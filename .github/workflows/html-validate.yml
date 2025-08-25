@@ -1,11 +1,15 @@
-name: html-validate
-on: [push, pull_request]
+name: htmlhint
+on:
+  push:
+  pull_request:
 jobs:
   htmlhint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Cyb3r-Jak3/htmlproofer-action@v1.1.6
+      - uses: actions/setup-node@v4
         with:
-          directory: .
-          arguments: --allow-hash-href --checks-to-ignore ScriptCheck
+          node-version: '20'
+      - name: Run HTMLHint
+        run: |
+          npx --yes htmlhint "**/*.html" --config .htmlhintrc
