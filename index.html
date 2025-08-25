@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src \self\; img-src \self\ data:;
+                 style-src \self\ \unsafe-inline\;
+                 script-src 
+one\; base-uri 
+one\;
+                 frame-ancestors 
+one\; form-action \self\
+                 https://formspree.io; upgrade-insecure-requests">
   <title>OkArthur — Where data becomes direction</title>
   <meta name="description" content="OkArthur — Where data becomes direction.">
   <link rel="canonical" href="https://okarthur.com/">
@@ -26,7 +35,7 @@
 </head>
 <body>
   <main>
-    <nav><a href="/">Home</a> · <a href="/about.html">About</a></nav>
+    <nav><a href="/">Home</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a></nav>
     <h1>OkArthur</h1>
     <p>Where data becomes direction.</p>
     <p>Say hello: <a href="mailto:hello@okarthur.com">hello@okarthur.com</a></p>
