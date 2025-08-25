@@ -1,0 +1,5 @@
+/* TEAM */
+Owner: OkArthur
+Contact: hello@okarthur.com
+/* THANKS */
+Built with GitHub Pages.

@@ -1,0 +1,3 @@
+Contact: mailto:hello@okarthur.com
+Policy: https://okarthur.com/
+# Optional fields can be added later: Expires, Encryption, Acknowledgments
