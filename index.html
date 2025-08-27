@@ -1,44 +1,110 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src \self\; img-src \self\ data:;
-                 style-src \self\ \unsafe-inline\;
-                 script-src 
-one\; base-uri 
-one\;
-                 frame-ancestors 
-one\; form-action \self\
-                 https://formspree.io; upgrade-insecure-requests">
-  <title>OkArthur — Where data becomes direction</title>
-  <meta name="description" content="OkArthur — Where data becomes direction.">
-  <link rel="canonical" href="https://okarthur.com/">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="OkArthur — Where data becomes direction">
-  <meta property="og:description" content="OkArthur — Where data becomes direction.">
-  <meta property="og:url" content="https://okarthur.com/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- Conservative CSP for a static site; widen only if you add external scripts -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;
+                 style-src 'self' 'unsafe-inline'; script-src 'self';
+                 base-uri 'none'; form-action 'self' https://formspree.io;
+                 upgrade-insecure-requests" />
+  <title>OkArthur — Data &amp; AI advisory in the GCC</title>
+  <meta name="description"
+    content="OkArthur helps organisations ship secure, data-driven products across the GCC. Where data becomes direction." />
+  <link rel="canonical" href="https://okarthur.com/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="OkArthur — Data &amp; AI advisory in the GCC" />
+  <meta property="og:description"
+    content="Secure delivery, data platforms, and AI in practice. Where data becomes direction." />
+  <meta property="og:url" content="https://okarthur.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="OkArthur" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"OkArthur",
+    "url":"https://okarthur.com/",
+    "email":"hello@okarthur.com"
+  }
+  </script>
+
   <style>
-    :root { color-scheme: light dark }
-    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Helvetica,Arial;
-         margin:0;min-height:100vh;display:grid;place-items:center;background:#0f172a;
-         color:#e5e7eb}
-    main{max-width:720px;padding:2rem;text-align:center}
-    nav a{margin:0 .5rem;color:#93c5fd;text-decoration:none}
-    nav a:hover{text-decoration:underline}
-    h1{font-size:2rem;margin:.25rem 0 .5rem}
-    p{opacity:.9}
+    :root {
+      color-scheme: light dark
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Helvetica, Arial;
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #0f172a;
+      color: #e5e7eb
+    }
+
+    main {
+      max-width: 720px;
+      padding: 2rem;
+      text-align: center
+    }
+
+    nav {
+      margin-bottom: .5rem
+    }
+
+    nav a {
+      margin: 0 .5rem;
+      color: #93c5fd;
+      text-decoration: none
+    }
+
+    nav a:hover {
+      text-decoration: underline
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: .25rem 0 .5rem
+    }
+
+    p {
+      opacity: .9
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      font-size: .9rem;
+      opacity: .8
+    }
   </style>
 </head>
+
 <body>
   <main>
-    <nav><a href="/">Home</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a></nav>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> ·
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+
     <h1>OkArthur</h1>
     <p>Where data becomes direction.</p>
     <p>Say hello: <a href="mailto:hello@okarthur.com">hello@okarthur.com</a></p>
+
+    <footer>
+      <small>&copy; 2025 OkArthur. All rights reserved.</small>
+    </footer>
   </main>
 </body>
+
 </html>
