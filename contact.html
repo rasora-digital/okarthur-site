@@ -1,23 +1,60 @@
-<!doctype html><meta charset="utf-8">
-<title>Contact · OkArthur</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:;
-               style-src 'self' 'unsafe-inline'; script-src 'none';
-               base-uri 'none'; frame-ancestors 'none';
-               form-action 'self' https://formspree.io;
-               upgrade-insecure-requests">
-<style>body{font-family:system-ui;margin:2rem auto;max-width:720px;line-height:1.6}
-nav a{margin-right:.75rem;text-decoration:none;color:#2563eb}</style>
-<nav><a href="/">Home</a><a href="/about.html">About</a>
-<a href="/privacy.html">Privacy</a></nav>
-<h1>Contact</h1>
-<p>Email: <a href="mailto:hello@okarthur.com">hello@okarthur.com</a></p>
-<form action="https://formspree.io/f/REPLACE_ME" method="POST">
-  <label>Your name<br><input name="name" required></label><br><br>
-  <label>Your email<br><input type="email" name="email" required></label><br><br>
-  <label>Message<br><textarea name="message" rows="6" required></textarea></label>
-  <input type="text" name="_gotcha" style="display:none"> <!-- honeypot -->
-  <br><button type="submit">Send</button>
-</form>
-<p><small>We’ll respond by email. No tracking.</small></p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;
+                 style-src 'self' 'unsafe-inline'; script-src 'self';
+                 base-uri 'none'; form-action 'self' https://formspree.io;
+                 upgrade-insecure-requests" />
+  <title>Contact — OkArthur</title>
+  <meta name="description" content="Contact OkArthur: email steven@okarthur.com for enquiries." />
+  <link rel="canonical" href="https://okarthur.com/contact.html" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Contact — OkArthur" />
+  <meta property="og:description" content="Get in touch with OkArthur at steven@okarthur.com." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://okarthur.com/contact.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="OkArthur" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ContactPage",
+    "url":"https://okarthur.com/contact.html",
+    "name":"Contact — OkArthur",
+    "contactPoint":[
+      {
+        "@type":"ContactPoint",
+        "contactType":"customer support",
+        "email":"steven@okarthur.com"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <main>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> ·
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+
+    <h1>Contact</h1>
+    <p>Email us any time:</p>
+    <p><a href="mailto:steven@okarthur.com">steven@okarthur.com</a></p>
+
+    <footer>
+      <small>&copy; <span id="y"></span> OkArthur. All rights reserved.</small>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>

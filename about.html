@@ -1,18 +1,55 @@
-<!doctype html><meta charset="utf-8">
-<title>About · OkArthur</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src \self\; img-src \self\ data:;
-                 style-src \self\ \unsafe-inline\;
-                 script-src 
-one\; base-uri 
-one\;
-                 frame-ancestors 
-one\; form-action \self\
-                 https://formspree.io; upgrade-insecure-requests">
-<link rel="canonical" href="https://okarthur.com/about.html">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<style>body{font-family:system-ui;margin:2rem auto;max-width:720px;line-height:1.6}</style>
-<nav><a href="/">Home</a></nav>
-<h1>About OkArthur</h1>
-<p>Short intro goes here. We can expand this later.</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;
+                 style-src 'self' 'unsafe-inline'; script-src 'self';
+                 base-uri 'none'; form-action 'self' https://formspree.io;
+                 upgrade-insecure-requests" />
+  <title>About — OkArthur</title>
+  <meta name="description"
+    content="About OkArthur: advisory for secure delivery, data platforms, and AI across the GCC." />
+  <link rel="canonical" href="https://okarthur.com/about.html" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="About — OkArthur" />
+  <meta property="og:description" content="What OkArthur does: secure delivery, data platforms, and AI in practice." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://okarthur.com/about.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="OkArthur" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AboutPage",
+    "url":"https://okarthur.com/about.html",
+    "name":"About — OkArthur"
+  }
+  </script>
+</head>
+
+<body>
+  <main>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> ·
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+
+    <h1>About OkArthur</h1>
+    <p>We help teams turn data into direction — secure delivery, data platforms,
+      and practical AI across the GCC.</p>
+    <p>Say hello: <a href="mailto:steven@okarthur.com">steven@okarthur.com</a></p>
+
+    <footer>
+      <small>&copy; <span id="y"></span> OkArthur. All rights reserved.</small>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>

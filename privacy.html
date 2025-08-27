@@ -1,12 +1,55 @@
-<!doctype html><meta charset="utf-8">
-<title>Privacy · OkArthur</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>body{font-family:system-ui;margin:2rem auto;max-width:720px;line-height:1.6}
-nav a{margin-right:.75rem;text-decoration:none;color:#2563eb}</style>
-<nav><a href="/">Home</a><a href="/about.html">About</a>
-<a href="/contact.html">Contact</a></nav>
-<h1>Privacy</h1>
-<p>We do not collect personal data on this site beyond messages you send via
-the contact form or email. No analytics, cookies, or third-party trackers.</p>
-<p>If you write to us, we’ll use your details only to reply. You can ask us to
-delete your message at any time.</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;
+                 style-src 'self' 'unsafe-inline'; script-src 'self';
+                 base-uri 'none'; form-action 'self' https://formspree.io;
+                 upgrade-insecure-requests" />
+  <title>Privacy — OkArthur</title>
+  <meta name="description" content="OkArthur privacy policy: what we collect (if anything) and how to contact us." />
+  <link rel="canonical" href="https://okarthur.com/privacy.html" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Privacy — OkArthur" />
+  <meta property="og:description" content="Our plain-English privacy policy and contact details." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://okarthur.com/privacy.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="OkArthur" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"PrivacyPolicy",
+    "url":"https://okarthur.com/privacy.html",
+    "name":"Privacy — OkArthur"
+  }
+  </script>
+</head>
+
+<body>
+  <main>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> ·
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+
+    <h1>Privacy</h1>
+    <p>We don’t collect personal data on this site. If you email us, we’ll use
+      your message only to respond. To request updates or deletion, contact
+      <a href="mailto:steven@okarthur.com">steven@okarthur.com</a>.
+    </p>
+
+    <footer>
+      <small>&copy; <span id="y"></span> OkArthur. All rights reserved.</small>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
