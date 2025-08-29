@@ -1,0 +1,33 @@
+<!doctype html><html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'none'; form-action 'self' https://formspree.io; upgrade-insecure-requests">
+  <title>Foundations-first delivery — OkArthur</title>
+  <meta name="description" content="Why gates, request IDs and metrics make features safer and faster."/>
+  <link rel="canonical" href="https://okarthur.com/notes/foundations-first.html"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/main.css"/>
+</head>
+<body>
+  <main>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> · <a href="/about.html">About</a> ·
+      <a href="/notes/">Notes</a> · <a href="/contact.html">Contact</a> ·
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <section class="hero">
+      <h1>Foundations-first delivery</h1>
+      <p class="lead">Why gates (CI/linters/secret scanning), request IDs and <code>/metrics</code>
+         make features safer and faster to ship.</p>
+      <div class="card"><p>
+        • Keep secrets out of git (use <code>.env</code>; run secret scanning in CI).<br/>
+        • Ship <code>/healthz</code> and <code>/metrics</code> from day 1.<br/>
+        • Friendly 429s and structured JSON logs with request IDs.
+      </p></div>
+      <p class="cta"><a href="mailto:steven@okarthur.com">Email steven@okarthur.com</a></p>
+    </section>
+    <footer><small>&copy; 2025 OkArthur. All rights reserved.</small></footer>
+  </main>
+</body></html>
