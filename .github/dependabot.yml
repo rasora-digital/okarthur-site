@@ -28,3 +28,7 @@ updates:
       github-actions:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "lycheeverse/lychee-action"
+        update-types:
+          - "version-update:semver-major"
