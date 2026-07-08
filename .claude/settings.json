@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(**/.env)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)"
+    ],
+    "allow": [
+      "Bash(make check)",
+      "Bash(make lint)",
+      "Bash(make fmt)",
+      "Bash(pre-commit run*)"
+    ]
+  }
+}
