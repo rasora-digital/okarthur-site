@@ -12,22 +12,35 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 	month: 'long',
 	year: 'numeric',
 });
+
+const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 ---
 
 <Base title="Notes">
-	<h1>Notes</h1>
+	<div class="page-head">
+		<h1 class="page-title">Notes</h1>
+	</div>
+
 	{
 		notes.length === 0 ? (
-			<p>[PLACEHOLDER: no notes published yet]</p>
+			<p class="contents-empty">[PLACEHOLDER: no notes published yet]</p>
 		) : (
-			<ul>
+			<ul class="contents">
 				{notes.map((note) => (
-					<li>
-						<h2>
-							<a href={`/notes/${note.id}`}>{note.data.title}</a>
-						</h2>
-						<p>{dateFormatter.format(note.data.pubDate)}</p>
-						<p>{note.data.description}</p>
+					<li class="reveal">
+						<div class="entry">
+							<div class="entry-meta">
+								<time class="meta" datetime={isoDate(note.data.pubDate)}>
+									{dateFormatter.format(note.data.pubDate)}
+								</time>
+							</div>
+							<div class="entry-body">
+								<h2 class="contents-title">
+									<a href={`/notes/${note.id}`}>{note.data.title}</a>
+								</h2>
+								<p class="contents-summary">{note.data.description}</p>
+							</div>
+						</div>
 					</li>
 				))}
 			</ul>

@@ -1,16 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const gateways = [
+	{ href: '/capabilities', label: 'What I do', target: 'Capabilities' },
+	{ href: '/notes', label: 'How I think', target: 'Notes' },
+	{ href: '/about', label: 'Who I am', target: 'About' },
+];
 ---
 
 <Base title="Home">
-	<h1>[PLACEHOLDER: home page headline]</h1>
-	<p>
+	<h1 class="hero-title">[PLACEHOLDER: home page headline]</h1>
+	<p class="standfirst">
 		[PLACEHOLDER: one-paragraph positioning statement introducing OkArthur
 		and Steven Yule's advisory practice]
 	</p>
-	<ul>
-		<li><a href="/capabilities">What I do</a></li>
-		<li><a href="/notes">How I think</a></li>
-		<li><a href="/about">Who I am</a></li>
-	</ul>
+
+	<nav class="gateways reveal" aria-label="Main sections">
+		{
+			gateways.map((gateway) => (
+				<a class="gateway" href={gateway.href}>
+					<span class="gateway-label">{gateway.label}</span>
+					<span class="gateway-target">{gateway.target}</span>
+				</a>
+			))
+		}
+	</nav>
 </Base>

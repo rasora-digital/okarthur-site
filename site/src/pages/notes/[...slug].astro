@@ -18,10 +18,27 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 	month: 'long',
 	year: 'numeric',
 });
+
+const isoDate = note.data.pubDate.toISOString().slice(0, 10);
 ---
 
 <Base title={note.data.title}>
-	<h1>{note.data.title}</h1>
-	<p>{dateFormatter.format(note.data.pubDate)}</p>
-	<Content />
+	<article>
+		<header class="note-header">
+			<div class="entry">
+				<div class="entry-meta">
+					<time class="meta" datetime={isoDate}>
+						{dateFormatter.format(note.data.pubDate)}
+					</time>
+				</div>
+				<div class="entry-body">
+					<h1 class="note-title">{note.data.title}</h1>
+				</div>
+			</div>
+		</header>
+
+		<div class="prose note-body">
+			<Content />
+		</div>
+	</article>
 </Base>
