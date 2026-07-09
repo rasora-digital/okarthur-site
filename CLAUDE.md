@@ -1,4 +1,21 @@
-# okarthur-site
+# Astro rebuild in progress
+
+A rebuild of this site is underway on the `rebuild/astro` branch. The new
+site lives in `site/` and is built with Astro. Commands for the new site
+are `npm run dev` and `npm run build`, run inside `site/`.
+
+The old root-level HTML site is still what is deployed to production at
+https://okarthur.com. Do not touch those root-level files as part of
+rebuild work. The Makefile and Jekyll instructions below apply only to
+that old, legacy site, not to `site/`.
+
+CI for the new site lives at `.github/workflows/astro-ci.yml` (jobs:
+`build`, `gitleaks`, `linkcheck`). It runs on pull requests and on pushes
+to `rebuild/astro`. The existing `.github/workflows/ci.yml`,
+`html-validate.yml` and `links.yml` (jobs: `checks`, `htmlhint`, `lychee`)
+keep covering the legacy site and are unchanged.
+
+# okarthur-site (legacy site)
 
 Static marketing site for OkArthur, a data and AI advisory in the GCC.
 Live at https://okarthur.com
