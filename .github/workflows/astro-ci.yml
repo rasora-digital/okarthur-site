@@ -44,5 +44,10 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress --accept-timeouts site/dist
-          fail: true
+          args: --no-progress --format json --output lychee/out.json site/dist
+          fail: false
+      - name: Fail on broken links (timeouts are not fatal)
+        run: |
+          errors=$(jq '.errors' lychee/out.json)
+          echo "lychee non-timeout errors: $errors"
+          test "$errors" -eq 0
