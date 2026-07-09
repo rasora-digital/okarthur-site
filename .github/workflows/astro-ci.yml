@@ -44,7 +44,10 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress site/dist
+          # Skip our own canonical/og:url tags: they point at the live site,
+          # where the new routes do not exist until cutover. External links
+          # are still checked.
+          args: --no-progress --exclude '^https://okarthur\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false
