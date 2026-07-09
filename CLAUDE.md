@@ -1,69 +1,86 @@
-# Astro rebuild in progress
-
-A rebuild of this site is underway on the `rebuild/astro` branch. The new
-site lives in `site/` and is built with Astro. Commands for the new site
-are `npm run dev` and `npm run build`, run inside `site/`.
-
-The old root-level HTML site is still what is deployed to production at
-https://okarthur.com. Do not touch those root-level files as part of
-rebuild work. The Makefile and Jekyll instructions below apply only to
-that old, legacy site, not to `site/`.
-
-CI for the new site lives at `.github/workflows/astro-ci.yml` (jobs:
-`build`, `gitleaks`, `linkcheck`). It runs on pull requests and on pushes
-to `rebuild/astro`. The existing `.github/workflows/ci.yml`,
-`html-validate.yml` and `links.yml` (jobs: `checks`, `htmlhint`, `lychee`)
-keep covering the legacy site and are unchanged.
-
-# okarthur-site (legacy site)
+# okarthur-site
 
 Static marketing site for OkArthur, a data and AI advisory in the GCC.
 Live at https://okarthur.com
 
 ## What this is
 
-Plain static HTML and CSS, partially migrated to Jekyll (_config.yml,
-_layouts/main.html, kramdown, no theme). No JavaScript framework.
+An Astro site. It lives entirely in `site/`. There is nothing to build at
+the repo root.
 
-There is no Python application code in this repo, despite the presence of
-black, flake8, isort and requirements files. requirements.txt is empty.
-Do not add Python application code here.
-
-## Pages
-
-index.html, about.html, contact.html, privacy.html, terms.html, 404.html
-notes/ contains a blog-style Notes section.
-
-## Deployment
-
-GitHub Pages builds from main. CNAME points to okarthur.com.
-Cloudflare Free sits in front, DNS on Cloudflare.
-
-Deploy sequence. Merge to main, wait for the Pages build to finish,
-purge the Cloudflare cache, then hard refresh. Purging before the build
-completes just re-caches the old page.
-
-If you add a page, update sitemap.xml.
+The legacy hand-written HTML site, its Jekyll layer and its Python tooling
+were removed when the site was cut over to Astro. Do not add Python
+application code here. If you find references to `make`, Jekyll, `_layouts`
+or `requirements.txt`, they are stale and should be deleted.
 
 ## Commands
 
-make run       serves on port 8013 via python -m http.server
-make stop
-make check     runs fmt, lint and test
-The Makefile uses hard tabs, not .RECIPEPREFIX. Do not change this
-casually.
+Run these inside `site/`:
+
+    npm install
+    npm run dev       local dev server
+    npm run build     writes site/dist
+    npm run preview   serve the built site
+
+## Layout
+
+    site/src/pages/            routes (index, about, capabilities, contact,
+                               privacy, terms, notes, 404)
+    site/src/content/notes/    notes collection, markdown, schema in
+                               site/src/content.config.ts
+    site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
+    site/public/               copied verbatim into dist
+
+`site/public/` holds `CNAME`, `humans.txt`, `robots.txt`, `llms.txt`,
+fonts, favicons, and `.well-known/security.txt`. Astro copies dotfiles and
+dot-directories, so `.well-known/` survives the build.
+
+## Pages and URLs
+
+Routes build as directories, so pages are served at `/about/`, not
+`/about.html`. The old `.html` URLs from the legacy site no longer exist.
+
+Adding a page needs no sitemap edit. `@astrojs/sitemap` generates
+`sitemap-index.xml` and `sitemap-0.xml` at build time. `rss.xml` is
+generated from the notes collection, drafts excluded.
+
+## Deployment
+
+GitHub Pages, Source set to **GitHub Actions** (not "deploy from a
+branch"). `.github/workflows/deploy.yml` runs on push to `main`: it builds
+`site/` with `withastro/action@v6`, which installs, builds and uploads the
+Pages artifact itself, then `actions/deploy-pages@v5` publishes it.
+
+The custom domain survives because `site/public/CNAME` lands in the build
+output. There is no CNAME file at the repo root and there must not be one.
+
+Cloudflare Free sits in front, DNS on Cloudflare. Deploy sequence: merge to
+`main`, wait for the deploy workflow to go green, purge the Cloudflare
+cache, then hard refresh. Purging before the deploy finishes just re-caches
+the old page.
 
 ## CI
 
-.github/workflows/ci.yml runs pre-commit on all files, then asserts that
-index.html and CNAME exist. It does not run pytest.
+`.github/workflows/astro-ci.yml` runs on pull requests and on pushes to
+`rebuild/astro`. Jobs: `build`, `gitleaks`, `linkcheck`. These three are
+the required status checks on `main`.
 
-pre-commit runs black, isort, flake8 and gitleaks.
+`linkcheck` runs lychee over `site/dist`. Its two `--exclude` flags are
+load-bearing and documented in the workflow: our own domain (canonical
+tags point at routes that only exist once deployed) and `linkedin.com`
+(blocks automated clients, returning 403/429 from GitHub runners).
+
+gitleaks runs in CI only. There is no longer a pre-commit hook.
 
 ## Facts that are easy to get wrong
 
-The public contact address is steven@okarthur.com.
-hello@okarthur.com is wrong wherever it appears and should be corrected.
+The public contact address is steven@okarthur.com. `hello@okarthur.com` is
+wrong wherever it appears.
 
-.well-known/security.txt is the real one. The security.txt at the repo
-root is an empty stray file and should be deleted.
+`site/public/.well-known/security.txt` is the real one.
+
+`site/src/content/notes/hello-notes.md` is placeholder scaffolding, marked
+`draft: true`, and never renders. It should be deleted.
+
+See `CARRYOVER.md` for copy that was drafted rather than written, and for
+the open issues that go with it.

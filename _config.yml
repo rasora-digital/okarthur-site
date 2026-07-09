@@ -1,5 +1,0 @@
-title: OkArthur
-description: Data & AI advisory in the GCC
-theme: null
-markdown: kramdown
-exclude: [".devcontainer", "node_modules", "site"]
