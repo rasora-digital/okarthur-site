@@ -44,7 +44,14 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress --exclude '^https://okarthur\.com' site/dist
+          # Both excludes are load-bearing; do not remove.
+          # okarthur.com: our own canonical/og:url tags point at the live site,
+          #   where the new routes do not exist until cutover.
+          # linkedin.com: LinkedIn blocks automated clients, answering 999 from
+          #   some IPs and 403/429 from GitHub runners. The latter counts as an
+          #   error, so leaving it in makes this required check fail at random.
+          # External links other than these are still checked.
+          args: --no-progress --exclude '^https://okarthur\.com' --exclude 'linkedin\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false

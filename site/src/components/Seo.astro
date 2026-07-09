@@ -1,0 +1,25 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	ogType?: 'website' | 'article';
+}
+
+const { title, description, ogType = 'website' } = Astro.props;
+
+const fullTitle = `${title} | OkArthur`;
+
+/** Resolve against Astro.site so the canonical is absolute in dev too. */
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+
+<meta name="twitter:card" content="summary" />

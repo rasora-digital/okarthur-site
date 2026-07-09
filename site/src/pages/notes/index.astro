@@ -16,14 +16,17 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 ---
 
-<Base title="Notes">
+<Base
+	title="Notes"
+	description="Short notes from OkArthur on secure delivery, data platforms and practical AI, written for teams shipping software in the GCC."
+>
 	<div class="page-head">
 		<h1 class="page-title">Notes</h1>
 	</div>
 
 	{
 		notes.length === 0 ? (
-			<p class="contents-empty">[PLACEHOLDER: no notes published yet]</p>
+			<p class="contents-empty">No notes published yet.</p>
 		) : (
 			<ul class="contents">
 				{notes.map((note) => (

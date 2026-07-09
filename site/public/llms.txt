@@ -1,0 +1,17 @@
+# OkArthur
+
+OkArthur is the site of Steven Yule, a chartered civil engineer (CEng FICE
+FCIHT MIAM) and director of digital and data, based in Dubai. He is an ICE
+Policy Fellow and the ICE UAE Country Representative. The site covers his
+work on digital, data and infrastructure transformation, and his writing on
+the same. Contact: steven@okarthur.com
+
+## Pages
+
+- [About](https://okarthur.com/about/): Steven Yule's background, chartered
+  status and professional roles.
+- [Capabilities](https://okarthur.com/capabilities/): The advisory work
+  offered through OkArthur.
+- [Notes](https://okarthur.com/notes/): Writing on digital, data and
+  infrastructure.
+- [Contact](https://okarthur.com/contact/): How to reach Steven Yule.

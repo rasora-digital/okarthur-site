@@ -1,0 +1,31 @@
+# OkArthur allows all crawlers, including AI crawlers, by deliberate policy.
+
+User-agent: *
+Allow: /
+
+# Named explicitly so that a future default-deny stance elsewhere, or a
+# crawler that looks for its own name before falling back to *, still
+# reads an allow.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://okarthur.com/sitemap-index.xml

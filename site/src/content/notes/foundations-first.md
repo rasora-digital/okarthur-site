@@ -1,11 +1,8 @@
 ---
-layout: main
 title: Foundations-first delivery
 description: CI, linters, secrets and observability before features.
-permalink: /notes/foundations-first.html
+pubDate: 2025-08-29
 ---
-
-# Foundations-first delivery
 
 Why gates (CI/linters/secret scanning), request IDs and `/metrics` make features safer and faster to ship.
 

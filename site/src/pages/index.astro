@@ -1,5 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { PERSON_ID } from '../lib/schema';
+
+const website = {
+	'@type': 'WebSite',
+	name: 'OkArthur',
+	url: 'https://okarthur.com',
+	author: { '@id': PERSON_ID },
+	publisher: { '@id': PERSON_ID },
+};
 
 const gateways = [
 	{ href: '/capabilities', label: 'What I do', target: 'Capabilities' },
@@ -8,11 +17,18 @@ const gateways = [
 ];
 ---
 
-<Base title="Home">
-	<h1 class="hero-title">[PLACEHOLDER: home page headline]</h1>
+<Base
+	title="Home"
+	description="OkArthur helps GCC organisations ship secure, data-driven products: secure delivery, data platforms and practical AI. Where data becomes direction."
+	schema={[website]}
+>
+	<h1 class="hero-title">Where data becomes direction.</h1>
 	<p class="standfirst">
-		[PLACEHOLDER: one-paragraph positioning statement introducing OkArthur
-		and Steven Yule's advisory practice]
+		OkArthur is the advisory practice of Steven Yule, making technology useful
+		in live capital delivery across the GCC. Data and AI strategy, digital
+		platforms and digital twins, and the operating models that make them
+		stick — procurement-ready, operable, and owned by the people who inherit
+		them.
 	</p>
 
 	<nav class="gateways reveal" aria-label="Main sections">
