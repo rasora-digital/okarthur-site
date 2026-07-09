@@ -15,5 +15,5 @@ export const person = {
 		addressLocality: 'Dubai',
 		addressCountry: 'AE',
 	},
-	sameAs: ['[PLACEHOLDER: LinkedIn URL]'],
+	sameAs: ['https://www.linkedin.com/in/stevenyule'],
 };

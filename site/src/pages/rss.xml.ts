@@ -7,7 +7,8 @@ export async function GET(context: APIContext) {
 
 	return rss({
 		title: 'OkArthur — Notes',
-		description: '[PLACEHOLDER: RSS feed description]',
+		description:
+			'Short notes on digital, data and AI in capital delivery, from OkArthur.',
 		site: context.site!,
 		items: notes
 			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
