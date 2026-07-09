@@ -44,7 +44,9 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress --format json --output lychee/out.json site/dist
+          args: --no-progress site/dist
+          format: json
+          output: lychee/out.json
           fail: false
       - name: Fail on broken links (timeouts are not fatal)
         run: |
