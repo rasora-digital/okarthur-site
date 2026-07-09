@@ -1,0 +1,135 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const path = Astro.url.pathname;
+
+const sections = [
+	{ href: '/about', label: 'About' },
+	{ href: '/capabilities', label: 'Capabilities' },
+	{ href: '/notes', label: 'Notes' },
+	{ href: '/contact', label: 'Contact' },
+];
+
+/** A section is current when the page is that section or lives beneath it. */
+const isCurrent = (href: string) =>
+	path === href || path.startsWith(`${href}/`);
+---
+
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="color-scheme" content="light dark" />
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: light)"
+			content="#eeeeea"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="#191b1d"
+		/>
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<!-- The two faces that render above the fold on every page. -->
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href="/fonts/public-sans-variable-roman.woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href="/fonts/source-serif-4-variable-roman.woff2"
+			crossorigin
+		/>
+
+		<title>{title} | OkArthur</title>
+
+		<script is:inline>
+			document.documentElement.classList.add('js');
+		</script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+
+		<div class="page">
+			<header class="masthead">
+				<a class="wordmark" href="/">OkArthur</a>
+				<nav class="nav" aria-label="Sections">
+					{
+						sections.map((section) => (
+							<a
+								href={section.href}
+								aria-current={isCurrent(section.href) ? 'page' : undefined}
+							>
+								{section.label}
+							</a>
+						))
+					}
+				</nav>
+			</header>
+
+			<main id="main">
+				<slot />
+			</main>
+
+			<footer class="footer">
+				<div class="footer-inner">
+					<p>&copy; 2026 OkArthur</p>
+					<nav class="footer-nav" aria-label="Footer">
+						<a href="mailto:steven@okarthur.com">steven@okarthur.com</a>
+						<a href="/privacy">Privacy</a>
+						<a href="/terms">Terms</a>
+					</nav>
+				</div>
+			</footer>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var targets = document.querySelectorAll('.reveal');
+				if (!targets.length) return;
+
+				var reduced = window.matchMedia(
+					'(prefers-reduced-motion: reduce)'
+				).matches;
+
+				if (reduced || !('IntersectionObserver' in window)) {
+					targets.forEach(function (el) {
+						el.classList.add('is-revealed');
+					});
+					return;
+				}
+
+				var observer = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (entry) {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add('is-revealed');
+							observer.unobserve(entry.target);
+						});
+					},
+					{ rootMargin: '0px 0px -10% 0px' }
+				);
+
+				targets.forEach(function (el) {
+					observer.observe(el);
+				});
+			})();
+		</script>
+	</body>
+</html>

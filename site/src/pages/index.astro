@@ -1,17 +1,28 @@
 ---
+import Base from '../layouts/Base.astro';
 
+const gateways = [
+	{ href: '/capabilities', label: 'What I do', target: 'Capabilities' },
+	{ href: '/notes', label: 'How I think', target: 'Notes' },
+	{ href: '/about', label: 'Who I am', target: 'About' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Home">
+	<h1 class="hero-title">[PLACEHOLDER: home page headline]</h1>
+	<p class="standfirst">
+		[PLACEHOLDER: one-paragraph positioning statement introducing OkArthur
+		and Steven Yule's advisory practice]
+	</p>
+
+	<nav class="gateways reveal" aria-label="Main sections">
+		{
+			gateways.map((gateway) => (
+				<a class="gateway" href={gateway.href}>
+					<span class="gateway-label">{gateway.label}</span>
+					<span class="gateway-target">{gateway.target}</span>
+				</a>
+			))
+		}
+	</nav>
+</Base>

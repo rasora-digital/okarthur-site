@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('notes', ({ data }) => !data.draft);
+const notes = allNotes.sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
+
+const isoDate = (date: Date) => date.toISOString().slice(0, 10);
+---
+
+<Base title="Notes">
+	<div class="page-head">
+		<h1 class="page-title">Notes</h1>
+	</div>
+
+	{
+		notes.length === 0 ? (
+			<p class="contents-empty">[PLACEHOLDER: no notes published yet]</p>
+		) : (
+			<ul class="contents">
+				{notes.map((note) => (
+					<li class="reveal">
+						<div class="entry">
+							<div class="entry-meta">
+								<time class="meta" datetime={isoDate(note.data.pubDate)}>
+									{dateFormatter.format(note.data.pubDate)}
+								</time>
+							</div>
+							<div class="entry-body">
+								<h2 class="contents-title">
+									<a href={`/notes/${note.id}`}>{note.data.title}</a>
+								</h2>
+								<p class="contents-summary">{note.data.description}</p>
+							</div>
+						</div>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</Base>
