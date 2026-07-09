@@ -1,9 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PERSON_ID } from '../../lib/schema';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const notes = await getCollection('notes');
+	const notes = await getCollection('notes', ({ data }) => !data.draft);
 	return notes.map((note) => ({
 		params: { slug: note.id },
 		props: { note },
@@ -20,9 +21,23 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 });
 
 const isoDate = note.data.pubDate.toISOString().slice(0, 10);
+
+const article = {
+	'@type': 'Article',
+	headline: note.data.title,
+	description: note.data.description,
+	datePublished: isoDate,
+	author: { '@id': PERSON_ID },
+	mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
 ---
 
-<Base title={note.data.title}>
+<Base
+	title={note.data.title}
+	description={note.data.description}
+	ogType="article"
+	schema={[article]}
+>
 	<article>
 		<header class="note-header">
 			<div class="entry">

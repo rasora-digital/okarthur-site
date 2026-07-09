@@ -1,11 +1,17 @@
 ---
+import JsonLd from '../components/JsonLd.astro';
+import Seo from '../components/Seo.astro';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
+	description: string;
+	ogType?: 'website' | 'article';
+	/** Schemas to emit alongside the site-wide Person. */
+	schema?: Record<string, unknown>[];
 }
 
-const { title } = Astro.props;
+const { title, description, ogType, schema } = Astro.props;
 
 const path = Astro.url.pathname;
 
@@ -57,7 +63,8 @@ const isCurrent = (href: string) =>
 			crossorigin
 		/>
 
-		<title>{title} | OkArthur</title>
+		<Seo title={title} description={description} ogType={ogType} />
+		<JsonLd extra={schema} />
 
 		<script is:inline>
 			document.documentElement.classList.add('js');

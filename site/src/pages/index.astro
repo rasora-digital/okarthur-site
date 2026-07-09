@@ -1,5 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { PERSON_ID } from '../lib/schema';
+
+const website = {
+	'@type': 'WebSite',
+	name: 'OkArthur',
+	url: 'https://okarthur.com',
+	author: { '@id': PERSON_ID },
+	publisher: { '@id': PERSON_ID },
+};
 
 const gateways = [
 	{ href: '/capabilities', label: 'What I do', target: 'Capabilities' },
@@ -8,7 +17,11 @@ const gateways = [
 ];
 ---
 
-<Base title="Home">
+<Base
+	title="Home"
+	description="[PLACEHOLDER: home page meta description, roughly 150 characters]"
+	schema={[website]}
+>
 	<h1 class="hero-title">[PLACEHOLDER: home page headline]</h1>
 	<p class="standfirst">
 		[PLACEHOLDER: one-paragraph positioning statement introducing OkArthur
