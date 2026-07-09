@@ -44,7 +44,7 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress site/dist
+          args: --no-progress --exclude '^https://okarthur\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false
