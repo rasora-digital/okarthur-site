@@ -1,17 +1,16 @@
 ---
-
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Home">
+	<h1>[PLACEHOLDER: home page headline]</h1>
+	<p>
+		[PLACEHOLDER: one-paragraph positioning statement introducing OkArthur
+		and Steven Yule's advisory practice]
+	</p>
+	<ul>
+		<li><a href="/capabilities">What I do</a></li>
+		<li><a href="/notes">How I think</a></li>
+		<li><a href="/about">Who I am</a></li>
+	</ul>
+</Base>
