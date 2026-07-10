@@ -23,13 +23,7 @@ wording**. Treat everything below as draft until it is read and signed off.
    use the CV's framing (capital delivery, digital twins, operating models).
    Pick one and make the whole site agree.
 
-2. **The LinkedIn URL is unverified.** `https://www.linkedin.com/in/stevenyule`
-   is in `site/src/lib/schema.ts` and on the Contact page. LinkedIn returns
-   HTTP 999 to every automated client, so CI cannot check it and lychee reports
-   it as "unknown", not an error. A typo would ship silently. Open it in a
-   browser once.
-
-3. **Old URLs die at cutover.** `/about.html`, `/privacy.html`, `/terms.html`
+2. **Old URLs die at cutover.** `/about.html`, `/privacy.html`, `/terms.html`
    and `/notes/foundations-first.html` become `/about/`, `/privacy/`, `/terms/`
    and `/notes/foundations-first/`. `foundations-first.html` is live and
    indexed today. A Cloudflare Bulk Redirect rule would preserve them.
