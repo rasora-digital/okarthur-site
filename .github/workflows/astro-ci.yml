@@ -2,7 +2,7 @@ name: astro-ci
 on:
   pull_request:
   push:
-    branches: [rebuild/astro]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest

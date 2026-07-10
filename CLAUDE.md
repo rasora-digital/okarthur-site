@@ -79,8 +79,5 @@ wrong wherever it appears.
 
 `site/public/.well-known/security.txt` is the real one.
 
-`site/src/content/notes/hello-notes.md` is placeholder scaffolding, marked
-`draft: true`, and never renders. It should be deleted.
-
 See `CARRYOVER.md` for copy that was drafted rather than written, and for
 the open issues that go with it.
