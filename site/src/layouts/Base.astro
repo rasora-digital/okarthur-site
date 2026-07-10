@@ -9,9 +9,11 @@ interface Props {
 	ogType?: 'website' | 'article';
 	/** Schemas to emit alongside the site-wide Person. */
 	schema?: Record<string, unknown>[];
+	/** Keep the page out of search indexes. */
+	noindex?: boolean;
 }
 
-const { title, description, ogType, schema } = Astro.props;
+const { title, description, ogType, schema, noindex } = Astro.props;
 
 const path = Astro.url.pathname;
 
@@ -62,6 +64,8 @@ const isCurrent = (href: string) =>
 			href="/fonts/source-serif-4-variable-roman.woff2"
 			crossorigin
 		/>
+
+		{noindex && <meta name="robots" content="noindex" />}
 
 		<Seo title={title} description={description} ogType={ogType} />
 		<JsonLd extra={schema} />

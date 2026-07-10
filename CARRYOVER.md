@@ -29,14 +29,7 @@ wording**. Treat everything below as draft until it is read and signed off.
    it as "unknown", not an error. A typo would ship silently. Open it in a
    browser once.
 
-3. **`site/src/content/notes/hello-notes.md` should be deleted.** It is
-   `draft: true` placeholder scaffolding and never renders. It is the only
-   remaining `[PLACEHOLDER:` string in the repository.
-
-4. **The 404 page should carry `<meta name="robots" content="noindex">`.**
-   It does not, and the legacy site did not either.
-
-5. **Old URLs die at cutover.** `/about.html`, `/privacy.html`, `/terms.html`
+3. **Old URLs die at cutover.** `/about.html`, `/privacy.html`, `/terms.html`
    and `/notes/foundations-first.html` become `/about/`, `/privacy/`, `/terms/`
    and `/notes/foundations-first/`. `foundations-first.html` is live and
    indexed today. A Cloudflare Bulk Redirect rule would preserve them.
