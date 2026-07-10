@@ -18,10 +18,10 @@
       "Bash(git clean -f*)"
     ],
     "allow": [
-      "Bash(make check)",
-      "Bash(make lint)",
-      "Bash(make fmt)",
-      "Bash(pre-commit run*)"
+      "Bash(npm ci)",
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npm run preview)"
     ]
   }
 }
