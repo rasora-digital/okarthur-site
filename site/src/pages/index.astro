@@ -11,32 +11,54 @@ const website = {
 };
 
 const gateways = [
-	{ href: '/capabilities', label: 'What I do', target: 'Capabilities' },
-	{ href: '/notes', label: 'How I think', target: 'Notes' },
-	{ href: '/about', label: 'Who I am', target: 'About' },
+	{
+		href: '/capabilities',
+		label: 'What I do',
+		target: 'Capabilities',
+		teaser:
+			'The advisory work, from data and AI strategy to digital twins and capital delivery transformation.',
+	},
+	{
+		href: '/notes',
+		label: 'How I think',
+		target: 'Notes',
+		teaser:
+			"Short notes on the problems I'm working through, from digital twins to whole-life asset decisions.",
+	},
+	{
+		href: '/about',
+		label: 'Who I am',
+		target: 'About',
+		teaser:
+			'The background behind the work, chartered engineer, ICE fellow, director-level digital and data leader.',
+	},
 ];
 ---
 
 <Base
 	title="Home"
-	description="OkArthur helps GCC organisations ship secure, data-driven products: secure delivery, data platforms and practical AI. Where data becomes direction."
+	description="Steven Yule, chartered engineer and digital and data leader, turning asset and operational evidence into investment decisions for infrastructure."
 	schema={[website]}
 >
-	<h1 class="hero-title">Where data becomes direction.</h1>
+	<h1 class="hero-title">Making technology useful in live capital delivery.</h1>
 	<p class="standfirst">
-		OkArthur is the advisory practice of Steven Yule, making technology useful
-		in live capital delivery across the GCC. Data and AI strategy, digital
-		platforms and digital twins, and the operating models that make them
-		stick — procurement-ready, operable, and owned by the people who inherit
-		them.
+		I'm Steven Yule, a chartered civil engineer and commercial leader in
+		digital, data and AI for infrastructure. I turn asset and operational
+		evidence into investment decisions for capital programmes and asset
+		owners across the GCC and UK. My work starts where most digital work is
+		treated as finished, at the point a capability has been demonstrated but
+		not yet relied on, on a live programme.
 	</p>
 
 	<nav class="gateways reveal" aria-label="Main sections">
 		{
 			gateways.map((gateway) => (
 				<a class="gateway" href={gateway.href}>
-					<span class="gateway-label">{gateway.label}</span>
-					<span class="gateway-target">{gateway.target}</span>
+					<span class="gateway-row">
+						<span class="gateway-label">{gateway.label}</span>
+						<span class="gateway-target">{gateway.target}</span>
+					</span>
+					<span class="gateway-teaser">{gateway.teaser}</span>
 				</a>
 			))
 		}
