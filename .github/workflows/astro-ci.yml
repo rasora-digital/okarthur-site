@@ -45,6 +45,11 @@ jobs:
       - uses: lycheeverse/lychee-action@v1
         with:
           # These excludes are load-bearing; do not remove.
+          # okarthur.com: our own canonical/og:url tags point at the live site.
+          #   A page added in a PR does not exist there until merge and deploy,
+          #   so lychee 404s on its own canonical tag. Do not drop this again —
+          #   it was removed once (9eb5392) on the mistaken belief it was
+          #   obsolete, which broke the very next PR that added a page.
           # linkedin.com: LinkedIn blocks automated clients, answering 999 from
           #   some IPs and 403/429 from GitHub runners. The latter counts as an
           #   error, so leaving it in makes this required check fail at random.
@@ -52,7 +57,7 @@ jobs:
           #   anti-bot behaviour against GitHub runners. The linked works are
           #   verified by hand.
           # External links other than these are still checked.
-          args: --no-progress --exclude 'linkedin\.com' --exclude 'open\.spotify\.com' --exclude 'de\.bentley\.com' --exclude 'ice\.org\.uk' --exclude 'emerald\.com' site/dist
+          args: --no-progress --exclude '^https://okarthur\.com' --exclude 'linkedin\.com' --exclude 'open\.spotify\.com' --exclude 'de\.bentley\.com' --exclude 'ice\.org\.uk' --exclude 'emerald\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false
