@@ -2,6 +2,8 @@
 
 User-agent: *
 Allow: /
+# Content Signals (contentsignals.org): open to search indexing and real-time AI answers, not to model training.
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 # Named explicitly so that a future default-deny stance elsewhere, or a
 # crawler that looks for its own name before falling back to *, still
