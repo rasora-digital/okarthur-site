@@ -44,12 +44,15 @@ jobs:
         working-directory: site
       - uses: lycheeverse/lychee-action@v1
         with:
-          # This exclude is load-bearing; do not remove.
+          # These excludes are load-bearing; do not remove.
           # linkedin.com: LinkedIn blocks automated clients, answering 999 from
           #   some IPs and 403/429 from GitHub runners. The latter counts as an
           #   error, so leaving it in makes this required check fail at random.
+          # open.spotify.com, de.bentley.com, ice.org.uk and emerald.com: same
+          #   anti-bot behaviour against GitHub runners. The linked works are
+          #   verified by hand.
           # External links other than these are still checked.
-          args: --no-progress --exclude 'linkedin\.com' site/dist
+          args: --no-progress --exclude 'linkedin\.com' --exclude 'open\.spotify\.com' --exclude 'de\.bentley\.com' --exclude 'ice\.org\.uk' --exclude 'emerald\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false
