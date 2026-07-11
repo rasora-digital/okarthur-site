@@ -69,7 +69,7 @@ const isCurrent = (href: string) =>
 
 		{noindex && <meta name="robots" content="noindex" />}
 
-		<Seo title={title} description={description} ogType={ogType} />
+		<Seo title={title} description={description} ogType={ogType} noindex={noindex} />
 		<JsonLd extra={schema} />
 
 		<script is:inline>
