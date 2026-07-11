@@ -1,7 +1,7 @@
 ---
 title: "Headroom"
 description: "Most long-life assets hold something that ages far faster than they do. What you are really buying is the room to change what is inside."
-pubDate: 2026-07-25
+pubDate: 2026-07-11
 ---
 
 Most long-life assets hold something that ages far faster than they do, and the trouble starts when the two are bought as if they were one thing.

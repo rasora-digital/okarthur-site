@@ -1,7 +1,7 @@
 ---
 title: "The reliance question"
 description: "Working once is a low bar. Whether an organisation can rely on a capability is settled upstream, in procurement and ownership, before go-live."
-pubDate: 2026-07-11
+pubDate: 2026-07-04
 ---
 
 A capability that works in a demonstration has cleared a low bar. It ran once, on a good day, with the people who built it in the room. The bar that matters comes the morning after, when the same capability has to run without them, for an operator who was never consulted, against decisions taken a year earlier by people who have since moved on.
