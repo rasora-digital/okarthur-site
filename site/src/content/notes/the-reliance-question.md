@@ -15,3 +15,5 @@ The pattern I see on live programmes is consistent. A team proves a capability, 
 So the useful work happens early and it is unglamorous. Name the owner before you name the tool. Write the information you will need to run the asset into the contract as a requirement with an owner and a standard, not as a hope you will sort out later. Then ask, at every gate, one plain question. If the people who built this walked away tomorrow, could we still rely on it? If the answer is no, you have a procurement problem wearing the costume of a technical one.
 
 Whether a capability can be relied on is answered by who owns it and what the contract asked for, and both are settled before anyone switches it on.
+
+A [digital twin](/notes/what-makes-a-digital-twin-worth-relying-on) is one place this plays out in detail, where reliance turns into a test of what the model shows and how current it needs to be for a given decision.
