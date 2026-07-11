@@ -502,13 +502,19 @@ main {
 
 .gateway {
 	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	gap: var(--s-4);
+	flex-direction: column;
+	gap: var(--s-3);
 	padding: var(--s-5) var(--s-3) var(--s-5) 0;
 	border-bottom: 1px solid var(--rule);
 	text-decoration: none;
 	transition: background-color var(--transition);
+}
+
+.gateway-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--s-4);
 }
 
 .gateway-label {
@@ -530,6 +536,12 @@ main {
 	transition: color var(--transition);
 }
 
+.gateway-teaser {
+	max-width: 58ch;
+	color: var(--ink-soft);
+	text-wrap: pretty;
+}
+
 .gateway:hover {
 	background-color: var(--accent-quiet);
 }
@@ -543,6 +555,27 @@ main {
 	.gateway:hover .gateway-label {
 		color: var(--ink);
 	}
+}
+
+/* --- About --- */
+
+.origin-note {
+	margin-top: var(--s-9);
+	padding-top: var(--s-6);
+	border-top: 1px solid var(--rule);
+	max-width: var(--measure);
+}
+
+.origin-note-title {
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--muted);
+}
+
+.origin-note p {
+	margin-top: var(--s-3);
+	color: var(--muted);
+	text-wrap: pretty;
 }
 
 /* --- Capabilities --- */
@@ -650,6 +683,25 @@ main {
 	padding-block: var(--s-7);
 	border-bottom: 1px solid var(--rule);
 	color: var(--muted);
+}
+
+.elsewhere {
+	margin-top: var(--s-8);
+	padding-top: var(--s-6);
+	border-top: 1px solid var(--rule);
+	max-width: var(--measure);
+}
+
+.elsewhere-title {
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--muted);
+}
+
+.elsewhere p {
+	margin-top: var(--s-3);
+	color: var(--muted);
+	text-wrap: pretty;
 }
 
 /* --- Rules ---
