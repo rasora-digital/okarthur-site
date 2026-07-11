@@ -14,7 +14,7 @@ That distinction matters. A digital twin is not reliable in general. It is relia
 
 A useful digital twin is a digital representation of an asset or system that is maintained for specified uses. The word doing the work is maintained. It does not need to reproduce everything about the asset, and it does not need every element to be updated at the same frequency. It does need to remain current and complete enough, within agreed tolerances, for the decisions it is intended to support.
 
-For me, reliance is the point at which someone is prepared to act on the information without repeating every check independently. That does not mean accepting the system without question. It means there is enough evidence about the information, its status and its limitations to decide how far it can be used.
+For me, [reliance](/notes/the-reliance-question) is the point at which someone is prepared to act on the information without repeating every check independently. That does not mean accepting the system without question. It means there is enough evidence about the information, its status and its limitations to decide how far it can be used.
 
 ## Reliability depends on the decision
 
