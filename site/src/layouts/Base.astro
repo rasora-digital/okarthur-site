@@ -11,9 +11,11 @@ interface Props {
 	schema?: Record<string, unknown>[];
 	/** Keep the page out of search indexes. */
 	noindex?: boolean;
+	/** Override the site-wide share card. */
+	image?: string;
 }
 
-const { title, description, ogType, schema, noindex } = Astro.props;
+const { title, description, ogType, schema, noindex, image } = Astro.props;
 
 const path = Astro.url.pathname;
 
@@ -69,7 +71,13 @@ const isCurrent = (href: string) =>
 
 		{noindex && <meta name="robots" content="noindex" />}
 
-		<Seo title={title} description={description} ogType={ogType} noindex={noindex} />
+		<Seo
+			title={title}
+			description={description}
+			ogType={ogType}
+			noindex={noindex}
+			image={image}
+		/>
 		<JsonLd extra={schema} />
 
 		<script is:inline>

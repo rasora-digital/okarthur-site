@@ -4,14 +4,24 @@ interface Props {
 	description: string;
 	ogType?: 'website' | 'article';
 	noindex?: boolean;
+	image?: string;
 }
 
-const { title, description, ogType = 'website', noindex = false } = Astro.props;
+const {
+	title,
+	description,
+	ogType = 'website',
+	noindex = false,
+	image = '/og-default.png',
+} = Astro.props;
 
 const fullTitle = `${title} | OkArthur`;
 
 /** Resolve against Astro.site so the canonical is absolute in dev too. */
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+/** Share cards need an absolute URL, so resolve as we do the canonical. */
+const ogImage = new URL(image, Astro.site).href;
 ---
 
 <title>{fullTitle}</title>
@@ -23,4 +33,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <meta property="og:type" content={ogType} />
 {!noindex && <meta property="og:url" content={canonical} />}
 
-<meta name="twitter:card" content="summary" />
+<!-- Emitted on every page, noindex included: a shared link still renders a card. -->
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+	property="og:image:alt"
+	content="OkArthur. Independent review of digital and AI investment decisions."
+/>
+<meta property="og:site_name" content="OkArthur" />
+
+<meta name="twitter:card" content="summary_large_image" />
