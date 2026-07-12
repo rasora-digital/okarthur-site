@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# design masters the site is generated from, not shipped with it
+assets-source/
+
 # dependencies
 node_modules/
 
