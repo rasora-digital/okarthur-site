@@ -12,7 +12,10 @@ const {
 	description,
 	ogType = 'website',
 	noindex = false,
-	image = '/og-default.png',
+	/* LinkedIn re-hosts the card and caches its render against this URL, so a
+	   changed image at the same filename keeps serving the stale copy. Bump
+	   the suffix to force a refetch. */
+	image = '/og-default-v2.png',
 } = Astro.props;
 
 const fullTitle = `${title} | OkArthur`;
