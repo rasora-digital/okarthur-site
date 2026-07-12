@@ -16,4 +16,12 @@ export const person = {
 		addressCountry: 'AE',
 	},
 	sameAs: ['https://www.linkedin.com/in/stevenyule'],
+	knowsAbout: [
+		'Digital twins',
+		'Asset information management',
+		'Infrastructure data strategy',
+		'Artificial intelligence in infrastructure',
+		'Capital programme delivery',
+		'Whole-life asset management',
+	],
 };

@@ -1,10 +1,34 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PERSON_ID } from '../../lib/schema';
+
+const service = {
+	'@type': 'Service',
+	'@id': 'https://okarthur.com/review/#service',
+	name: 'Independent review',
+	serviceType:
+		'Independent review of a digital or AI investment decision',
+	description:
+		'A second opinion on a proposed digital, data or AI investment in infrastructure. Fixed scope, a fixed end date, and one written opinion from someone with no stake in the outcome.',
+	url: 'https://okarthur.com/review/',
+	provider: { '@id': PERSON_ID },
+	areaServed: [
+		{ '@type': 'Country', name: 'United Arab Emirates' },
+		{ '@type': 'Country', name: 'United Kingdom' },
+		{ '@type': 'Place', name: 'Gulf Cooperation Council' },
+	],
+	audience: {
+		'@type': 'Audience',
+		audienceType:
+			'Infrastructure owners, developers and major capital programmes',
+	},
+};
 ---
 
 <Base
 	title="Independent review"
 	description="A second opinion on a digital or AI investment decision in infrastructure, before you commit. Fixed scope, fixed end date, one written opinion."
+	schema={[service]}
 >
 	<div class="page-head">
 		<h1 class="page-title">Independent review</h1>
