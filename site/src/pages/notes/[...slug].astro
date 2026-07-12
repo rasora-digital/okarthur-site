@@ -21,12 +21,14 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 });
 
 const isoDate = note.data.pubDate.toISOString().slice(0, 10);
+const isoUpdated = note.data.updatedDate?.toISOString().slice(0, 10);
 
 const article = {
 	'@type': 'Article',
 	headline: note.data.title,
 	description: note.data.description,
 	datePublished: isoDate,
+	...(isoUpdated ? { dateModified: isoUpdated } : {}),
 	author: { '@id': PERSON_ID },
 	mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
 };
