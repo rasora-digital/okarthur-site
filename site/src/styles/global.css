@@ -890,6 +890,33 @@ hr::after {
 	border-bottom: 1px solid var(--rule);
 }
 
+.note-bridge {
+	margin-top: var(--s-8);
+	padding-top: var(--s-6);
+	border-top: 1px solid var(--rule);
+	max-width: var(--measure);
+}
+
+.note-bridge p {
+	color: var(--muted);
+	text-wrap: pretty;
+}
+
+.note-bridge a {
+	color: var(--ink);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.16em;
+	text-decoration-skip-ink: auto;
+	transition: color var(--transition), text-decoration-thickness var(--transition);
+}
+
+.note-bridge a:hover {
+	color: var(--accent);
+	text-decoration-thickness: 2px;
+}
+
 /* 11. Motion ==============================================================
    Off unless the visitor has expressed no preference against it, and off
    entirely without JavaScript: the hiding rule requires the .js class that
