@@ -578,24 +578,6 @@ main {
 	text-wrap: pretty;
 }
 
-/* --- Capabilities --- */
-
-.capability {
-	margin-top: var(--s-8);
-	max-width: var(--measure);
-}
-
-.capability-title {
-	font-size: var(--text-xl);
-	font-weight: 500;
-}
-
-.capability p {
-	margin-top: var(--s-4);
-	color: var(--ink-soft);
-	text-wrap: pretty;
-}
-
 /* --- Entries that annotate the margin ---
    The block is pulled left so its meta column fills the annotation margin
    and its body begins exactly on the datum. Below 62em there is no margin

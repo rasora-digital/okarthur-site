@@ -24,7 +24,7 @@ Run these inside `site/`:
 
 ## Layout
 
-    site/src/pages/            routes (index, about, capabilities, contact,
+    site/src/pages/            routes (index, about, review, contact,
                                privacy, terms, notes, 404)
     site/src/content/notes/    notes collection, markdown, schema in
                                site/src/content.config.ts
