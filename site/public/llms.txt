@@ -10,8 +10,9 @@ the same. Contact: steven@okarthur.com
 
 - [About](https://okarthur.com/about/): Steven Yule's background, chartered
   status and professional roles.
-- [Capabilities](https://okarthur.com/capabilities/): The advisory work
-  offered through OkArthur.
+- [Independent review](https://okarthur.com/review/): The entry
+  engagement, an independent second opinion on a digital or AI
+  investment decision.
 - [Notes](https://okarthur.com/notes/): Writing on digital, data and
   infrastructure.
 - [Contact](https://okarthur.com/contact/): How to reach Steven Yule.

@@ -24,7 +24,7 @@ Run these inside `site/`:
 
 ## Layout
 
-    site/src/pages/            routes (index, about, capabilities, contact,
+    site/src/pages/            routes (index, about, review, contact,
                                privacy, terms, notes, 404)
     site/src/content/notes/    notes collection, markdown, schema in
                                site/src/content.config.ts
@@ -65,10 +65,15 @@ the old page.
 `rebuild/astro`. Jobs: `build`, `gitleaks`, `linkcheck`. These three are
 the required status checks on `main`.
 
-`linkcheck` runs lychee over `site/dist`. Its two `--exclude` flags are
+`linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
-tags point at routes that only exist once deployed) and `linkedin.com`
-(blocks automated clients, returning 403/429 from GitHub runners).
+tags point at routes that only exist once deployed), `linkedin.com`
+(blocks automated clients, returning 403/429 from GitHub runners), and
+`open.spotify.com`, `de.bentley.com`, `ice.org.uk` and `emerald.com`
+(same anti-bot behaviour against GitHub runners). The okarthur.com
+exclusion was dropped once, in PR #39, on the mistaken belief the live
+site made it obsolete. It broke the next PR that added a page and was
+restored the same day in `90bf879`. Do not drop it again.
 
 gitleaks runs in CI only. There is no longer a pre-commit hook.
 
