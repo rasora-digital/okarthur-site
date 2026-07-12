@@ -9,24 +9,30 @@ wording**. Treat everything below as draft until it is read and signed off.
 
 | File | What was drafted |
 | --- | --- |
-| `site/src/pages/index.astro` | Hero headline and positioning standfirst |
 | `site/src/pages/about.astro` | Page headline and two-paragraph biography |
-| `site/src/pages/capabilities/index.astro` | Lede and all three capability titles + descriptions |
 | `site/src/pages/rss.xml.ts` | RSS feed description |
-| 8 × `*.astro` | Meta descriptions (also used for `og:description`) |
+| `*.astro` | Meta descriptions (also used for `og:description`) |
+
+The Capabilities page has since been retired, and the Home page rewritten
+around the independent review. That copy was written rather than drafted,
+so it is not awaiting sign-off.
 
 ## Known issues to fix
 
-1. **Positioning is not coherent across the site.** The meta descriptions on
-   Home, Notes and 404 still use the legacy site's triad ("secure delivery,
-   data platforms and practical AI"). The Capabilities page and About page now
-   use the CV's framing (capital delivery, digital twins, operating models).
-   Pick one and make the whole site agree.
+1. ~~**Positioning is not coherent across the site.**~~ Resolved. The legacy
+   site's triad ("secure delivery, data platforms and practical AI") no longer
+   appears anywhere in `site/`. Home, Contact, Notes and the new `/review/`
+   page now share the independent-review framing.
 
 2. **Old URLs die at cutover.** `/about.html`, `/privacy.html`, `/terms.html`
    and `/notes/foundations-first.html` become `/about/`, `/privacy/`, `/terms/`
    and `/notes/foundations-first/`. `foundations-first.html` is live and
    indexed today. A Cloudflare Bulk Redirect rule would preserve them.
+
+3. **`/capabilities/` is retired.** The page was deleted once `/review/`
+   replaced it. The URL was live and is linked from outside the site, so it
+   needs a Cloudflare redirect to `/review/`, in place as soon as the
+   retirement deploys.
 
 ## Deliberately excluded from the site
 
