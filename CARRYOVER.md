@@ -1,21 +1,21 @@
-# Carry-over: copy needs sign-off before or during Phase 7
+# Carry-over
 
-The Astro site's placeholder copy was drafted from
-`Steven Yule CV - June 26.docx` rather than written by Steven. It reads
-plausibly and contains no invented facts, but **nobody has approved the
-wording**. Treat everything below as draft until it is read and signed off.
+The Astro site's original copy was drafted from
+`Steven Yule CV - June 26.docx` rather than written by Steven, and was
+carried here awaiting sign-off.
 
-## Drafted copy awaiting sign-off
+## Drafted copy: cleared
 
-| File | What was drafted |
+Nothing is outstanding. The drafted copy has since been replaced or
+approved, page by page:
+
+| File | Now |
 | --- | --- |
-| `site/src/pages/about.astro` | Page headline and two-paragraph biography |
-| `site/src/pages/rss.xml.ts` | RSS feed description |
-| `*.astro` | Meta descriptions (also used for `og:description`) |
-
-The Capabilities page has since been retired, and the Home page rewritten
-around the independent review. That copy was written rather than drafted,
-so it is not awaiting sign-off.
+| `site/src/pages/index.astro` | Rewritten around the independent review. |
+| `site/src/pages/capabilities/index.astro` | Page retired; `/review/` replaced it. |
+| `site/src/pages/contact.astro` | Rewritten to shape the enquiry. |
+| `site/src/pages/about.astro` | Bio kept and approved; meta description and the review paragraph written. |
+| `site/src/pages/rss.xml.ts` | Feed description aligned to the review line. |
 
 ## Known issues to fix
 

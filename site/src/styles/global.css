@@ -342,22 +342,6 @@ main {
 	}
 }
 
-/* A benchmark tick: a short accent mark struck off the datum at the level
-   of a heading. Structural, not decorative — it says "a level is set here". */
-.tick {
-	position: relative;
-}
-
-.tick::before {
-	content: '';
-	position: absolute;
-	left: calc(-1 * var(--rail));
-	top: 0.62em;
-	width: calc(var(--rail) * 0.62);
-	height: 2px;
-	background-color: var(--accent);
-}
-
 /* 8. Masthead and footer ================================================== */
 
 .masthead {
@@ -966,7 +950,6 @@ hr::after {
 		border-bottom: 1px solid #000;
 	}
 
-	.tick::before,
 	.entry-meta::before {
 		display: none;
 	}
