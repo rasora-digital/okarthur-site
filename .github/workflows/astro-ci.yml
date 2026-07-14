@@ -22,6 +22,12 @@ jobs:
       - name: Meta descriptions within Bing's 155 character limit
         run: npm run check:meta
         working-directory: site
+      # lychee does not cover llms.txt: it reads the HTML, and our own domain is
+      # excluded from it. Nothing else links these URLs, so a renamed route
+      # would rot the file silently.
+      - name: llms.txt links point at routes that exist
+        run: npm run check:llms
+        working-directory: site
 
   gitleaks:
     runs-on: ubuntu-latest
