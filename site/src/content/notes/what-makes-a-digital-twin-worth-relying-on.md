@@ -1,6 +1,6 @@
 ---
 title: "What makes a digital twin worth relying on"
-description: "What it takes for an owner to rely on a digital twin for a specific decision, and why procurement sets the conditions for reliance rather than guaranteeing it."
+description: "What it takes for an owner to rely on a digital twin for a decision, and why procurement sets the conditions for reliance rather than guaranteeing it."
 pubDate: 2026-07-11
 ---
 
