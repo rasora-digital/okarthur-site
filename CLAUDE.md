@@ -23,8 +23,9 @@ will not fail loudly; it will just do the wrong thing.
     npm run dev       local dev server
     npm run build     writes site/dist
     npm run preview   serve the built site
-    npm run check:meta  asserts meta descriptions fit Bing's 155 characters,
-                        reads site/dist, so run it after a build
+    npm run check:meta  asserts titles fit Bing's 70 characters and meta
+                        descriptions its 155, reads site/dist, so run it
+                        after a build
     npm run check:llms  asserts every URL in llms.txt is a real route, also
                         reads site/dist, so run it after a build
 
@@ -48,7 +49,7 @@ not "tidy them away" as unused.
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
-    site/scripts/check-meta.mjs  meta description length check, run in CI
+    site/scripts/check-meta.mjs  title and meta description check, run in CI
     site/scripts/check-llms.mjs  llms.txt link check, run in CI
     site/public/               copied verbatim into dist
 
@@ -91,12 +92,21 @@ the old page.
 required status checks on `main`.
 
 `build` also runs `npm run check:meta` after the build, which fails the job
-if any page's meta description is missing or runs past 155 characters, the
-point at which Bing truncates. It is a step of `build` rather than a job of
-its own so that it can read the dist that build just produced, and so that
-the required checks stay at three. Adding a fourth job would mean editing
-branch protection, and the check would have to build the site a second time
-to have anything to read.
+if a page's title or meta description is missing or overruns Bing's limits,
+70 characters and 155. It also asserts that `og:title` agrees with `<title>`
+on every page, that `og:site_name` reads OkArthur, and that the brand suffix
+is present everywhere except the home page. It is a step of `build` rather
+than a job of its own so that it can read the dist that build just produced,
+and so that the required checks stay at three. Adding a fourth job would mean
+editing branch protection, and the check would have to build the site a
+second time to have anything to read.
+
+`Seo.astro` appends `" | OkArthur"` to every title. A page that passes
+`titleIsComplete` skips the suffix and supplies its whole title instead. The
+home page is the only page that does, because with the suffix its title ran
+to 78 characters. The prop governs `<title>` and `og:title` together, and
+that is deliberate: a page is called one thing, not two. Nothing is lost from
+a share unfurl, because `og:site_name` still carries the brand.
 
 `build` also runs `npm run check:llms`, which fails the job if a URL in the
 Pages section of `llms.txt` is not a route in the built sitemap. `linkcheck`

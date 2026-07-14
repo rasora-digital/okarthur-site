@@ -5,6 +5,8 @@ import '../styles/global.css';
 
 interface Props {
 	title: string;
+	/** Suppress the brand suffix; title is already complete. See Seo.astro. */
+	titleIsComplete?: boolean;
 	description: string;
 	ogType?: 'website' | 'article';
 	/** Schemas to emit alongside the site-wide Person. */
@@ -15,7 +17,8 @@ interface Props {
 	image?: string;
 }
 
-const { title, description, ogType, schema, noindex, image } = Astro.props;
+const { title, titleIsComplete, description, ogType, schema, noindex, image } =
+	Astro.props;
 
 const path = Astro.url.pathname;
 
@@ -79,6 +82,7 @@ const isCurrent = (href: string) =>
 
 		<Seo
 			title={title}
+			titleIsComplete={titleIsComplete}
 			description={description}
 			ogType={ogType}
 			noindex={noindex}
