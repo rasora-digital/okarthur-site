@@ -15,21 +15,40 @@ or `requirements.txt`, they are stale and should be deleted.
 
 ## Commands
 
-Run these inside `site/`:
+Every npm command runs inside `site/`, never at the repository root. There
+is no root `package.json`, so `npm install` or `npm run build` at the root
+will not fail loudly; it will just do the wrong thing.
 
     npm install
     npm run dev       local dev server
     npm run build     writes site/dist
     npm run preview   serve the built site
 
+The Open Graph card is generated, not hand-edited, and is not part of
+`npm run build`. Regenerate it only when the card design changes:
+
+    node scripts/og-card.mjs    writes site/public/og-default-v3.png
+
+That script is the only reason `site/package.json` carries
+devDependencies. `@resvg/resvg-js`, `subset-font` and `wawoff2` are pinned
+to exact versions and are used by the card generator alone. Nothing in the
+site's runtime imports them, and `npm run build` does not need them, so do
+not "tidy them away" as unused.
+
 ## Layout
 
-    site/src/pages/            routes (index, about, review, contact,
-                               privacy, terms, notes, 404)
+    site/src/pages/            routes (index, about, work, review, media,
+                               contact, privacy, terms, notes, rss.xml,
+                               404)
     site/src/content/notes/    notes collection, markdown, schema in
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
+    site/scripts/og-card.mjs   generates the Open Graph card, run by hand
     site/public/               copied verbatim into dist
+
+`notes` is two files: `notes/index.astro` for the list and
+`notes/[...slug].astro` for each note. `work`, `review` and `media` are
+each an `index.astro` inside their own directory.
 
 `site/public/` holds `CNAME`, `humans.txt`, `robots.txt`, `llms.txt`,
 fonts, favicons, and `.well-known/security.txt`. Astro copies dotfiles and
@@ -83,6 +102,13 @@ The public contact address is steven@okarthur.com. `hello@okarthur.com` is
 wrong wherever it appears.
 
 `site/public/.well-known/security.txt` is the real one.
+
+`site/public/og-default-v2.png` must not be deleted, even though nothing in
+`site/src` references it any more. The live card is `og-default-v3.png`, so
+v2 looks like a dead asset and reads as safe to remove. It is not. LinkedIn
+caches share renders against the absolute image URL, and posts already in
+circulation still point at v2. Deleting it breaks the card on every one of
+them. The same goes for any future v4: retire the reference, keep the file.
 
 See `CARRYOVER.md` for copy that was drafted rather than written, and for
 the open issues that go with it.
