@@ -17,6 +17,11 @@ jobs:
         working-directory: site
       - run: npm run build
         working-directory: site
+      # A step of build, not a job of its own: it needs the same dist the build
+      # just produced, and folding it in keeps the required checks at three.
+      - name: Meta descriptions within Bing's 155 character limit
+        run: npm run check:meta
+        working-directory: site
 
   gitleaks:
     runs-on: ubuntu-latest

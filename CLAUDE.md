@@ -23,6 +23,8 @@ will not fail loudly; it will just do the wrong thing.
     npm run dev       local dev server
     npm run build     writes site/dist
     npm run preview   serve the built site
+    npm run check:meta  asserts meta descriptions fit Bing's 155 characters,
+                        reads site/dist, so run it after a build
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -44,6 +46,7 @@ not "tidy them away" as unused.
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
+    site/scripts/check-meta.mjs  meta description length check, run in CI
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -81,8 +84,16 @@ the old page.
 ## CI
 
 `.github/workflows/astro-ci.yml` runs on pull requests and on pushes to
-`rebuild/astro`. Jobs: `build`, `gitleaks`, `linkcheck`. These three are
-the required status checks on `main`.
+`main`. Jobs: `build`, `gitleaks`, `linkcheck`. These three are the
+required status checks on `main`.
+
+`build` also runs `npm run check:meta` after the build, which fails the job
+if any page's meta description is missing or runs past 155 characters, the
+point at which Bing truncates. It is a step of `build` rather than a job of
+its own so that it can read the dist that build just produced, and so that
+the required checks stay at three. Adding a fourth job would mean editing
+branch protection, and the check would have to build the site a second time
+to have anything to read.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
