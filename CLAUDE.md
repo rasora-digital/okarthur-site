@@ -25,6 +25,8 @@ will not fail loudly; it will just do the wrong thing.
     npm run preview   serve the built site
     npm run check:meta  asserts meta descriptions fit Bing's 155 characters,
                         reads site/dist, so run it after a build
+    npm run check:llms  asserts every URL in llms.txt is a real route, also
+                        reads site/dist, so run it after a build
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -47,6 +49,7 @@ not "tidy them away" as unused.
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
     site/scripts/check-meta.mjs  meta description length check, run in CI
+    site/scripts/check-llms.mjs  llms.txt link check, run in CI
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -94,6 +97,15 @@ its own so that it can read the dist that build just produced, and so that
 the required checks stay at three. Adding a fourth job would mean editing
 branch protection, and the check would have to build the site a second time
 to have anything to read.
+
+`build` also runs `npm run check:llms`, which fails the job if a URL in the
+Pages section of `llms.txt` is not a route in the built sitemap. `linkcheck`
+does not cover this: lychee reads the HTML in `dist`, and okarthur.com is
+excluded from it in any case. Nothing else in the build links these URLs, so
+without the check a renamed route leaves `llms.txt` pointing at a 404 and
+nothing says so. The reverse is not asserted, because plenty of routes
+belong in the sitemap and not in `llms.txt`: the individual notes, privacy,
+terms.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
