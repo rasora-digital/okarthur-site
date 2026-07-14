@@ -6,7 +6,7 @@ export const person = {
 	'@type': 'Person',
 	'@id': PERSON_ID,
 	name: 'Steven Yule',
-	jobTitle: 'Independent adviser on digital and AI in infrastructure',
+	jobTitle: 'Chartered civil engineer',
 	honorificSuffix: 'CEng FICE FCIHT MIAM',
 	url: 'https://okarthur.com',
 	image: 'https://okarthur.com/steven-yule.jpg',
@@ -17,6 +17,28 @@ export const person = {
 		addressCountry: 'AE',
 	},
 	sameAs: ['https://www.linkedin.com/in/stevenyule'],
+	memberOf: [
+		{
+			'@type': 'Organization',
+			name: 'Institution of Civil Engineers',
+			url: 'https://www.ice.org.uk',
+		},
+		{
+			'@type': 'Organization',
+			name: 'Chartered Institution of Highways and Transportation',
+			url: 'https://www.ciht.org.uk',
+		},
+		{
+			'@type': 'Organization',
+			name: 'Institute of Asset Management',
+			url: 'https://theiam.org',
+		},
+		{
+			'@type': 'Organization',
+			name: 'Worshipful Company of Engineers',
+			url: 'https://www.engineerscompany.org.uk',
+		},
+	],
 	knowsAbout: [
 		'Digital twins',
 		'Asset information management',
@@ -24,5 +46,9 @@ export const person = {
 		'Artificial intelligence in infrastructure',
 		'Capital programme delivery',
 		'Whole-life asset management',
+		'Digital and AI investment appraisal',
+		'Technology procurement for infrastructure owners',
+		'Independent technical review',
+		'Digital twin assurance',
 	],
 };
