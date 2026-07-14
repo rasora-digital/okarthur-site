@@ -23,8 +23,9 @@ will not fail loudly; it will just do the wrong thing.
     npm run dev       local dev server
     npm run build     writes site/dist
     npm run preview   serve the built site
-    npm run check:meta  asserts meta descriptions fit Bing's 155 characters,
-                        reads site/dist, so run it after a build
+    npm run check:meta  asserts titles fit Bing's 70 characters and meta
+                        descriptions its 155, reads site/dist, so run it
+                        after a build
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -88,12 +89,21 @@ the old page.
 required status checks on `main`.
 
 `build` also runs `npm run check:meta` after the build, which fails the job
-if any page's meta description is missing or runs past 155 characters, the
-point at which Bing truncates. It is a step of `build` rather than a job of
-its own so that it can read the dist that build just produced, and so that
-the required checks stay at three. Adding a fourth job would mean editing
-branch protection, and the check would have to build the site a second time
-to have anything to read.
+if a page's title or meta description is missing or overruns Bing's limits,
+70 characters and 155. It also asserts that `og:title` agrees with `<title>`
+on every page, that `og:site_name` reads OkArthur, and that the brand suffix
+is present everywhere except the home page. It is a step of `build` rather
+than a job of its own so that it can read the dist that build just produced,
+and so that the required checks stay at three. Adding a fourth job would mean
+editing branch protection, and the check would have to build the site a
+second time to have anything to read.
+
+`Seo.astro` appends `" | OkArthur"` to every title. A page that passes
+`titleIsComplete` skips the suffix and supplies its whole title instead. The
+home page is the only page that does, because with the suffix its title ran
+to 78 characters. The prop governs `<title>` and `og:title` together, and
+that is deliberate: a page is called one thing, not two. Nothing is lost from
+a share unfurl, because `og:site_name` still carries the brand.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
