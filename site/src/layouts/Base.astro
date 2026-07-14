@@ -1,6 +1,7 @@
 ---
 import JsonLd from '../components/JsonLd.astro';
 import Seo from '../components/Seo.astro';
+import { FEED_TITLE, FEED_PATH } from '../lib/feed';
 import '../styles/global.css';
 
 interface Props {
@@ -79,6 +80,13 @@ const isCurrent = (href: string) =>
 		/>
 
 		{noindex && <meta name="robots" content="noindex" />}
+
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={FEED_TITLE}
+			href={FEED_PATH}
+		/>
 
 		<Seo
 			title={title}

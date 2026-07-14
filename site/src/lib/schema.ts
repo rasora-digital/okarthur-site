@@ -16,7 +16,12 @@ export const person = {
 		addressLocality: 'Dubai',
 		addressCountry: 'AE',
 	},
-	sameAs: ['https://www.linkedin.com/in/stevenyule'],
+	/* An identity claim, not a link list: these say the Person is that profile.
+	   The GitHub account is styule, not the unrelated and empty stevenyule. */
+	sameAs: [
+		'https://www.linkedin.com/in/stevenyule',
+		'https://github.com/styule',
+	],
 	memberOf: [
 		{
 			'@type': 'Organization',

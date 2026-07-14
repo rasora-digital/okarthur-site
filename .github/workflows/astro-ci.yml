@@ -19,7 +19,7 @@ jobs:
         working-directory: site
       # A step of build, not a job of its own: it needs the same dist the build
       # just produced, and folding it in keeps the required checks at three.
-      - name: Meta descriptions within Bing's 155 character limit
+      - name: Titles and meta descriptions within Bing's limits
         run: npm run check:meta
         working-directory: site
       # lychee does not cover llms.txt: it reads the HTML, and our own domain is
@@ -27,6 +27,12 @@ jobs:
       # would rot the file silently.
       - name: llms.txt links point at routes that exist
         run: npm run check:llms
+        working-directory: site
+      # Astro's markdown SmartyPants is on by default and rewrites straight
+      # apostrophes into curly ones between src and dist. astro.config.mjs turns
+      # it off; this catches a dependency bump that turns it back on.
+      - name: No curly quotes or em dashes in the build output
+        run: npm run check:text
         working-directory: site
 
   gitleaks:

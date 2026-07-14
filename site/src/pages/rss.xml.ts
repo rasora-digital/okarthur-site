@@ -1,14 +1,14 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { FEED_TITLE, FEED_DESCRIPTION } from '../lib/feed';
 
 export async function GET(context: APIContext) {
 	const notes = await getCollection('notes', ({ data }) => !data.draft);
 
 	return rss({
-		title: 'OkArthur — Notes',
-		description:
-			'Notes from Steven Yule on digital and AI investment decisions in infrastructure and capital programmes.',
+		title: FEED_TITLE,
+		description: FEED_DESCRIPTION,
 		site: context.site!,
 		items: notes
 			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
