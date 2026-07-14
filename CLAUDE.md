@@ -28,6 +28,8 @@ will not fail loudly; it will just do the wrong thing.
                         after a build
     npm run check:llms  asserts every URL in llms.txt is a real route, also
                         reads site/dist, so run it after a build
+    npm run check:text  asserts no curly quotes or em dashes reach the build
+                        output, same again
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -51,6 +53,9 @@ not "tidy them away" as unused.
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
     site/scripts/check-meta.mjs  title and meta description check, run in CI
     site/scripts/check-llms.mjs  llms.txt link check, run in CI
+    site/scripts/check-text.mjs  curly quote and em dash check, run in CI
+    site/src/lib/feed.ts       feed title, description and path, imported by
+                               rss.xml.ts and by the head in Base.astro
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -116,6 +121,16 @@ without the check a renamed route leaves `llms.txt` pointing at a 404 and
 nothing says so. The reverse is not asserted, because plenty of routes
 belong in the sitemap and not in `llms.txt`: the individual notes, privacy,
 terms.
+
+`build` also runs `npm run check:text`, which fails the job if a curly quote
+or an em dash reaches `site/dist`. Astro runs SmartyPants over markdown by
+default, which rewrites the straight apostrophes in the note sources into
+curly ones between `src` and `dist`. The sources were always clean, so a grep
+of `src/` finds nothing and the characters appear only in the build.
+`astro.config.mjs` sets `markdown.smartypants` to `false`; the check is what
+stops a dependency bump quietly restoring the default. If a piece of copy
+ever genuinely needs an em dash, change the check deliberately rather than
+working around it.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical

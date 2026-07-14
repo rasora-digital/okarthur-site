@@ -11,6 +11,7 @@
     "build": "astro build",
     "check:llms": "node scripts/check-llms.mjs",
     "check:meta": "node scripts/check-meta.mjs",
+    "check:text": "node scripts/check-text.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
