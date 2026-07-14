@@ -6,7 +6,7 @@ export const person = {
 	'@type': 'Person',
 	'@id': PERSON_ID,
 	name: 'Steven Yule',
-	jobTitle: 'Digital, data and infrastructure transformation director',
+	jobTitle: 'Independent adviser on digital and AI in infrastructure',
 	honorificSuffix: 'CEng FICE FCIHT MIAM',
 	url: 'https://okarthur.com',
 	email: 'steven@okarthur.com',

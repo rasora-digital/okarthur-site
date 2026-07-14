@@ -478,6 +478,20 @@ main {
 	text-wrap: pretty;
 }
 
+/* Post-nominals and appointments, and the pointer to the newest note. Both
+   lean on .meta for their voice and only add their own spacing. */
+.hero-credentials {
+	margin-top: var(--s-5);
+	max-width: 54ch;
+	line-height: 1.6;
+}
+
+.hero-latest {
+	margin-top: var(--s-6);
+	max-width: 54ch;
+	line-height: 1.6;
+}
+
 /* Editorial navigation: rows on a rule, not buttons on a grid. */
 .gateways {
 	margin-top: var(--s-9);

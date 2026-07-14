@@ -21,14 +21,17 @@ const path = Astro.url.pathname;
 
 const sections = [
 	{ href: '/about', label: 'About' },
-	{ href: '/review', label: 'Review' },
+	{ href: '/work', label: 'Work' },
 	{ href: '/notes', label: 'Notes' },
 	{ href: '/contact', label: 'Contact' },
 ];
 
-/** A section is current when the page is that section or lives beneath it. */
+/** A section is current when the page is that section or lives beneath it.
+ * /review keeps its own URL but belongs to Work in the nav. */
 const isCurrent = (href: string) =>
-	path === href || path.startsWith(`${href}/`);
+	path === href ||
+	path.startsWith(`${href}/`) ||
+	(href === '/work' && (path === '/review' || path.startsWith('/review/')));
 ---
 
 <html lang="en-GB">
