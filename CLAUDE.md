@@ -26,6 +26,8 @@ will not fail loudly; it will just do the wrong thing.
     npm run check:meta  asserts titles fit Bing's 70 characters and meta
                         descriptions its 155, reads site/dist, so run it
                         after a build
+    npm run check:llms  asserts every URL in llms.txt is a real route, also
+                        reads site/dist, so run it after a build
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -47,7 +49,8 @@ not "tidy them away" as unused.
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
-    site/scripts/check-meta.mjs  meta description length check, run in CI
+    site/scripts/check-meta.mjs  title and meta description check, run in CI
+    site/scripts/check-llms.mjs  llms.txt link check, run in CI
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -104,6 +107,15 @@ home page is the only page that does, because with the suffix its title ran
 to 78 characters. The prop governs `<title>` and `og:title` together, and
 that is deliberate: a page is called one thing, not two. Nothing is lost from
 a share unfurl, because `og:site_name` still carries the brand.
+
+`build` also runs `npm run check:llms`, which fails the job if a URL in the
+Pages section of `llms.txt` is not a route in the built sitemap. `linkcheck`
+does not cover this: lychee reads the HTML in `dist`, and okarthur.com is
+excluded from it in any case. Nothing else in the build links these URLs, so
+without the check a renamed route leaves `llms.txt` pointing at a 404 and
+nothing says so. The reverse is not asserted, because plenty of routes
+belong in the sitemap and not in `llms.txt`: the individual notes, privacy,
+terms.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
