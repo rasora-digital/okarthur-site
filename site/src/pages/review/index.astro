@@ -23,12 +23,55 @@ const service = {
 			'Infrastructure owners, developers and major capital programmes',
 	},
 };
+
+/* The section and the FAQPage node are both built from this, so the answers
+   Google reads and the answers on the page cannot drift apart. */
+const questions = [
+	{
+		q: 'Is this an audit?',
+		a: "No. An audit tests compliance against a standard. This is an opinion on whether a decision is supported by its evidence. That evidence is usually a familiar set. A business case, a supplier's proposal or solutions material, a pilot's results, an integration or handover plan, and a set of benefits claims. The review tests whether those documents answer the questions the decision actually turns on. It carries no certification, and it can sit alongside formal assurance rather than replacing it.",
+	},
+	{
+		q: 'Can a decision that has already been made be reviewed?',
+		a: 'Yes. A completed supplier selection, a platform already funded, a system approaching handover. The question changes from whether to commit to what must now be true for the investment to pay back, but the method is the same.',
+	},
+	{
+		q: 'Can you review a procurement before it goes to market?',
+		a: 'Yes, and it is one of the most valuable moments to look. By the time bids arrive, most of the outcome has already been decided by what the tender asked for and how it will be scored. A review at this point examines the technical scope, the evaluation criteria, the contract shape, bundled or decoupled, and whether what is being bought fits the architecture and data it has to live with. It is far cheaper to fix a tender than to manage a wrong award.',
+	},
+	{
+		q: 'You spent years on the supplier side. How is the review independent?',
+		a: 'That history is why the review works. For sixteen years I helped build the evidence that sellers put in front of infrastructure owners. I know what that material is written to show, what it is written not to show, and which questions it is not built to answer. The independence is structural rather than personal, and it is written into each engagement. No stake in the outcome, no delivery work behind the opinion, and any interest declared before work starts.',
+	},
+	{
+		q: 'Do you take supplier-side work?',
+		a: 'Not on anything under review. If a conflict cannot be cleanly separated, I decline the engagement rather than manage it.',
+	},
+	{
+		q: 'What does it cost?',
+		a: 'A fixed fee, proposed within two working days of a first call. There is no published rate because scope is agreed per decision, but the fee is fixed before work starts and does not change. No time and materials.',
+	},
+	{
+		q: 'Why one person rather than a firm?',
+		a: 'Because the opinion is the product. A firm reviewing a proposal is usually also positioned to sell what comes after it, the implementation, the programme office, the follow-on advisory. I have watched that arithmetic from the inside. Here there is no delivery team to sell on and no follow-on the review is priced to win. What you buy is the judgement, and the judgement has nothing riding on your answer.',
+	},
+];
+
+const faq = {
+	'@type': 'FAQPage',
+	'@id': 'https://okarthur.com/review/#faq',
+	mainEntity: questions.map(({ q, a }) => ({
+		'@type': 'Question',
+		name: q,
+		acceptedAnswer: { '@type': 'Answer', text: a },
+	})),
+};
 ---
 
 <Base
 	title="Independent review"
 	description="A second opinion on a digital or AI investment decision in infrastructure, before you commit. Fixed scope, fixed end date, one written opinion."
-	schema={[service]}
+	schema={[service, faq]}
 >
 	<div class="page-head">
 		<h1 class="page-title">Independent review</h1>
@@ -123,6 +166,16 @@ const service = {
 			certification and no regulatory sign-off. The supplier's technical
 			work is examined, not redone.
 		</p>
+
+		<h2>Common questions</h2>
+		{
+			questions.map(({ q, a }) => (
+				<Fragment>
+					<h3>{q}</h3>
+					<p>{a}</p>
+				</Fragment>
+			))
+		}
 
 		<h2>Beyond the review</h2>
 		<p>
