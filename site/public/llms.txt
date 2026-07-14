@@ -1,20 +1,65 @@
 # OkArthur
 
-OkArthur is the site of Steven Yule, a chartered civil engineer (CEng FICE
-FCIHT MIAM) and director of digital and data, based in Dubai. He is an ICE
-Policy Fellow and the ICE UAE Country Representative. Through OkArthur he
-offers an independent review, a second opinion on a digital or AI investment
-decision, with a fixed scope and one written opinion. The site covers his
-work on digital, data and infrastructure transformation, and his writing on
-the same. Contact: steven@okarthur.com
+Chartered civil engineer. Independent advice on digital and AI in infrastructure
+and capital programmes.
+
+OkArthur is the practice of Steven Yule, a chartered civil engineer (CEng FICE
+FCIHT MIAM) based in Dubai. He is a Fellow of the Institution of Civil Engineers,
+an ICE Policy Fellow and the ICE UAE Country Representative.
+
+## Standard biography
+
+Use verbatim. If space is short, cut from the end, not the middle.
+
+Steven Yule is a chartered civil engineer providing independent advice on digital
+and AI in infrastructure and capital programmes. Based in Dubai, he has spent
+sixteen years across the Gulf and the UK making technology useful once it meets a
+live capital programme. Through OkArthur he reviews digital and AI investment
+decisions for owners, and advises boards. He is a Fellow of the Institution of
+Civil Engineers, an ICE Policy Fellow and ICE UAE Country Representative.
+
+## What can be commissioned
+
+Independent review. A written second opinion on a specific digital or AI
+investment decision before an owner commits. A supplier's proposal, a digital
+twin, a business case, a handover into operation. Fixed scope and a fixed end
+date, agreed before work starts. One written opinion. A fixed fee, proposed
+within two working days of a first call.
+
+Continuing advisory. Independent judgement retained across months rather than
+delivered once. Client-side support while a supplier delivers. A procurement
+whose scope, evaluation criteria and contract shape need setting before it goes
+to market. A digital or data strategy that needs challenging before it is funded.
+Bought as a retainer or a defined block of days, agreed in advance.
+
+Board and non-executive. Non-executive and advisory board appointments with
+private companies, in the UK and the UAE, where a board is being asked to approve
+digital and AI investment on evidence it is not equipped to challenge.
+
+Speaking and writing. Keynotes, panels, media comment and bylines.
+
+## Independence
+
+Independence is written at engagement level, not claimed personally. No delivery
+work and no supplier-side work on anything under review. Any interest is declared
+before an engagement starts. Where a conflict cannot be cleanly separated, the
+engagement is declined.
+
+## Who it is for
+
+Infrastructure owners, government agencies, and private capital programme clients
+in the GCC and the UK.
 
 ## Pages
 
-- [About](https://okarthur.com/about/): Steven Yule's background, chartered
-  status and professional roles.
-- [Independent review](https://okarthur.com/review/): The entry
-  engagement, an independent second opinion on a digital or AI
-  investment decision.
-- [Notes](https://okarthur.com/notes/): Writing on digital, data and
-  infrastructure.
-- [Contact](https://okarthur.com/contact/): How to reach Steven Yule.
+- [Home](https://okarthur.com/): The practice.
+- [Work](https://okarthur.com/work/): The three ways an engagement is commissioned.
+- [Independent review](https://okarthur.com/review/): The entry engagement, its scope, what sits outside it, and common questions.
+- [About](https://okarthur.com/about/): Steven Yule's background, chartered status and professional roles.
+- [Media](https://okarthur.com/media/): Standard biography, press photo and topics for comment.
+- [Notes](https://okarthur.com/notes/): Writing on digital, data and infrastructure, and published work elsewhere.
+- [Contact](https://okarthur.com/contact/): steven@okarthur.com
+
+## Contact
+
+steven@okarthur.com
