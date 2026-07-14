@@ -26,12 +26,15 @@ const sections = [
 	{ href: '/contact', label: 'Contact' },
 ];
 
-/** A section is current when the page is that section or lives beneath it.
- * /review keeps its own URL but belongs to Work in the nav. */
+/** Pages that keep their own URL but belong to Work in the nav. */
+const workPages = ['/review', '/media'];
+
+/** A section is current when the page is that section or lives beneath it. */
 const isCurrent = (href: string) =>
 	path === href ||
 	path.startsWith(`${href}/`) ||
-	(href === '/work' && (path === '/review' || path.startsWith('/review/')));
+	(href === '/work' &&
+		workPages.some((p) => path === p || path.startsWith(`${p}/`)));
 ---
 
 <html lang="en-GB">
@@ -116,6 +119,7 @@ const isCurrent = (href: string) =>
 					<p>&copy; 2026 OkArthur</p>
 					<nav class="footer-nav" aria-label="Footer">
 						<a href="mailto:steven@okarthur.com">steven@okarthur.com</a>
+						<a href="/media">Media</a>
 						<a href="/privacy">Privacy</a>
 						<a href="/terms">Terms</a>
 					</nav>
