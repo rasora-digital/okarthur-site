@@ -9,6 +9,7 @@ export const person = {
 	jobTitle: 'Independent adviser on digital and AI in infrastructure',
 	honorificSuffix: 'CEng FICE FCIHT MIAM',
 	url: 'https://okarthur.com',
+	image: 'https://okarthur.com/steven-yule.jpg',
 	email: 'steven@okarthur.com',
 	address: {
 		'@type': 'PostalAddress',

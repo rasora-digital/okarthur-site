@@ -223,6 +223,10 @@ picture,
 svg {
 	display: block;
 	max-width: 100%;
+	/* Without this, the width and height attributes an image needs in order to
+	   reserve its space would also hold its height fixed as max-width shrinks
+	   it, and squash it. */
+	height: auto;
 }
 
 /* 5. Base typography ====================================================== */
@@ -777,6 +781,14 @@ hr::after {
 	margin-top: var(--s-7);
 	font-size: var(--text-lg);
 	font-weight: 600;
+}
+
+/* The press photo ships at 1600px so an editor can take it at print size.
+   On the page it is a portrait, and a portrait filling the measure would
+   tower over the copy, so it is held to a portrait's worth of column. */
+.press-photo {
+	max-width: 20rem;
+	border: 1px solid var(--rule);
 }
 
 .prose ul,
