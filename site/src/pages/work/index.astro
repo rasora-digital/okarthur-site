@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PERSON_ID } from '../../lib/schema';
+
+const advisory = {
+	'@type': 'Service',
+	'@id': 'https://okarthur.com/work/#advisory',
+	name: 'Continuing advisory',
+	serviceType:
+		'Independent advisory on digital, data and AI in infrastructure',
+	description:
+		'Retained independent advice to infrastructure owners and leadership teams on digital, data and AI decisions and procurements, bought as a retainer or a defined block of days.',
+	url: 'https://okarthur.com/work/',
+	provider: { '@id': PERSON_ID },
+	areaServed: [
+		{ '@type': 'Country', name: 'United Arab Emirates' },
+		{ '@type': 'Country', name: 'United Kingdom' },
+		{ '@type': 'Place', name: 'Gulf Cooperation Council' },
+	],
+	audience: {
+		'@type': 'Audience',
+		audienceType:
+			'Infrastructure owners, developers and major capital programmes',
+	},
+};
+---
+
+<Base
+	title="Advisory, review and board work"
+	description="Three ways to commission independent judgement from Steven Yule on a digital or AI decision in infrastructure. A written review, continuing advisory, or a board appointment."
+	schema={[advisory]}
+>
+	<div class="page-head">
+		<h1 class="page-title">Work</h1>
+		<p class="lede">
+			Three ways to commission independent judgement on a digital or AI
+			decision.
+		</p>
+	</div>
+
+	<div class="prose reveal">
+		<p>
+			Every engagement here sells the same thing, judgement with no stake in
+			the answer. What varies is the shape it takes. A decision at a single
+			point takes a review. Where the decisions keep coming, it takes an
+			adviser who stays in the room, or a seat on the board.
+		</p>
+
+		<h2>Independent review</h2>
+		<p>
+			A second opinion on a specific decision, before you commit. A
+			supplier's proposal, a digital twin, a business case, a handover into
+			operation. Fixed scope and a fixed end date, agreed before work starts.
+			One written opinion, short enough for a board to read and specific
+			enough to act on. A fixed fee, proposed within two working days of a
+			first call.
+		</p>
+		<p>
+			<a href="/review/">The full scope of a review</a>, including what is
+			examined, what you receive, and what sits outside it.
+		</p>
+
+		<h2>Continuing advisory</h2>
+		<p>
+			Some decisions do not resolve in a single opinion. Where an owner or a
+			leadership team needs independent judgement available across months
+			rather than once, I work as a retained adviser. Client-side support
+			while a supplier delivers. A platform or integrator procurement that
+			needs its scope, evaluation criteria and contract shape set before it
+			goes to market. A digital or data strategy that needs challenging
+			before it is funded. A programme where someone has to be willing to say
+			the thing nobody in the room is paid to say.
+		</p>
+		<p>
+			Bought as a retainer or a defined block of days, agreed in advance. The
+			independence rule holds here as it does on a review. I take no delivery
+			work and no supplier-side work on anything I am advising on, and any
+			interest is declared before the engagement starts.
+		</p>
+
+		<h2>Board and non-executive</h2>
+		<p>
+			Boards are being asked to approve digital and AI investment at a scale
+			most of them cannot test, on evidence they are not equipped to
+			challenge. I take non-executive and advisory board appointments where
+			that is the gap. What I bring is a chartered engineer fluent in
+			digital, data and AI at board level, rather than a technologist who has
+			learned the vocabulary of governance.
+		</p>
+		<p>Private companies and advisory boards, in the UK and the UAE.</p>
+
+		<h2>Speaking and writing</h2>
+		<p>
+			Keynotes, panels, media comment and bylines on digital, data and AI in
+			infrastructure. Recent talks and published work are listed under <a
+				href="/notes/">Notes</a
+			>.
+		</p>
+
+		<h2>Start here</h2>
+		<p>
+			<a href="/contact/">Tell me the decision you are facing</a>, or the role
+			you are trying to fill.
+		</p>
+	</div>
+</Base>

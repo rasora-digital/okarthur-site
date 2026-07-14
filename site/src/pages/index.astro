@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { PERSON_ID } from '../lib/schema';
+import { getCollection } from 'astro:content';
 
 const website = {
 	'@type': 'WebSite',
@@ -10,13 +11,24 @@ const website = {
 	publisher: { '@id': PERSON_ID },
 };
 
+const allNotes = await getCollection('notes', ({ data }) => !data.draft);
+const [latest] = allNotes.sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
+
 const gateways = [
 	{
-		href: '/review',
+		href: '/work',
 		label: 'What you can commission',
-		target: 'Independent review',
+		target: 'Work',
 		teaser:
-			'A second opinion on a digital or AI investment decision. Fixed scope, fixed end date, one written opinion.',
+			'Independent review of a decision, continuing advisory, and non-executive and board roles.',
 	},
 	{
 		href: '/notes',
@@ -36,20 +48,24 @@ const gateways = [
 ---
 
 <Base
-	title="Independent review of digital and AI investment decisions"
-	description="Steven Yule, a chartered civil engineer in Dubai, giving infrastructure owners an independent read on digital and AI investment decisions across the GCC and UK."
+	title="Steven Yule, independent advice on digital and AI in infrastructure"
+	description="Steven Yule, chartered civil engineer in Dubai. Independent review, advisory and board work on digital and AI decisions in infrastructure, across the GCC and UK."
 	schema={[website]}
 >
 	<h1 class="hero-title">
-		Independent review of digital and AI investment decisions.
+		Independent advice on digital and AI in infrastructure and capital
+		programmes.
 	</h1>
 	<p class="standfirst">
 		I'm Steven Yule, a chartered civil engineer working at director level in
-		digital, data and AI for infrastructure, across the GCC and UK. When an
-		owner is about to commit, to a supplier's proposal, a digital twin, a
-		handover, or a business case, I give them a written opinion from someone
-		with no stake in the outcome. Fixed scope, a fixed end date, one
-		document a board can act on.
+		digital, data and AI for infrastructure, across the GCC and the UK. Owners
+		bring me in when a digital or AI decision has to be made and everyone
+		holding the evidence stands to gain from the answer. What they get from me
+		is an opinion with nothing riding on it.
+	</p>
+	<p class="meta hero-credentials">
+		CEng FICE FCIHT MIAM. ICE UAE Country Representative and ICE Policy
+		Fellow.
 	</p>
 
 	<nav class="gateways reveal" aria-label="Main sections">
@@ -65,4 +81,13 @@ const gateways = [
 			))
 		}
 	</nav>
+
+	{
+		latest && (
+			<p class="meta hero-latest">
+				Latest note. <a href={`/notes/${latest.id}`}>{latest.data.title}</a>,{' '}
+				{dateFormatter.format(latest.data.pubDate)}.
+			</p>
+		)
+	}
 </Base>
