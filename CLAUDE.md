@@ -142,7 +142,11 @@ exclusion was dropped once, in PR #39, on the mistaken belief the live
 site made it obsolete. It broke the next PR that added a page and was
 restored the same day in `90bf879`. Do not drop it again.
 
-gitleaks runs in CI only. There is no longer a pre-commit hook.
+gitleaks runs in CI only. There is no longer a pre-commit hook. The job
+downloads the gitleaks scanner at a pinned version, checks it against a pinned
+SHA-256, and scans git history. It does not use gitleaks/gitleaks-action,
+which needs a licence key held as a secret that Dependabot's pull requests
+cannot read. Bump the version and checksum together.
 
 ## Facts that are easy to get wrong
 
