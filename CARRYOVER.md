@@ -24,25 +24,22 @@ approved, page by page:
    appears anywhere in `site/`. Home, Contact, Notes and the new `/review/`
    page now share the independent-review framing.
 
-2. **Legacy `.html` URLs, partly covered.** A Cloudflare redirect exists, but
-   it only ever covered two of the four, and one of those has since rotted.
-   Measured against the live site on 12 July 2026:
+2. **Legacy `.html` URLs.** The redirect rules are Cloudflare single
+   redirects, not anything in this repository. Measured on 30 September 2026
+   with `curl -sI`:
 
    | URL | Now |
    | --- | --- |
-   | `/about.html` | 301 to `/about/`, which is 200. Correct. |
-   | `/notes/foundations-first.html` | 301 to `/notes/foundations-first/`, **which is a 404**. |
-   | `/privacy.html` | 404, never redirected. |
-   | `/terms.html` | 404, never redirected. |
+   | `/about.html` | 301 to `/about/`. Correct. |
+   | `/notes/foundations-first.html` | 301 to `/notes/`. Correct. The 301 into a 404 found on 12 July was fixed on 13 July. |
+   | `/notes/foundations-first/` | 301 to `/notes/`. Correct. |
+   | `/privacy.html`, `/terms.html` | 404, left that way on purpose. Nobody deep-links a privacy policy. |
 
-   The `foundations-first` chain broke when that note was deliberately deleted
-   in `d7d82b9` (11 July 2026), leaving a redirect pointing at a page that no
-   longer exists. A 301 into a 404 is worse than a plain 404, because crawlers
-   follow it and find nothing. **Repoint that rule at `/notes/`**, which is a
-   reasonable home for anyone still arriving from an indexed link.
-
-   `/privacy.html` and `/terms.html` are left to 404 on purpose. Nobody
-   deep-links a privacy policy, and an honest 404 beats an invented target.
+   One gap remains. With a query string appended, `/about.html?v=1` and
+   `/notes/foundations-first.html?v=1` return 404, because the rules match
+   the full URL rather than the path. Old indexed links carry no query string,
+   so this bites only tagged links. The fix is in Cloudflare, Rules, Redirect
+   Rules: change each rule's field from URI Full to URI Path.
 
 3. ~~**`/capabilities/` is retired.**~~ Done. The page was deleted once
    `/review/` replaced it, and a Cloudflare redirect rule now sends both

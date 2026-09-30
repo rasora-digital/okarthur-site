@@ -1,7 +1,8 @@
 # okarthur-site
 
-Static marketing site for OkArthur, a data and AI advisory in the GCC.
-Live at https://okarthur.com
+Static site for OkArthur, the practice of Steven Yule, chartered civil engineer.
+Independent advice on digital and AI in infrastructure and capital
+programmes, in the GCC and the UK. Live at https://okarthur.com
 
 ## What this is
 
@@ -86,9 +87,12 @@ The custom domain survives because `site/public/CNAME` lands in the build
 output. There is no CNAME file at the repo root and there must not be one.
 
 Cloudflare Free sits in front, DNS on Cloudflare. Deploy sequence: merge to
-`main`, wait for the deploy workflow to go green, purge the Cloudflare
-cache, then hard refresh. Purging before the deploy finishes just re-caches
-the old page.
+`main`, wait for the deploy workflow to go green, then check the changed page
+with a unique query string such as `?v=20260930a`. No Cloudflare purge is
+needed. Cloudflare does not cache this site's HTML (every response is
+`cf-cache-status: DYNAMIC`), and the GitHub Pages cache behind it sends
+`max-age=600`, so a deploy is live within ten minutes. A page still stale
+after that needs a fresh deployment, not a purge.
 
 ## CI
 
