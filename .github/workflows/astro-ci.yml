@@ -35,16 +35,35 @@ jobs:
         run: npm run check:text
         working-directory: site
 
+  # The gitleaks scanner itself, not gitleaks/gitleaks-action. The action needs
+  # a licence key for organisation-owned repositories, held as a repository
+  # secret, and pull requests opened by Dependabot cannot read Actions secrets,
+  # so the check failed on every Dependabot pull request. The scanner needs no
+  # key and no secrets. The job keeps the name gitleaks because that name is a
+  # required status check on main. Bump the version and checksum together,
+  # taking the checksum from the release's checksums file.
   gitleaks:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v3
+      - name: Install gitleaks, checksum verified
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITLEAKS_VERSION: 8.30.1
+          GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -sSfL -o gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          echo "${GITLEAKS_SHA256}  gitleaks.tar.gz" | sha256sum --check
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks version
+      # Scans every commit reachable from the checked-out ref, which for a pull
+      # request is the merge of the branch into main. Exits 1 on any finding.
+      - name: Scan git history for secrets
+        run: '"$RUNNER_TEMP/gitleaks" git --redact --no-banner --verbose .'
 
   linkcheck:
     runs-on: ubuntu-latest
