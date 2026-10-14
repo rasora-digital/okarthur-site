@@ -52,31 +52,53 @@ const gateways = [
 	titleIsComplete
 	description="Chartered civil engineer in Dubai. Digital, data and AI for owners delivering more than one development at once. Review, advisory and board work."
 	schema={[website]}
+	sheet="Home"
 >
-	<h1 class="hero-title">
-		Digital, data and AI for owners delivering more than one development at
-		once.
-	</h1>
-	<p class="standfirst">
-		I am Steven Yule, a chartered civil engineer based in Dubai. I lead
-		digital, data and AI work for infrastructure across the GCC and the UK.
-		Owners usually bring me in when one decision reaches across several of
-		their developments, and the evidence for it sits with teams that each
-		report on their own part.
-	</p>
-	<p class="standfirst">
-		A road closure agreed for one site can hold up a utility connection that
-		another site is waiting for. Neither programme will show the problem
-		until the date has passed. I read the programmes and contracts each
-		development already holds against each other, and set out what the
-		decision commits elsewhere while there is still time to change it.
-	</p>
-	<p class="meta hero-credentials">
-		CEng FICE FCIHT MIAM. ICE UAE Country Representative and ICE Policy
-		Fellow.
-	</p>
+	<div class="hero">
+		<picture class="hero-photo">
+			<source
+				type="image/webp"
+				srcset="/steven-yule-portrait-360.webp 360w, /steven-yule-portrait-720.webp 720w"
+				sizes="(min-width: 48em) 11rem, 5.5rem"
+			/>
+			<img
+				class="portrait"
+				src="/steven-yule-portrait-360.jpg"
+				srcset="/steven-yule-portrait-360.jpg 360w, /steven-yule-portrait-720.jpg 720w"
+				sizes="(min-width: 48em) 11rem, 5.5rem"
+				alt="Steven Yule"
+				width="360"
+				height="450"
+				fetchpriority="high"
+			/>
+		</picture>
+		<div class="hero-text">
+			<h1 class="hero-title">
+				Digital, data and AI for owners delivering more than one development at
+				once.
+			</h1>
+			<p class="standfirst">
+				I am Steven Yule, a chartered civil engineer based in Dubai. I lead
+				digital, data and AI work for infrastructure across the GCC and the UK.
+				Owners usually bring me in when one decision reaches across several of
+				their developments, and the evidence for it sits with teams that each
+				report on their own part.
+			</p>
+			<p class="standfirst pen-mark">
+				A road closure agreed for one site can hold up a utility connection that
+				another site is waiting for. Neither programme will show the problem
+				until the date has passed. I read the programmes and contracts each
+				development already holds against each other, and set out what the
+				decision commits elsewhere while there is still time to change it.
+			</p>
+			<p class="meta hero-credentials">
+				CEng FICE FCIHT MIAM. ICE UAE Country Representative and ICE Policy
+				Fellow.
+			</p>
+		</div>
+	</div>
 
-	<nav class="gateways reveal" aria-label="Main sections">
+	<nav class="gateways" aria-label="Main sections">
 		{
 			gateways.map((gateway) => (
 				<a class="gateway" href={gateway.href}>

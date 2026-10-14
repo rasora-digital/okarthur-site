@@ -10,7 +10,23 @@ import Base from '../layouts/Base.astro';
 		<h1 class="page-title">About Steven Yule</h1>
 	</div>
 
-	<div class="prose reveal">
+	<div class="prose">
+		<picture class="about-photo">
+			<source
+				type="image/webp"
+				srcset="/steven-yule-portrait-360.webp 360w, /steven-yule-portrait-720.webp 720w"
+				sizes="(min-width: 40em) 13rem, 9rem"
+			/>
+			<img
+				class="portrait"
+				src="/steven-yule-portrait-360.jpg"
+				srcset="/steven-yule-portrait-360.jpg 360w, /steven-yule-portrait-720.jpg 720w"
+				sizes="(min-width: 40em) 13rem, 9rem"
+				alt="Steven Yule"
+				width="360"
+				height="450"
+			/>
+		</picture>
 		<p>
 			I am Steven Yule, a chartered civil engineer based in Dubai, and I lead
 			digital, data and AI work for infrastructure at director level. For 16
@@ -38,7 +54,7 @@ import Base from '../layouts/Base.astro';
 			gap appears at the top of a large owner, where each development can be
 			relied on separately and the sum of them cannot.
 		</p>
-		<p>
+		<p class="pen-mark">
 			The clearest example of reading across developments is Riyadh. As
 			project director with the Riyadh Infrastructure Projects Center, I led
 			the first integrated infrastructure plan for the region. It brought the
@@ -74,7 +90,7 @@ import Base from '../layouts/Base.astro';
 		</p>
 	</div>
 
-	<div class="origin-note reveal">
+	<div class="origin-note">
 		<h2 class="origin-note-title">About the name</h2>
 		<p>
 			OkArthur is named after my son Arthur, who is seven and asks more

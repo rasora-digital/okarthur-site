@@ -38,7 +38,7 @@ will not fail loudly; it will just do the wrong thing.
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
 
-    node scripts/og-card.mjs    writes site/public/og-default-v4.png
+    node scripts/og-card.mjs    writes site/public/og-default-v5.png
 
 That script is the only reason `site/package.json` carries
 devDependencies. `@resvg/resvg-js`, `subset-font` and `wawoff2` are pinned
@@ -61,6 +61,11 @@ not "tidy them away" as unused.
     site/scripts/check-voice.mjs  page copy register check, run in CI
     site/src/lib/feed.ts       feed title, description and path, imported by
                                rss.xml.ts and by the head in Base.astro
+    site/src/lib/site.ts       contact email, LinkedIn URL, the Calendly
+                               booking URL and the default revision date,
+                               each set once and used by the layout
+    site/src/styles/global.css the whole design, "Datum", the site's only
+                               stylesheet
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -70,6 +75,28 @@ each an `index.astro` inside their own directory.
 `site/public/` holds `CNAME`, `humans.txt`, `robots.txt`, `llms.txt`,
 fonts, favicons, and `.well-known/security.txt`. Astro copies dotfiles and
 dot-directories, so `.well-known/` survives the build.
+
+## Design
+
+`global.css` is Datum version 2, from October 2026. One family, Charis SIL,
+sets everything a reader reads, and IBM Plex Mono sets dates, references and
+labels. Both are self-hosted Latin subsets in `site/public/fonts`, and
+Charis SIL's licence sits beside it as `charis-sil-OFL.txt`. Charis ships in
+400 and 700 only, so a weight of 500 or 600 on serif text falls back to one
+of those, and nothing should ask for one. The red-pen colour, `--pen`, is
+used at most once a page, through the `pen-mark` class or in a figure. Links
+stay drawing blue. The masthead carries an email action and a "Book 30
+minutes" link to Calendly, and the footer is a drawing title block whose
+Revised date comes from `SITE_REVISED` in `site.ts` unless a page passes
+`revised`. There is no fade-in on scroll and no client script. The reveal
+was removed because it hid content from link previews and background tabs.
+The Datum design system in Claude Design was extracted from this stylesheet,
+so when the stylesheet changes, Datum is re-extracted from it, not the other
+way round.
+
+The portrait crops `steven-yule-portrait-360` and `-720`, in WebP and JPEG,
+were cut once from `steven-yule.jpg` with sharp and are committed. The press
+photo itself stays at full size for editors.
 
 ## Pages and URLs
 
@@ -173,13 +200,13 @@ wrong wherever it appears.
 
 `site/public/.well-known/security.txt` is the real one.
 
-`site/public/og-default-v2.png` and `og-default-v3.png` must not be deleted,
-even though nothing in `site/src` references them any more. The live card is
-`og-default-v4.png`, so v2 and v3 look like dead assets and read as safe to
-remove. They are not. LinkedIn caches share renders against the absolute image
-URL, and posts already in circulation still point at them. Deleting either
-breaks the card on every one of them. The same goes for any future v5: retire
-the reference, keep the file.
+`site/public/og-default-v2.png`, `og-default-v3.png` and `og-default-v4.png`
+must not be deleted, even though nothing in `site/src` references them any
+more. The live card is `og-default-v5.png`, so the older three look like dead
+assets and read as safe to remove. They are not. LinkedIn caches share renders
+against the absolute image URL, and posts already in circulation still point
+at them. Deleting any of them breaks the card on every one of those posts. The
+same goes for any future v6: retire the reference, keep the file.
 
 See `CARRYOVER.md` for copy that was drafted rather than written, and for
 the open issues that go with it.
