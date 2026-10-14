@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import { elsewhere, elsewhereDate } from '../../lib/elsewhere';
+---
+
+<Base
+	title="Published elsewhere"
+	description="Articles, talks, interviews and papers by Steven Yule for the Institution of Civil Engineers, New Civil Engineer and others, newest first."
+>
+	<div class="page-head">
+		<h1 class="page-title">Published elsewhere</h1>
+		<p class="lede">
+			This page lists what I have written or said for other publications and
+			institutions, newest first. My own notes are listed under <a
+				href="/notes/">Notes</a
+			>.
+		</p>
+	</div>
+
+	<ul class="contents">
+		{
+			elsewhere.map((item) => (
+				<li>
+					<div class="entry">
+						<div class="entry-meta">
+							<span class="meta">{elsewhereDate(item.date) || 'Undated'}</span>
+						</div>
+						<div class="entry-body">
+							<h2 class="contents-title">
+								<a href={item.url} target="_blank" rel="noopener noreferrer">
+									{item.title}
+								</a>
+							</h2>
+							<p class="contents-source meta">{item.source}</p>
+						</div>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</Base>

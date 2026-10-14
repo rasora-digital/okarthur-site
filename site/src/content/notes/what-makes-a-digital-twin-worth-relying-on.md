@@ -2,6 +2,9 @@
 title: "What makes a digital twin worth relying on"
 description: "What it takes for an owner to rely on a digital twin for a decision, and why procurement sets the conditions for reliance rather than guaranteeing it."
 pubDate: 2026-07-11
+related:
+  - the-reliance-question
+  - poor-data-is-a-finding
 ---
 
 Suppose a pump is replaced during planned maintenance. The work order is completed and the asset register is updated, but the model still contains the previous equipment and identifier. A live feed continues to report against the old record.

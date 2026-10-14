@@ -2,6 +2,9 @@
 title: "Headroom"
 description: "Most long-life assets hold something that ages far faster than they do. What you are really buying is the room to change what is inside."
 pubDate: 2026-07-04
+related:
+  - the-reliance-question
+  - what-makes-a-digital-twin-worth-relying-on
 ---
 
 Most long-life assets hold something that ages far faster than they do, and the trouble starts when the two are bought as if they were one thing.

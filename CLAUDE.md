@@ -49,8 +49,8 @@ not "tidy them away" as unused.
 ## Layout
 
     site/src/pages/            routes (index, about, work, review, media,
-                               contact, privacy, terms, notes, rss.xml,
-                               404)
+                               contact, privacy, terms, notes, elsewhere,
+                               rss.xml, 404)
     site/src/content/notes/    notes collection, markdown, schema in
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
@@ -61,6 +61,9 @@ not "tidy them away" as unused.
     site/scripts/check-voice.mjs  page copy register check, run in CI
     site/src/lib/feed.ts       feed title, description and path, imported by
                                rss.xml.ts and by the head in Base.astro
+    site/src/lib/elsewhere.ts  writing and talks published by others, read
+                               by the elsewhere page in full and by the Notes
+                               index for its five most recent
     site/src/lib/site.ts       contact email, LinkedIn URL, the Calendly
                                booking URL and the default revision date,
                                each set once and used by the layout
@@ -69,8 +72,17 @@ not "tidy them away" as unused.
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
-`notes/[...slug].astro` for each note. `work`, `review` and `media` are
-each an `index.astro` inside their own directory.
+`notes/[...slug].astro` for each note. `work`, `review`, `media` and
+`elsewhere` are each an `index.astro` inside their own directory.
+
+A note can name up to two others in a `related` frontmatter list, by file
+name without `.md`, and they are shown above the bridge to the review. A name
+that matches no published note fails the build, so renaming or drafting a
+note means updating any note that points at it.
+
+Published elsewhere entries are added to `site/src/lib/elsewhere.ts` once,
+after checking the title, the byline and the date against the published page.
+The date is as precise as the publisher gives it.
 
 `site/public/` holds `CNAME`, `humans.txt`, `robots.txt`, `llms.txt`,
 fonts, favicons, and `.well-known/security.txt`. Astro copies dotfiles and

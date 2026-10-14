@@ -1,6 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { elsewhere, elsewhereDate } from '../../lib/elsewhere';
+import { FEED_PATH } from '../../lib/feed';
+
+/** The Notes index shows the most recent external pieces; the rest are on
+    the Published elsewhere page. */
+const RECENT_ELSEWHERE = 5;
+const recentElsewhere = elsewhere.slice(0, RECENT_ELSEWHERE);
 
 const allNotes = await getCollection('notes', ({ data }) => !data.draft);
 const notes = allNotes.sort(
@@ -55,50 +62,30 @@ const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 		)
 	}
 
+	<p class="notes-feed meta">
+		New notes are also published as an <a href={FEED_PATH}>RSS feed</a>.
+	</p>
+
 	<div class="elsewhere">
 		<h2 class="elsewhere-title">Published elsewhere</h2>
-		<p>Selected writing and talks for other publications and institutions.</p>
+		<p>
+			These are the most recent pieces of writing and talks for other
+			publications and institutions. <a href="/elsewhere/">The full list</a> goes
+			back to 2022.
+		</p>
 		<ul class="elsewhere-list">
-			<li>
-				<a href="https://www.big5global.com/agenda/" target="_blank" rel="noopener noreferrer">From pilot to enterprise: Scaling AI across construction organizations</a>
-				<span class="elsewhere-source">Big 5 Global, panel moderator, November 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/news-views-insights/inside-infrastructure/the-long-term-consequences-of-a-really-good-idea" target="_blank" rel="noopener noreferrer">The long-term consequences of a really good idea</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, Inside Infrastructure, October 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/news-views-insights/inside-infrastructure/innovations-role-when-consultancies-look-the-same" target="_blank" rel="noopener noreferrer">When every consultancy looks the same, where does innovation go?</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, Inside Infrastructure, September 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/news-views-insights/inside-infrastructure/if-its-not-in-the-contract-its-unlikely-to-happen" target="_blank" rel="noopener noreferrer">Engineers, if it's not in the contract, it's unlikely to happen</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, Inside Infrastructure, September 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/what-is-civil-engineering/meet-the-engineers/steven-yule" target="_blank" rel="noopener noreferrer">Meet the engineers: Steven Yule</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, profile, August 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/news-views-insights/inside-infrastructure/not-every-slow-step-in-engineering-is-waste" target="_blank" rel="noopener noreferrer">The limits of efficiency: not every slow step in engineering is waste</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, Inside Infrastructure, July 2026</span>
-			</li>
-			<li>
-				<a href="https://www.ice.org.uk/events/recorded-lectures/beyond-engineering-digital-transformation-middle-east" target="_blank" rel="noopener noreferrer">How AI is shaping the built environment in the Middle East</a>
-				<span class="elsewhere-source">Institution of Civil Engineers, recorded lecture, May 2025</span>
-			</li>
-			<li>
-				<a href="https://open.spotify.com/episode/4ZU81nDTxpErpH06PYYfMB" target="_blank" rel="noopener noreferrer">How digital engineering is improving project delivery</a>
-				<span class="elsewhere-source">The Engineers Collective, podcast, January 2022</span>
-			</li>
-			<li>
-				<a href="https://www.emerald.com/jsmic/article-abstract/174/2/33/411939/Informing-the-information-requirements-of-a" target="_blank" rel="noopener noreferrer">Informing the information requirements of a digital twin, a rail industry case study</a>
-				<span class="elsewhere-source">Proceedings of the Institution of Civil Engineers, Smart Infrastructure and Construction, 2022</span>
-			</li>
-			<li>
-				<a href="https://de.bentley.com/wp-content/uploads/BSY-121421-TRU.pdf" target="_blank" rel="noopener noreferrer">Civil engineering means going digital</a>
-				<span class="elsewhere-source">Bentley Systems, case study</span>
-			</li>
+			{
+				recentElsewhere.map((item) => (
+					<li>
+						<a href={item.url} target="_blank" rel="noopener noreferrer">
+							{item.title}
+						</a>
+						<span class="elsewhere-source">
+							{[item.source, elsewhereDate(item.date)].filter(Boolean).join(', ')}
+						</span>
+					</li>
+				))
+			}
 		</ul>
 	</div>
 </Base>

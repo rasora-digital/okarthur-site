@@ -2,6 +2,9 @@
 title: "Poor data is a finding"
 description: "Waiting for the data to be ready sounds prudent. The state of the data is often the first answer worth having."
 pubDate: 2026-09-14
+related:
+  - the-dull-checks
+  - what-makes-a-digital-twin-worth-relying-on
 ---
 
 Waiting for the data to be ready sounds prudent. The state of the data is often the first answer worth having.
