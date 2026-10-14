@@ -8,7 +8,7 @@
 export const FEED_TITLE = 'OkArthur, notes';
 
 export const FEED_DESCRIPTION =
-	'Notes from Steven Yule on digital and AI in infrastructure and capital programmes.';
+	'Notes from Steven Yule on digital, data and AI for infrastructure owners.';
 
 /** Where rss.xml.ts builds to, and so what the discovery link points at. */
 export const FEED_PATH = '/rss.xml';

@@ -33,15 +33,15 @@ const site = join(here, '..');
 
 /** The practice line. Wrapped by hand: the renderer does not break lines. */
 const HEADLINE = [
-	'Independent advice on',
-	'digital and AI in infrastructure',
-	'and capital programmes.',
+	'Digital, data and AI for owners',
+	'delivering more than one',
+	'development at once.',
 ];
 
 const WORDMARK = 'OA';
 const FOOTER = 'okarthur.com';
 
-const OUT = join(site, 'public', 'og-default-v3.png');
+const OUT = join(site, 'public', 'og-default-v4.png');
 
 /* --- Geometry, measured from og-default-v2.png ------------------------- */
 
