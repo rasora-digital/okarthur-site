@@ -29,35 +29,35 @@ const service = {
 const questions = [
 	{
 		q: 'Is this an audit?',
-		a: "An audit tests compliance against a standard, while a review gives an opinion on whether a decision is supported by its evidence. That evidence is usually a familiar set of documents, such as a business case, a supplier's proposal, a pilot's results, an integration or handover plan and a set of benefits claims. The review tests whether those documents answer the questions the decision actually turns on. It carries no certification, and it can sit alongside formal assurance.",
+		a: "An audit tests compliance against a standard. A review gives an opinion on whether a decision is supported by its evidence. That evidence is usually a familiar set of documents, such as a business case, a supplier's proposal, a pilot's results and a set of benefits claims. The review tests whether those documents answer the questions the decision turns on. It carries no certification and can run alongside formal assurance.",
 	},
 	{
 		q: 'Can a decision that has already been made be reviewed?',
-		a: 'A decision already made can still be reviewed, such as a completed supplier selection or a platform that has already been funded. The question changes from whether to commit to what must now be true for the investment to pay back, and the method stays the same.',
+		a: 'A decision already made can still be reviewed, such as a completed supplier selection or a platform that has been funded. The question changes from whether to commit to what must now be true for the investment to pay back. The method is the same.',
 	},
 	{
 		q: 'Can you review a procurement before it goes to market?',
-		a: 'Before the tender is issued is one of the most useful moments to look. By the time bids arrive, most of the outcome has been decided by what the tender asked for and how it will be scored. A review at this point examines the technical scope and the evaluation criteria, and whether the contract should be bundled or decoupled. It also checks whether what is being bought fits the architecture and the data it will have to work with. Fixing a tender costs far less than managing a wrong award.',
+		a: 'This is one of the most useful moments to look. By the time bids arrive, most of the outcome has been set by what the tender asked for and how it will be scored. A review at this point examines the technical scope and the evaluation criteria. It asks whether the contract should be bundled or decoupled. It also asks whether what is being bought fits the architecture and data it will depend on. Fixing a tender costs far less than managing a wrong award.',
 	},
 	{
 		q: 'Does this need new reporting from my teams?',
-		a: 'The review works from the material each development already holds, so no team is asked to produce new reporting. Nothing has to leave your organisation, and the review can run on your own systems under your own confidentiality terms where that is simpler for you.',
+		a: 'No team is asked for new reporting. The review works from the material each development already holds. Nothing has to leave your organisation. The review can run on your own systems under your own confidentiality terms if that is simpler.',
 	},
 	{
 		q: 'You spent years on the supplier side. How is the review independent?',
-		a: 'For 16 years I helped build the evidence that sellers put in front of infrastructure owners. I know what that material is written to show, and which questions it is not built to answer. The independence is written into each engagement, with no delivery work behind the opinion and any interest declared before work starts.',
+		a: 'For 17 years I helped build the evidence that sellers put in front of infrastructure owners. I know what that material is written to show and which questions it is not built to answer. Independence is written into each engagement. There is no delivery work behind the opinion. Any interest is declared before work starts.',
 	},
 	{
 		q: 'Do you take supplier-side work?',
-		a: 'I take no supplier-side work on anything under review. If a conflict cannot be cleanly separated, I decline the engagement and do not try to manage it.',
+		a: 'I take no supplier-side work on anything under review. If a conflict cannot be cleanly separated, I decline the engagement.',
 	},
 	{
 		q: 'What does it cost?',
-		a: 'The fee is fixed, and I propose it after a first call. There is no published rate, because scope is agreed for each decision, but once the fee is agreed it does not change and there is no time-and-materials element.',
+		a: 'The fee is fixed and proposed after a first call. There is no published rate because scope is agreed for each decision. Once the fee is agreed it does not change. There is no time-and-materials element.',
 	},
 	{
 		q: 'Why one person and not a firm?',
-		a: 'A firm that reviews a proposal is often also in a position to sell what comes after it, such as the implementation or the programme office that runs it. I have seen that arithmetic from the inside. A review here has no delivery team behind it and no follow-on work it is priced to win, so the opinion is the whole of what you are buying.',
+		a: 'A firm that reviews a proposal is often in a position to sell what follows, such as the implementation or the programme office. I have seen that from the inside. A review here has no delivery team behind it and no follow-on work it is priced to win. The opinion is the whole of what you buy.',
 	},
 ];
 
@@ -86,24 +86,23 @@ const faq = {
 
 	<div class="prose numbered">
 		<p>
-			Digital and AI investments are usually approved on evidence put together
-			by people who gain from the approval. The supplier wants the contract
-			and the delivery team wants the programme, and neither is being
-			dishonest when the evidence they assemble shows what they need it to
-			show. A review reads that evidence on behalf of the owner alone, and
-			gives a written opinion on what it supports.
+			Digital and AI investments are usually approved on evidence prepared by
+			people who gain from the approval. The supplier wants the contract and
+			the delivery team wants the programme. Their evidence tends to show what
+			each of them needs it to show, without anyone being dishonest. A review
+			tests that evidence on the owner's behalf.
 		</p>
 		<p>
-			A decision that reaches across more than one development has a
-			different problem. Each development reports against its own budget and
-			programme, and usually reports well. What the decision means for the
-			others appears in nobody's report, and it tends to be found once it is
-			too late to act on. The review sets the decision against the whole
-			portfolio before it is confirmed.
+			A decision that affects several developments has a different problem.
+			Each development reports against its own budget and programme. What the
+			decision means for the others appears in nobody's report. It usually
+			comes to light when it is too late to change. The review asks whether
+			the portfolio still lands within its range after the decision. If it
+			does not, the review sets out what can still be moved.
 		</p>
 
 		<h2 id="when-it-applies">When it applies</h2>
-		<p>The review lands at a decision point, of one of two kinds.</p>
+		<p>A review fits a decision point of one of two kinds.</p>
 		<h3>A digital or AI commitment</h3>
 		<ul>
 			<li>
@@ -111,45 +110,44 @@ const faq = {
 				it.
 			</li>
 			<li>
-				A digital twin or data platform, before you fund it, or fund it
-				again.
+				A digital twin or data platform, before you fund it or fund it again.
 			</li>
 			<li>A digital asset, before you accept handover into operation.</li>
 		</ul>
-		<h3>A decision that reaches across the portfolio</h3>
+		<h3>A decision that affects the portfolio</h3>
 		<ul>
 			<li>
 				A change of plan at group level, such as a pause or a re-phasing,
-				before it is confirmed and before anyone has set out what it frees up
-				or holds up elsewhere.
+				before anyone has worked out what it releases or delays elsewhere.
 			</li>
 			<li>
-				A business case approved some time ago, where an assumption it rested
-				on, such as a utility connection or a handover date next door, has
-				since moved.
+				A portfolio forecast to miss its range, where the owner needs to know
+				which developments can still make up the difference.
 			</li>
 			<li>
-				A committee choosing which phases or parcels to fund within a limit,
-				where each case was made on its own and nobody has set them against
-				each other.
+				A business case approved some time ago whose assumptions have since
+				moved, such as a utility connection or a handover date next door.
+			</li>
+			<li>
+				A committee choosing which phases to fund within a limit, where each
+				case was made on its own and none has been compared with the others.
 			</li>
 		</ul>
 
 		<h2 id="what-is-reviewed">What is reviewed</h2>
 		<p>
-			The review works from material that already exists, usually the
-			business case, the supplier's proposal, the stated information
-			requirements and whatever assurance evidence has been produced. It adds
-			a small number of interviews, agreed and named before work starts.
+			The review works from material that already exists. That is usually the
+			business case, the supplier's proposal, the information requirements
+			and any assurance evidence. A small number of interviews are added,
+			agreed and named before work starts.
 		</p>
 		<p>
-			For a decision across developments, the material is the programme,
-			contracts, commitments and correspondence that each development already
-			holds, and nobody is asked to produce new reporting. Much of the value
-			comes from reading those documents against each other. A business case
-			that counts on a handover in March, set beside a programme that now
-			shows September, is the kind of disagreement the review is there to
-			find.
+			For a decision that affects several developments, the material is the
+			programmes and contracts each development already holds. Nobody is
+			asked for new reporting. Much of the value comes from setting those
+			documents side by side. A business case that assumes a March handover,
+			next to a programme that now shows September, is the kind of gap a
+			review is there to find.
 		</p>
 		<p>The decision is then tested against five questions.</p>
 		<ul>
@@ -164,24 +162,23 @@ const faq = {
 
 		<h2 id="what-you-receive">What you receive</h2>
 		<p>
-			You receive a single written opinion, short enough for a board to read
+			You receive one written opinion, short enough to put in front of a board
 			and specific enough to act on. It sets out what the evidence supports
-			and what it does not, and the conditions under which the investment can
-			be defended. It then lists the risks that matter, ranked by severity.
-			The opinion comes with a one-page summary you can lift into your own
-			paper, and I present it once to the sponsor or the board.
+			and what it does not. It states the conditions under which the
+			investment can be defended. It lists the risks that matter, ranked by
+			severity. A one-page summary comes with it for your own paper. I present
+			the opinion once to the sponsor or the board.
 		</p>
 		<p>
-			Where the decision crosses developments, the opinion also sets out what
-			it commits elsewhere, by when, and which options are still open. It is
-			written about the decision, and it does not apportion blame between
-			teams.
+			Where the decision affects several developments, the opinion also sets
+			out what it commits elsewhere and by when. It shows which options are
+			still open. It is about the decision and does not apportion blame
+			between teams.
 		</p>
 		<p>
-			Every opinion carries a reliance statement on its front page, bounding
-			it to the decision reviewed, the material examined and the date it was
-			issued. The statement matters as much as the findings, because an
-			opinion, like a digital twin, is <a
+			Every opinion carries a reliance statement on its front page. It limits
+			the opinion to the decision reviewed, the material examined and the date
+			of issue. An opinion, like a digital twin, is <a
 				href="/notes/what-makes-a-digital-twin-worth-relying-on/"
 				>worth relying on only within stated limits</a
 			>.
@@ -194,11 +191,11 @@ const faq = {
 			>
 				<title id="fig-reliance-title">The front page of an opinion</title>
 				<desc id="fig-reliance-desc">
-					A page headed Independent review, Opinion. Near the top sits a
-					boxed reliance statement with three entries, the decision reviewed,
-					the material examined and the date issued, each circled in red, with
-					a red note saying the opinion holds within these bounds and no
-					further.
+					A page headed Independent review, Opinion. Near the top is a boxed
+					reliance statement with three entries. They are the decision
+					reviewed, the material examined and the date issued. Each is circled
+					in red, and a red note says the opinion is valid within these limits
+					only.
 				</desc>
 				<path class="fig-sheet" d="M24 352 V8 H456 V352" />
 				<text class="fig-label" x="48" y="40">INDEPENDENT REVIEW</text>
@@ -233,7 +230,7 @@ const faq = {
 				<path class="fig-pen" d="M412 240 L418 248 L426 241" />
 
 				<text class="fig-pen-text" x="48" y="298">
-					Holds within these bounds, and no further.
+					Valid within these limits only.
 				</text>
 
 				<rect class="fig-bar" x="48" y="318" width="384" height="6" />
@@ -241,34 +238,33 @@ const faq = {
 				<rect class="fig-bar" x="48" y="346" width="370" height="6" />
 			</svg>
 			<figcaption>
-				Figure 1. The front page of every opinion. The reliance statement bounds
-				it to the decision reviewed, the material examined and the date it was
-				issued.
+				Figure 1. The front page of every opinion. The reliance statement limits
+				it to the decision reviewed, the material examined and the date of
+				issue.
 			</figcaption>
 		</figure>
 
 		<h2 id="how-it-runs">How it runs</h2>
 		<p>
-			Scope and end date are agreed before work starts, and a review
-			typically takes 3 to 4 weeks from kickoff. The fee is fixed,
-			proposed after a first call, and it does not change once agreed. There
-			is no time-and-materials billing.
+			Scope and end date are agreed before work starts. A review typically
+			takes 3 to 4 weeks from kickoff. The fee is fixed after a first call and
+			does not change. There is no time-and-materials billing.
 		</p>
 
 		<h2 id="independence">The independence rule</h2>
 		<p>
-			On any review I take no delivery work and no supplier-side work, and I
-			have no stake in the outcome. Any interest is declared before the
-			engagement starts, and if a conflict cannot be cleanly separated I
-			decline the engagement.
+			On any review I take no delivery work and no supplier-side work. I have
+			no stake in the outcome. Any interest is declared before the engagement
+			starts. If a conflict cannot be cleanly separated, I decline the
+			engagement.
 		</p>
 
 		<h2 id="out-of-scope">Out of scope</h2>
 		<p>
-			The review does not include implementation or delivery resource, and it
-			does not run a supplier selection, though a completed selection can be
-			reviewed. It carries no certification and no regulatory sign-off. The
-			supplier's technical work is examined but not redone.
+			A review does not include implementation or delivery resource. It does
+			not run a supplier selection, though a completed selection can be
+			reviewed. It carries no certification or regulatory sign-off. The
+			supplier's technical work is examined and is not redone.
 		</p>
 
 		<h2 id="questions">Common questions</h2>
@@ -283,15 +279,15 @@ const faq = {
 
 		<h2 id="beyond-the-review">Beyond the review</h2>
 		<p>
-			Some owners keep me on as an adviser after a review, and the other ways
-			to engage are described under <a href="/work/">Work</a>. If a review is
-			not the shape of what you need, say so in the same message.
+			Continuing advice can follow a review where an owner wants it. The other
+			ways to engage are described under <a href="/work/">Work</a>. If a review is not
+			the right shape for you, say so in your first message.
 		</p>
 
 		<h2 id="start-here">Start here</h2>
 		<p>
-			<a href="/contact/">Tell me the decision you are facing</a> and when
-			it has to be made.
+			<a href="/contact/">Tell me the decision you are facing</a> and when it
+			has to be made.
 		</p>
 	</div>
 </Base>

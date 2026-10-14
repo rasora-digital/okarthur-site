@@ -6,7 +6,7 @@ import { FEED_PATH } from '../../lib/feed';
 
 /** The Notes index shows the most recent external pieces; the rest are on
     the Published elsewhere page. */
-const RECENT_ELSEWHERE = 5;
+const RECENT_ELSEWHERE = 7;
 const recentElsewhere = elsewhere.slice(0, RECENT_ELSEWHERE);
 
 const allNotes = await getCollection('notes', ({ data }) => !data.draft);
@@ -69,9 +69,8 @@ const isoDate = (date: Date) => date.toISOString().slice(0, 10);
 	<div class="elsewhere">
 		<h2 class="elsewhere-title">Published elsewhere</h2>
 		<p>
-			These are the most recent pieces of writing and talks for other
-			publications and institutions. <a href="/elsewhere/">The full list</a> goes
-			back to 2022.
+			These are my most recent articles and talks for other publications and
+			institutions. <a href="/elsewhere/">The full list</a> goes back to 2022.
 		</p>
 		<ul class="elsewhere-list">
 			{
