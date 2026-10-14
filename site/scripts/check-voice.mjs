@@ -10,6 +10,12 @@
  * "rather than" in about one sentence in fifteen. This check counts both, per
  * page, in the built HTML, and fails above the limits below.
  *
+ * Since the language pass of 15 October it also fails on phrases Steven does
+ * not use and has asked never to see, such as "reading across" and "the seat",
+ * on more than one ", but" a page, and on any sentence carrying more than
+ * three commas. Those are the habits that made the copy read as generated.
+ * The phrase list is below. Add to it when a new habit appears.
+ *
  * What it reads. The text of every <p> inside <main>, for fragments, and all
  * the visible text inside <main>, for "rather than". Paragraphs with the meta
  * class are skipped, because they carry post-nominals and dates, which are
@@ -36,6 +42,41 @@ const FRAGMENT_MAX_WORDS = 4;
 /* Per page. */
 const MAX_FRAGMENTS = 0;
 const MAX_RATHER_THAN = 1;
+const MAX_COMMA_BUT = 1;
+/* Per sentence, in paragraphs. */
+const MAX_COMMAS = 3;
+
+/* Never on a page. Matched case-insensitively on whole words. */
+const BANNED = [
+	'read across',
+	'reads across',
+	'reading across',
+	'sits across',
+	'sit across',
+	'sits',
+	'the seat',
+	'landscape',
+	'leverage',
+	'levers',
+	'robust',
+	'seamless',
+	'seamlessly',
+	'delve',
+	'journey',
+	'passionate',
+	'pivotal',
+	'foster',
+	'testament',
+	'crucial',
+	'navigate',
+	'underscore',
+	'tapestry',
+	'decision rights',
+	'quick wins',
+	'unlock',
+	'game changer',
+	'game-changer',
+];
 
 function files(dir) {
 	const out = [];
@@ -105,19 +146,31 @@ for (const { file, rel } of pages) {
 	const body = main[1];
 
 	const fragments = [];
+	const commaHeavy = [];
 	for (const m of body.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi)) {
 		const cls = (m[1].match(/class\s*=\s*"([^"]*)"/i) || [, ''])[1].split(/\s+/);
 		if (cls.includes('meta')) continue;
 		for (const s of sentences(text(m[2]))) {
 			if (words(s).length <= FRAGMENT_MAX_WORDS) fragments.push(s);
+			if ((s.match(/,/g) || []).length > MAX_COMMAS) commaHeavy.push(s);
 		}
 	}
 
-	const ratherThan = (text(body).match(/\brather than\b/gi) || []).length;
+	const visible = text(body);
+	const ratherThan = (visible.match(/\brather than\b/gi) || []).length;
+	const commaBut = (visible.match(/,\s+but\b/gi) || []).length;
+	const banned = BANNED.filter((phrase) =>
+		new RegExp(`\\b${phrase.replace(/[-]/g, '[- ]')}\\b`, 'i').test(visible)
+	);
 
-	const ok = fragments.length <= MAX_FRAGMENTS && ratherThan <= MAX_RATHER_THAN;
+	const ok =
+		fragments.length <= MAX_FRAGMENTS &&
+		ratherThan <= MAX_RATHER_THAN &&
+		commaBut <= MAX_COMMA_BUT &&
+		commaHeavy.length === 0 &&
+		banned.length === 0;
 	console.log(
-		`  ${ok ? 'ok  ' : 'FAIL'}  ${rel.padEnd(28)}  fragments ${fragments.length}  rather than ${ratherThan}`
+		`  ${ok ? 'ok  ' : 'FAIL'}  ${rel.padEnd(28)}  fragments ${fragments.length}  rather than ${ratherThan}  , but ${commaBut}  comma-heavy ${commaHeavy.length}  banned ${banned.length}`
 	);
 
 	if (fragments.length > MAX_FRAGMENTS) {
@@ -129,6 +182,18 @@ for (const { file, rel } of pages) {
 	if (ratherThan > MAX_RATHER_THAN) {
 		failures.push(`${rel}: "rather than" ${ratherThan} times, limit ${MAX_RATHER_THAN}`);
 	}
+	if (commaBut > MAX_COMMA_BUT) {
+		failures.push(`${rel}: ", but" ${commaBut} times, limit ${MAX_COMMA_BUT}`);
+	}
+	if (commaHeavy.length) {
+		failures.push(
+			`${rel}: ${commaHeavy.length} sentence(s) with more than ${MAX_COMMAS} commas\n` +
+				commaHeavy.map((f) => `      "${f}"`).join('\n')
+		);
+	}
+	if (banned.length) {
+		failures.push(`${rel}: banned phrase(s) ${banned.map((b) => `"${b}"`).join(', ')}`);
+	}
 }
 
 if (failures.length) {
@@ -136,7 +201,9 @@ if (failures.length) {
 	for (const f of failures) console.error(`  ${f}`);
 	console.error(
 		'\nJoin a fragment to the sentence it belongs to, or rewrite it as a full\n' +
-			'sentence. Recast a second "rather than" as a plain statement.'
+			'sentence. Recast a second "rather than" or ", but" as a plain statement.\n' +
+			'Split a comma-heavy sentence in two. Replace a banned phrase with what it\n' +
+			'actually means.'
 	);
 	process.exit(1);
 }

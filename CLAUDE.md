@@ -32,8 +32,9 @@ will not fail loudly; it will just do the wrong thing.
     npm run check:text  asserts no curly quotes or em dashes reach the build
                         output, same again
     npm run check:voice  asserts the page copy has no fragments of four
-                        words or fewer and at most one "rather than" per
-                        page, same again
+                        words or fewer, at most one "rather than" and one
+                        ", but" per page, no sentence over three commas
+                        and none of the banned phrases, same again
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -184,7 +185,11 @@ October 2026 in the register of the notes Steven wrote himself, full sentences
 and few contrasts, because the earlier copy read as a brochure. The check
 counts sentences of four words or fewer in each paragraph inside `<main>`, and
 uses of "rather than" across the page, and fails above the limits set at the
-top of the script. Paragraphs with the `meta` class are skipped, because
+top of the script. Since the language pass of 15 October it also fails on more
+than one ", but" a page, on any sentence with more than three commas, and on
+any phrase in its BANNED list, which holds the habits Steven has asked never
+to see, such as "reading across", "sits" and "the seat". Add to that list
+when a new habit appears. Paragraphs with the `meta` class are skipped, because
 post-nominals and dates are meant to be terse, and so are individual notes,
 whose voice is settled in Steven's writing project. If a limit is ever wrong,
 change it in the script deliberately rather than padding a sentence to pass.
