@@ -103,9 +103,9 @@ minutes" link to Calendly, and the footer is a drawing title block whose
 Revised date comes from `SITE_REVISED` in `site.ts` unless a page passes
 `revised`. There is no fade-in on scroll and no client script. The reveal
 was removed because it hid content from link previews and background tabs.
-The Datum design system in Claude Design was extracted from this stylesheet,
-so when the stylesheet changes, Datum is re-extracted from it, not the other
-way round.
+The Datum design system in Claude Design was extracted from an earlier
+version of this stylesheet and is no longer kept in step. The stylesheet is
+the design.
 
 The portrait crops `steven-yule-portrait-360` and `-720`, in WebP and JPEG,
 were cut once from `steven-yule.jpg` with sharp and are committed. The press
