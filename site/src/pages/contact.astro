@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { BOOKING_URL } from '../lib/site';
 ---
 
 <Base
@@ -18,6 +19,14 @@ import Base from '../layouts/Base.astro';
 				target="_blank"
 				rel="noopener noreferrer">LinkedIn</a
 			>.
+		</p>
+		<p>
+			If you would prefer to talk first, <a
+				href={BOOKING_URL}
+				target="_blank"
+				rel="noopener noreferrer">book a 30-minute call</a
+			> at a time that suits you. Booking goes through Calendly, which asks for
+			your name and email address.
 		</p>
 
 		<h2>If you are considering a <a href="/review/">review</a></h2>

@@ -39,6 +39,7 @@ const article = {
 	description={note.data.description}
 	ogType="article"
 	schema={[article]}
+	revised={note.data.updatedDate ?? note.data.pubDate}
 >
 	<article>
 		<header class="note-header">
@@ -58,7 +59,7 @@ const article = {
 			<Content />
 		</div>
 
-		<aside class="note-bridge reveal">
+		<aside class="note-bridge">
 			<p>
 				Notes like this one usually trace back to a live decision. If you
 				are facing one, <a href="/review/">an independent review</a> gives

@@ -13,10 +13,10 @@
  *
  * resvg cannot read woff2, so the site's woff2 faces are decompressed to
  * TrueType first. And resvg does not interpolate variable-font axes: it
- * renders the default instance. Public Sans Variable defaults to Thin (100),
- * which would set the footer as a hairline, so the weight axis is pinned with
- * harfbuzz before the font ever reaches the renderer. Source Serif 4 already
- * defaults to Regular, but is pinned the same way to keep the two paths alike.
+ * renders the default instance. That mattered for v4 and earlier, which used
+ * Public Sans Variable, whose default instance is Thin. From v5 the card uses
+ * the site's own static faces, Charis SIL and IBM Plex Mono, so there is no
+ * axis to pin, and loadFace only pins one when it is asked to.
  */
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -41,7 +41,7 @@ const HEADLINE = [
 const WORDMARK = 'OA';
 const FOOTER = 'okarthur.com';
 
-const OUT = join(site, 'public', 'og-default-v4.png');
+const OUT = join(site, 'public', 'og-default-v5.png');
 
 /* --- Geometry, measured from og-default-v2.png ------------------------- */
 
@@ -62,25 +62,27 @@ const WORDMARK_TYPE = { size: 49, baseline: 112, tracking: -1 };
 /** One hairline, from just right of the wordmark to the right margin. */
 const RULE = { y: 98, x1: 176, x2: CARD.w - MARGIN + 1 };
 
-/** v2's scale exactly: 71px on an 84px line, --tracking-hero at -0.03em. */
+/** v2's scale, set a little smaller because Charis SIL runs wider than
+    Source Serif did. Tracking follows --tracking-hero. */
 const HEADLINE_TYPE = {
-	size: 71,
-	leading: 84,
-	tracking: -0.03 * 71,
+	size: 66,
+	leading: 82,
+	tracking: -0.012 * 66,
 	firstBaseline: 289,
 };
 
-const FOOTER_TYPE = { size: 21, baseline: 567, tracking: 1 };
+const FOOTER_TYPE = { size: 20, baseline: 567, tracking: 2 };
 
 /* --- Fonts ------------------------------------------------------------- */
 
-/** woff2 -> TrueType, with the weight axis pinned to a fixed instance. */
+/** woff2 -> TrueType, subset to the text, with the weight axis pinned only
+    when a weight is given, for a variable face. */
 async function loadFace(file, text, weight) {
 	const woff2 = await readFile(join(site, 'public', 'fonts', file));
 	const ttf = Buffer.from(await decompress(woff2));
 	return subsetFont(ttf, text, {
 		targetFormat: 'truetype',
-		variationAxes: { wght: weight },
+		...(weight ? { variationAxes: { wght: weight } } : {}),
 	});
 }
 
@@ -90,15 +92,15 @@ const escape = (s) =>
 function svg() {
 	const lines = HEADLINE.map((line, i) => {
 		const y = HEADLINE_TYPE.firstBaseline + i * HEADLINE_TYPE.leading;
-		return `		<text x="${MARGIN}" y="${y}" font-family="Source Serif 4" font-size="${HEADLINE_TYPE.size}" letter-spacing="${HEADLINE_TYPE.tracking}" fill="${COLOUR.ink}">${escape(line)}</text>`;
+		return `		<text x="${MARGIN}" y="${y}" font-family="Charis SIL" font-size="${HEADLINE_TYPE.size}" letter-spacing="${HEADLINE_TYPE.tracking}" fill="${COLOUR.ink}">${escape(line)}</text>`;
 	}).join('\n');
 
 	return `<svg xmlns="http://www.w3.org/2000/svg" width="${CARD.w}" height="${CARD.h}" viewBox="0 0 ${CARD.w} ${CARD.h}">
 	<rect width="${CARD.w}" height="${CARD.h}" fill="${COLOUR.field}"/>
-	<text x="${MARGIN}" y="${WORDMARK_TYPE.baseline}" font-family="Source Serif 4" font-size="${WORDMARK_TYPE.size}" letter-spacing="${WORDMARK_TYPE.tracking}" fill="${COLOUR.ink}">${WORDMARK}</text>
+	<text x="${MARGIN}" y="${WORDMARK_TYPE.baseline}" font-family="Charis SIL" font-size="${WORDMARK_TYPE.size}" letter-spacing="${WORDMARK_TYPE.tracking}" fill="${COLOUR.ink}">${WORDMARK}</text>
 	<rect x="${RULE.x1}" y="${RULE.y}" width="${RULE.x2 - RULE.x1}" height="1" fill="${COLOUR.rule}"/>
 ${lines}
-	<text x="${MARGIN}" y="${FOOTER_TYPE.baseline}" font-family="Public Sans" font-size="${FOOTER_TYPE.size}" letter-spacing="${FOOTER_TYPE.tracking}" fill="${COLOUR.footer}">${FOOTER}</text>
+	<text x="${MARGIN}" y="${FOOTER_TYPE.baseline}" font-family="IBM Plex Mono" font-size="${FOOTER_TYPE.size}" letter-spacing="${FOOTER_TYPE.tracking}" fill="${COLOUR.footer}">${FOOTER}</text>
 </svg>`;
 }
 
@@ -107,24 +109,20 @@ ${lines}
 const scratch = await mkdtemp(join(tmpdir(), 'og-card-'));
 try {
 	const serifText = WORDMARK + HEADLINE.join('');
-	const serif = await loadFace(
-		'source-serif-4-variable-roman.woff2',
-		serifText,
-		400
-	);
-	const sans = await loadFace('public-sans-variable-roman.woff2', FOOTER, 400);
+	const serif = await loadFace('charis-sil-latin-400-normal.woff2', serifText);
+	const mono = await loadFace('ibm-plex-mono-400.woff2', FOOTER);
 
-	const serifPath = join(scratch, 'source-serif-4.ttf');
-	const sansPath = join(scratch, 'public-sans.ttf');
+	const serifPath = join(scratch, 'charis-sil.ttf');
+	const monoPath = join(scratch, 'ibm-plex-mono.ttf');
 	await writeFile(serifPath, serif);
-	await writeFile(sansPath, sans);
+	await writeFile(monoPath, mono);
 
 	const resvg = new Resvg(svg(), {
 		fitTo: { mode: 'width', value: CARD.w },
 		font: {
-			fontFiles: [serifPath, sansPath],
+			fontFiles: [serifPath, monoPath],
 			loadSystemFonts: false,
-			defaultFontFamily: 'Source Serif 4',
+			defaultFontFamily: 'Charis SIL',
 		},
 	});
 
