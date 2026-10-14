@@ -14,6 +14,18 @@ export async function getStaticPaths() {
 const { note } = Astro.props;
 const { Content } = await render(note);
 
+/* Related notes are chosen by hand in each note's frontmatter. A name that
+   matches no published note fails the build, so a renamed or drafted note
+   cannot leave a dead link behind. */
+const published = await getCollection('notes', ({ data }) => !data.draft);
+const related = (note.data.related ?? []).map((id) => {
+	const match = published.find((n) => n.id === id);
+	if (!match) {
+		throw new Error(`Note "${note.id}" lists "${id}" as related, and no published note has that name.`);
+	}
+	return match;
+});
+
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 	day: 'numeric',
 	month: 'long',
@@ -58,6 +70,23 @@ const article = {
 		<div class="prose note-body">
 			<Content />
 		</div>
+
+		{
+			related.length > 0 && (
+				<nav class="note-related" aria-labelledby="related-title">
+					<h2 class="note-related-title" id="related-title">
+						Related
+					</h2>
+					<ul>
+						{related.map((r) => (
+							<li>
+								<a href={`/notes/${r.id}/`}>{r.data.title}</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+			)
+		}
 
 		<aside class="note-bridge">
 			<p>

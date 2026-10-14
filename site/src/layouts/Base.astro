@@ -56,15 +56,18 @@ const sections = [
 	{ href: '/contact', label: 'Contact' },
 ];
 
-/** Pages that keep their own URL but belong to Work in the nav. */
-const workPages = ['/review', '/media'];
+/** Pages that keep their own URL but belong to a section in the nav. */
+const borrowed: Record<string, string[]> = {
+	'/work': ['/review', '/media'],
+	'/notes': ['/elsewhere'],
+};
 
-/** A section is current when the page is that section or lives beneath it. */
+const within = (href: string) => path === href || path.startsWith(`${href}/`);
+
+/** A section is current when the page is that section, lives beneath it, or
+    is one of the pages it borrows. */
 const isCurrent = (href: string) =>
-	path === href ||
-	path.startsWith(`${href}/`) ||
-	(href === '/work' &&
-		workPages.some((p) => path === p || path.startsWith(`${p}/`)));
+	within(href) || (borrowed[href] ?? []).some(within);
 ---
 
 <html lang="en-GB">

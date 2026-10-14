@@ -61,7 +61,8 @@ in the GCC and the UK.
 - [Independent review](https://okarthur.com/review/): The entry engagement, its scope, what sits outside it, and common questions.
 - [About](https://okarthur.com/about/): Steven Yule's background, chartered status and professional roles.
 - [Media](https://okarthur.com/media/): Standard biography, press photo and topics for comment.
-- [Notes](https://okarthur.com/notes/): Writing on digital, data and infrastructure, and published work elsewhere.
+- [Notes](https://okarthur.com/notes/): Writing on digital, data and infrastructure.
+- [Published elsewhere](https://okarthur.com/elsewhere/): Articles, talks, interviews and papers published by other organisations.
 - [Contact](https://okarthur.com/contact/): steven@okarthur.com
 
 ## Contact

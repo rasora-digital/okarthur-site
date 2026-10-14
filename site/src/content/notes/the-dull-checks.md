@@ -2,6 +2,9 @@
 title: "The dull checks"
 description: "Most of the effort on AI in capital delivery goes into producing documents. The better return is in checking the ones that already arrive."
 pubDate: 2026-08-10
+related:
+  - poor-data-is-a-finding
+  - the-reliance-question
 ---
 
 Most of the effort on AI in capital delivery goes into producing documents. The better return is in checking the ones that already arrive, the slow work that usually gets skipped.

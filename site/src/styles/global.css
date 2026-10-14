@@ -849,6 +849,25 @@ main {
 	text-wrap: pretty;
 }
 
+.contents-source {
+	margin-top: var(--s-2);
+}
+
+.notes-feed {
+	margin-top: var(--s-5);
+}
+
+.notes-feed a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-underline-offset: 0.16em;
+}
+
+.notes-feed a:hover {
+	color: var(--accent);
+}
+
 .contents-empty {
 	padding-block: var(--s-7);
 	border-bottom: 1px solid var(--rule);
@@ -921,6 +940,7 @@ main {
 
 .numbered > h2 {
 	counter-increment: section;
+	scroll-margin-top: var(--s-6);
 }
 
 .numbered > h2::before {
@@ -1203,6 +1223,48 @@ hr::after {
 	margin-bottom: var(--s-8);
 	padding-bottom: var(--s-6);
 	border-bottom: 1px solid var(--rule);
+}
+
+.note-related {
+	margin-top: var(--s-8);
+	padding-top: var(--s-6);
+	border-top: 1px solid var(--rule);
+	max-width: var(--measure);
+}
+
+.note-related-title {
+	font-family: var(--font-mono);
+	font-size: var(--text-2xs);
+	font-weight: 500;
+	letter-spacing: var(--tracking-label);
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+.note-related ul {
+	list-style: none;
+	margin: var(--s-3) 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--s-2);
+}
+
+.note-related a {
+	font-size: var(--text-lg);
+	color: var(--ink);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.16em;
+}
+
+.note-related a:hover {
+	color: var(--accent);
+}
+
+.note-related + .note-bridge {
+	margin-top: var(--s-6);
 }
 
 .note-bridge {

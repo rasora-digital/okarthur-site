@@ -9,6 +9,8 @@ const notes = defineCollection({
 		pubDate: z.date(),
 		updatedDate: z.date().optional(),
 		draft: z.boolean().default(false),
+		/** Up to two other notes, by file name without .md, chosen by hand. */
+		related: z.array(z.string()).max(2).optional(),
 	}),
 });
 
