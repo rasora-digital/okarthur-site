@@ -34,6 +34,13 @@ jobs:
       - name: No curly quotes or em dashes in the build output
         run: npm run check:text
         working-directory: site
+      # The page copy was rewritten to match the register of Steven's own notes,
+      # full sentences and few contrasts. This counts fragments of four words
+      # or fewer and uses of "rather than" per page, and fails above the limits
+      # set in the script. Individual notes are not checked.
+      - name: Page copy within the voice limits
+        run: npm run check:voice
+        working-directory: site
 
   # The gitleaks scanner itself, not gitleaks/gitleaks-action. The action needs
   # a licence key for organisation-owned repositories, held as a repository

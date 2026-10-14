@@ -31,6 +31,9 @@ will not fail loudly; it will just do the wrong thing.
                         reads site/dist, so run it after a build
     npm run check:text  asserts no curly quotes or em dashes reach the build
                         output, same again
+    npm run check:voice  asserts the page copy has no fragments of four
+                        words or fewer and at most one "rather than" per
+                        page, same again
 
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
@@ -55,6 +58,7 @@ not "tidy them away" as unused.
     site/scripts/check-meta.mjs  title and meta description check, run in CI
     site/scripts/check-llms.mjs  llms.txt link check, run in CI
     site/scripts/check-text.mjs  curly quote and em dash check, run in CI
+    site/scripts/check-voice.mjs  page copy register check, run in CI
     site/src/lib/feed.ts       feed title, description and path, imported by
                                rss.xml.ts and by the head in Base.astro
     site/public/               copied verbatim into dist
@@ -135,6 +139,16 @@ of `src/` finds nothing and the characters appear only in the build.
 stops a dependency bump quietly restoring the default. If a piece of copy
 ever genuinely needs an em dash, change the check deliberately rather than
 working around it.
+
+`build` also runs `npm run check:voice`. The page copy was rewritten in
+October 2026 in the register of the notes Steven wrote himself, full sentences
+and few contrasts, because the earlier copy read as a brochure. The check
+counts sentences of four words or fewer in each paragraph inside `<main>`, and
+uses of "rather than" across the page, and fails above the limits set at the
+top of the script. Paragraphs with the `meta` class are skipped, because
+post-nominals and dates are meant to be terse, and so are individual notes,
+whose voice is settled in Steven's writing project. If a limit is ever wrong,
+change it in the script deliberately rather than padding a sentence to pass.
 
 `linkcheck` runs lychee over `site/dist`. Its `--exclude` flags are
 load-bearing and documented in the workflow: our own domain (canonical
