@@ -35,7 +35,7 @@ will not fail loudly; it will just do the wrong thing.
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
 
-    node scripts/og-card.mjs    writes site/public/og-default-v3.png
+    node scripts/og-card.mjs    writes site/public/og-default-v4.png
 
 That script is the only reason `site/package.json` carries
 devDependencies. `@resvg/resvg-js`, `subset-font` and `wawoff2` are pinned
@@ -159,12 +159,13 @@ wrong wherever it appears.
 
 `site/public/.well-known/security.txt` is the real one.
 
-`site/public/og-default-v2.png` must not be deleted, even though nothing in
-`site/src` references it any more. The live card is `og-default-v3.png`, so
-v2 looks like a dead asset and reads as safe to remove. It is not. LinkedIn
-caches share renders against the absolute image URL, and posts already in
-circulation still point at v2. Deleting it breaks the card on every one of
-them. The same goes for any future v4: retire the reference, keep the file.
+`site/public/og-default-v2.png` and `og-default-v3.png` must not be deleted,
+even though nothing in `site/src` references them any more. The live card is
+`og-default-v4.png`, so v2 and v3 look like dead assets and read as safe to
+remove. They are not. LinkedIn caches share renders against the absolute image
+URL, and posts already in circulation still point at them. Deleting either
+breaks the card on every one of them. The same goes for any future v5: retire
+the reference, keep the file.
 
 See `CARRYOVER.md` for copy that was drafted rather than written, and for
 the open issues that go with it.

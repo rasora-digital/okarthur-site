@@ -7,9 +7,9 @@ const service = {
 	'@id': 'https://okarthur.com/review/#service',
 	name: 'Independent review',
 	serviceType:
-		'Independent review of a digital or AI investment decision',
+		'Independent review of an infrastructure decision before it is confirmed',
 	description:
-		'A second opinion on a proposed digital, data or AI investment in infrastructure. Fixed scope, a fixed end date, and one written opinion from someone with no stake in the outcome.',
+		'A second opinion on a digital, data or AI investment, or on a decision that commits more than one development. Fixed scope, a fixed end date, and one written opinion from someone with no stake in the outcome.',
 	url: 'https://okarthur.com/review/',
 	provider: { '@id': PERSON_ID },
 	areaServed: [
@@ -38,6 +38,10 @@ const questions = [
 	{
 		q: 'Can you review a procurement before it goes to market?',
 		a: 'Yes, and it is one of the most valuable moments to look. By the time bids arrive, most of the outcome has already been decided by what the tender asked for and how it will be scored. A review at this point examines the technical scope, the evaluation criteria, the contract shape, bundled or decoupled, and whether what is being bought fits the architecture and data it has to live with. It is far cheaper to fix a tender than to manage a wrong award.',
+	},
+	{
+		q: 'Does this need new reporting from my teams?',
+		a: 'No. It works from the material each development already holds. Nothing has to leave your organisation, and the review can run on your own systems under your own confidentiality terms where that is simpler for you.',
 	},
 	{
 		q: 'You spent years on the supplier side. How is the review independent?',
@@ -70,14 +74,13 @@ const faq = {
 
 <Base
 	title="Independent review"
-	description="A second opinion on a digital or AI investment decision in infrastructure, before you commit. Fixed scope, fixed end date, one written opinion."
+	description="A second opinion on a decision in infrastructure, before you commit. Fixed scope, fixed end date, one written opinion."
 	schema={[service, faq]}
 >
 	<div class="page-head">
 		<h1 class="page-title">Independent review</h1>
 		<p class="lede">
-			A second opinion on a digital or AI investment decision, before you
-			commit.
+			A second opinion on a decision, before you commit.
 		</p>
 	</div>
 
@@ -89,9 +92,18 @@ const faq = {
 			follow-on. An independent review gives you the one thing none of them
 			can, a written opinion from someone with no stake in the outcome.
 		</p>
+		<p>
+			A decision that reaches across more than one development has a
+			different problem. Each development reports against its own budget,
+			programme and plan, and usually reports well. What the decision means
+			for the others sits in nobody's report, and it tends to be found once it
+			is too late to act on. The review puts the decision against the whole
+			before it is confirmed.
+		</p>
 
 		<h2>When it applies</h2>
-		<p>The review lands at a decision point, usually one of four.</p>
+		<p>The review lands at a decision point, of one of two kinds.</p>
+		<h3>A digital or AI commitment</h3>
 		<ul>
 			<li>
 				A supplier's proposal for a digital or AI system, before you
@@ -104,9 +116,23 @@ const faq = {
 			<li>
 				A digital asset, before you accept handover into operation.
 			</li>
+		</ul>
+		<h3>A decision that reaches across the portfolio</h3>
+		<ul>
 			<li>
-				A business case, before it reaches an investment committee and
-				someone has to say whether the evidence supports the claim.
+				A change of plan at group level, a pause, a re-phasing or a shift
+				in priority, before it is confirmed, where what it frees up or
+				holds up elsewhere has not been set out.
+			</li>
+			<li>
+				A business case approved some time ago, where the assumptions it
+				rested on, a shared road, a utility connection, a handover date
+				next door, have since moved.
+			</li>
+			<li>
+				A committee choosing which phases or parcels to fund within a
+				limit, where each case was made on its own and nobody has set them
+				against each other.
 			</li>
 		</ul>
 
@@ -117,12 +143,18 @@ const faq = {
 			evidence has been produced. A small number of interviews across
 			owner, supplier and operator, agreed and named before work starts.
 		</p>
-		<p>The decision is then tested against four questions.</p>
+		<p>
+			For a decision across developments, the material is the programme,
+			the contracts, the commitments and the correspondence each development
+			already holds, rather than new reporting from anyone.
+		</p>
+		<p>The decision is then tested against five questions.</p>
 		<ul>
 			<li>What decision does this evidence actually support.</li>
 			<li>What would have to be true for the claim to hold.</li>
 			<li>What breaks it.</li>
 			<li>What does it cost to keep true after year one.</li>
+			<li>What else it commits, and the date after which that cannot be changed.</li>
 		</ul>
 
 		<h2>What you receive</h2>
@@ -132,7 +164,10 @@ const faq = {
 			what it does not, the conditions under which the investment is
 			defensible, and the risks that matter, with their severity. One
 			session presenting it to the sponsor or the board. A one-page summary
-			you can lift into your own paper.
+			you can lift into your own paper. Where the decision crosses
+			developments, the opinion sets out what it commits elsewhere, by when,
+			and which options are still open, and it is written for the decision
+			rather than as a verdict on any team.
 		</p>
 		<p>
 			Every opinion carries a reliance statement on its front page,
