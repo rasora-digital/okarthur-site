@@ -50,6 +50,7 @@ export const person = {
 		'Infrastructure data strategy',
 		'Artificial intelligence in infrastructure',
 		'Capital programme delivery',
+		'Portfolio delivery across multiple developments',
 		'Whole-life asset management',
 		'Digital and AI investment appraisal',
 		'Technology procurement for infrastructure owners',
