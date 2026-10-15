@@ -2,6 +2,11 @@
 
 User-agent: *
 Allow: /
+# /cdn-cgi/ is Cloudflare's own endpoint, not site content. Cloudflare
+# recommends disallowing it. Its AI Labyrinth decoy pages live there, and
+# Bing's Site Scan followed them and reported them as pages with no meta
+# description.
+Disallow: /cdn-cgi/
 # Content Signals (contentsignals.org): open to search indexing and real-time AI answers, not to model training.
 Content-Signal: search=yes, ai-input=yes, ai-train=no
 
@@ -11,23 +16,30 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: GPTBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: CCBot
 Allow: /
+Disallow: /cdn-cgi/
 
 Sitemap: https://okarthur.com/sitemap-index.xml
