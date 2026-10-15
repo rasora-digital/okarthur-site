@@ -32,6 +32,15 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 	year: 'numeric',
 });
 
+/* A note's own title is often a few words, which search engines report as too
+   short. The page title adds the author where the whole stays within the 70
+   characters check:meta allows, counting the " | OkArthur" suffix. The heading
+   on the page keeps the note's own title. */
+const BRAND_SUFFIX_LENGTH = ' | OkArthur'.length;
+const bylined = `${note.data.title}, a note by Steven Yule`;
+const pageTitle =
+	bylined.length + BRAND_SUFFIX_LENGTH <= 70 ? bylined : note.data.title;
+
 const isoDate = note.data.pubDate.toISOString().slice(0, 10);
 const isoUpdated = note.data.updatedDate?.toISOString().slice(0, 10);
 
@@ -47,7 +56,8 @@ const article = {
 ---
 
 <Base
-	title={note.data.title}
+	title={pageTitle}
+	sheet={note.data.title}
 	description={note.data.description}
 	ogType="article"
 	schema={[article]}
