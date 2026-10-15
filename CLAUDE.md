@@ -1,8 +1,8 @@
 # okarthur-site
 
 Static site for OkArthur, the practice of Steven Yule, chartered civil engineer.
-Independent advice on digital and AI in infrastructure and capital
-programmes, in the GCC and the UK. Live at https://okarthur.com
+Digital, data and AI for owners delivering more than one development at once,
+in the GCC and the UK. Live at https://okarthur.com
 
 ## What this is
 
@@ -64,7 +64,7 @@ not "tidy them away" as unused.
                                rss.xml.ts and by the head in Base.astro
     site/src/lib/elsewhere.ts  writing and talks published by others, read
                                by the elsewhere page in full and by the Notes
-                               index for its five most recent
+                               index for its seven most recent
     site/src/lib/site.ts       contact email, LinkedIn URL, the Calendly
                                booking URL and the default revision date,
                                each set once and used by the layout

@@ -9,7 +9,7 @@ an ICE Policy Fellow and the ICE UAE Country Representative.
 
 ## Standard biography
 
-Use verbatim. If space is short, cut from the end, not the middle.
+Use verbatim. If space is short, cut from the end.
 
 Steven Yule is a chartered civil engineer who leads digital, data and AI work
 for infrastructure. Based in Dubai, he has spent 17 years across the Gulf and the
@@ -22,43 +22,48 @@ director of Thomas Telford Ltd.
 
 ## What can be commissioned
 
-Independent review. A written second opinion on a specific decision before an
-owner commits. A supplier's proposal, a business case, a change of plan at group
-level that touches more than one development, a handover into operation. Fixed scope and a fixed end
-date, agreed before work starts. One written opinion. A fixed fee, proposed
-after a first call.
+An owner with several developments is measured on where the portfolio lands,
+usually a range such as a return or a number of homes. When one development
+slips, the question is what can move elsewhere to keep the portfolio in range.
+The work below is built around that question.
 
-Continuing advisory. Independent judgement retained across months rather than
-delivered once. Client-side support while a supplier delivers. A procurement
-whose scope, evaluation criteria and contract shape need setting before it goes
-to market. A digital or data strategy that needs challenging before it is funded.
-Bought as a retainer or a defined block of days, agreed in advance.
+Independent review. A written second opinion on one decision before an owner
+commits. The decision might be a supplier's proposal or a business case. It
+might also be a change of plan at group level that affects several
+developments. Scope and end date are agreed before work starts. A fixed fee is
+proposed after a first call.
+
+Continuing advisory. Independent advice over several months, bought as a
+retainer or a block of days agreed in advance. It typically covers client-side
+support while a supplier delivers, or setting the scope and scoring of a
+procurement before it goes to market. It can also cover testing a digital or
+data strategy before it is funded.
 
 Board and non-executive. Non-executive and advisory board appointments with
-private companies, in the UK and the UAE, where a board is being asked to approve
-digital and AI investment on evidence it is not equipped to challenge, or to
-hold a portfolio of developments to a plan on reports written one development
-at a time.
+private companies in the UK and the UAE. They suit boards asked to approve
+digital and AI investment they cannot test, or to hold a portfolio of
+developments to its plan using reports written one development at a time.
 
-Speaking and writing. Keynotes, panels, media comment and bylines.
+Speaking and writing. Keynotes, panels, press comment and bylines on digital,
+data and AI in infrastructure.
 
 ## Independence
 
-Independence is written at engagement level, not claimed personally. No delivery
-work and no supplier-side work on anything under review. Any interest is declared
+Independence is written into each engagement. No delivery work and no
+supplier-side work is taken on anything under review. Any interest is declared
 before an engagement starts. Where a conflict cannot be cleanly separated, the
 engagement is declined.
 
 ## Who it is for
 
-Infrastructure owners, government agencies, and private capital programme clients
-in the GCC and the UK.
+Infrastructure owners, developers, government agencies and capital programme
+clients in the GCC and the UK.
 
 ## Pages
 
 - [Home](https://okarthur.com/): The practice.
 - [Work](https://okarthur.com/work/): The three ways an engagement is commissioned.
-- [Independent review](https://okarthur.com/review/): The entry engagement, its scope, what sits outside it, and common questions.
+- [Independent review](https://okarthur.com/review/): The entry engagement, what it covers and what it does not, and common questions.
 - [About](https://okarthur.com/about/): Steven Yule's background, chartered status and professional roles.
 - [Media](https://okarthur.com/media/): Standard biography, press photo and topics for comment.
 - [Notes](https://okarthur.com/notes/): Writing on digital, data and infrastructure.
