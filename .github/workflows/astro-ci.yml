@@ -3,6 +3,19 @@ on:
   pull_request:
   push:
     branches: [main]
+  # Once a month on main, so a link that has rotted or a host that has started
+  # refusing runners shows up without waiting for the next change. The time is
+  # off the hour because scheduled runs on the hour queue behind everyone
+  # else's. A manual run is available from the Actions tab.
+  schedule:
+    - cron: '17 3 1 * *'
+  workflow_dispatch:
+
+# Every job reads the repository and nothing else. Set here so the jobs do not
+# depend on the repository's default token setting, whatever that is.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -85,7 +98,10 @@ jobs:
         working-directory: site
       - run: npm run build
         working-directory: site
-      - uses: lycheeverse/lychee-action@v1
+      # Pinned to the commit behind v1.10.0, not the movable v1 tag, so a
+      # compromised tag cannot change what runs here. Dependabot updates the
+      # pin and the comment together.
+      - uses: lycheeverse/lychee-action@2b973e86fc7b1f6b36a93795fe2c9c6ae1118621 # v1.10.0
         with:
           # These excludes are load-bearing; do not remove.
           # okarthur.com: our own canonical/og:url tags point at the live site.
@@ -99,13 +115,42 @@ jobs:
           # open.spotify.com, de.bentley.com, ice.org.uk and emerald.com: same
           #   anti-bot behaviour against GitHub runners. The linked works are
           #   verified by hand.
+          # newcivilengineer.com: answers 403 to runners some of the time and
+          #   200 to a browser. It caused the one-off failures after #93 and
+          #   #97, and the named-link report below caught it on 26 October.
           # External links other than these are still checked.
-          args: --no-progress --exclude '^https://okarthur\.com' --exclude 'linkedin\.com' --exclude 'open\.spotify\.com' --exclude 'de\.bentley\.com' --exclude 'ice\.org\.uk' --exclude 'emerald\.com' site/dist
+          # Retries and a longer timeout absorb the brief refusals runners get
+          # from some hosts. Two runs failed once and passed on re-run, after
+          # #93 and #97, with every link answering normally from a browser.
+          args: --no-progress --max-retries 4 --retry-wait-time 5 --timeout 30 --exclude '^https://okarthur\.com' --exclude 'linkedin\.com' --exclude 'open\.spotify\.com' --exclude 'de\.bentley\.com' --exclude 'ice\.org\.uk' --exclude 'emerald\.com' --exclude 'newcivilengineer\.com' site/dist
           format: json
           output: lychee/out.json
           fail: false
+      # Names every failing link as an annotation and in the job summary, so a
+      # failure says which host to look at without opening the raw log. A
+      # report that is not JSON means lychee crashed, which is said plainly.
       - name: Fail on broken links (timeouts are not fatal)
         run: |
-          errors=$(jq '.errors' lychee/out.json)
-          echo "lychee non-timeout errors: $errors"
+          set -euo pipefail
+          report=lychee/out.json
+          if ! jq -e . "$report" >/dev/null 2>&1; then
+            echo "::error title=linkcheck::lychee wrote no JSON report and may have crashed. See the lychee step above."
+            exit 1
+          fi
+          errors=$(jq '.errors' "$report")
+          timeouts=$(jq '.timeouts' "$report")
+          echo "lychee non-timeout errors: $errors, timeouts: $timeouts"
+          jq -r '.fail_map | to_entries[] | .key as $page | .value[] | [$page, .url, (.status.code // "-" | tostring), .status.text] | @tsv' "$report" > lychee/failures.tsv
+          if [ -s lychee/failures.tsv ]; then
+            {
+              echo "### Links that failed"
+              echo
+              echo "| Page | Link | Code | Error |"
+              echo "| --- | --- | --- | --- |"
+              awk -F '\t' '{ printf "| %s | %s | %s | %s |\n", $1, $2, $3, $4 }' lychee/failures.tsv
+            } >> "$GITHUB_STEP_SUMMARY"
+            while IFS=$'\t' read -r page url code text; do
+              echo "::warning title=Link failed::$url ($code, $text) on $page"
+            done < lychee/failures.tsv
+          fi
           test "$errors" -eq 0
