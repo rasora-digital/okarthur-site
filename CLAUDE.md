@@ -201,16 +201,17 @@ change it in the script deliberately rather than padding a sentence to pass.
 load-bearing and documented in the workflow: our own domain (canonical
 tags point at routes that only exist once deployed), `linkedin.com`
 (blocks automated clients, returning 403/429 from GitHub runners), and
-`open.spotify.com`, `de.bentley.com`, `ice.org.uk` and `emerald.com`
-(same anti-bot behaviour against GitHub runners). The okarthur.com
+`open.spotify.com`, `de.bentley.com`, `ice.org.uk`, `emerald.com` and
+`newcivilengineer.com` (same anti-bot behaviour against GitHub runners). The okarthur.com
 exclusion was dropped once, in PR #39, on the mistaken belief the live
 site made it obsolete. It broke the next PR that added a page and was
 restored the same day in `90bf879`. Do not drop it again.
 
 lychee retries a failing link four times, five seconds apart, with a
 30-second timeout, because some hosts briefly refuse GitHub's runners. The
-check failed once and passed on re-run after #93 and again after #97, with
-every link answering normally from a browser. When it does fail, the last
+check failed once and passed on re-run after #93 and again after #97. The
+named-link report found the cause on its first run, newcivilengineer.com
+answering 403 to runners, and it is now excluded. When it does fail, the last
 step names each failing link as a warning annotation and in a table in the
 job summary, so the host is visible without the raw log. A lychee crash shows
 as an error saying the report is not JSON. If one host keeps failing from
