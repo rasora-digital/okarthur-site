@@ -20,12 +20,6 @@ export interface ElsewhereEntry {
 
 const entries: ElsewhereEntry[] = [
 	{
-		title: 'Planted broken link to prove the linkcheck report, reverted before merge',
-		url: 'https://okarthur-linkcheck-proof-zz9.com/missing',
-		source: 'Test',
-		date: '2026-10-26',
-	},
-	{
 		title: 'From pilot to enterprise: Scaling AI across construction organizations',
 		url: 'https://www.big5global.com/agenda/',
 		source: 'Big 5 Global, panel moderator',
