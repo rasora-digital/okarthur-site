@@ -1,9 +1,14 @@
 version: 2
 updates:
+  # A new release has to be seven days old before it is proposed. Most
+  # malicious versions published through hijacked maintainer accounts are
+  # found and pulled within days. Security updates are not delayed.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:
@@ -20,6 +25,8 @@ updates:
       day: "monday"
       time: "06:00"
       timezone: "Asia/Dubai"
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 3
     groups:
       npm-minor-and-patch:

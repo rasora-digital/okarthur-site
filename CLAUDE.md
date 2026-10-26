@@ -140,9 +140,12 @@ after that needs a fresh deployment, not a purge.
 
 ## CI
 
-`.github/workflows/astro-ci.yml` runs on pull requests and on pushes to
-`main`. Jobs: `build`, `gitleaks`, `linkcheck`. These three are the
-required status checks on `main`.
+`.github/workflows/astro-ci.yml` runs on pull requests, on pushes to
+`main`, on the 1st of each month at 03:17 UTC, and by hand from the Actions
+tab. Jobs: `build`, `gitleaks`, `linkcheck`. These three are the required
+status checks on `main`. The monthly run exists to catch an external link
+that has rotted while nothing in the repository changed. Every job's token is
+read-only, set at the top of the workflow.
 
 `build` also runs `npm run check:meta` after the build, which fails the job
 if a page's title or meta description is missing or overruns Bing's limits,
@@ -203,6 +206,36 @@ tags point at routes that only exist once deployed), `linkedin.com`
 exclusion was dropped once, in PR #39, on the mistaken belief the live
 site made it obsolete. It broke the next PR that added a page and was
 restored the same day in `90bf879`. Do not drop it again.
+
+lychee retries a failing link four times, five seconds apart, with a
+30-second timeout, because some hosts briefly refuse GitHub's runners. The
+check failed once and passed on re-run after #93 and again after #97, with
+every link answering normally from a browser. When it does fail, the last
+step names each failing link as a warning annotation and in a table in the
+job summary, so the host is visible without the raw log. A lychee crash shows
+as an error saying the report is not JSON. If one host keeps failing from
+runners while working in a browser, exclude it with a comment, as for the
+hosts above.
+
+## Supply chain
+
+`site/.npmrc` sets `ignore-scripts=true`, so no package runs an install script
+on `npm ci`, locally, in CI or inside `withastro/action`. The Shai-Hulud worms
+spread through preinstall scripts. Nothing this site uses needs one, and the
+built site is byte-identical with scripts off. `npm run` still runs the
+scripts in `package.json`. If a future dependency needs its install script,
+the build fails and says so, and that is the moment to decide.
+
+Dependabot waits seven days after a release before proposing it, through
+`cooldown` in `.github/dependabot.yml`, for npm and for Actions. Versions
+published through hijacked maintainer accounts are usually found and pulled
+within days. Security updates are not delayed.
+
+The two third-party actions, `lycheeverse/lychee-action` and
+`withastro/action`, are pinned to commit SHAs with the version in a comment,
+so a moved or compromised tag cannot change what runs. Dependabot updates a
+pin and its comment together. The `actions/*` actions are GitHub's own and
+stay on their major tags.
 
 gitleaks runs in CI only. There is no longer a pre-commit hook. The job
 downloads the gitleaks scanner at a pinned version, checks it against a pinned

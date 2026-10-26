@@ -20,8 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      # Installs, builds and uploads the Pages artifact itself.
-      - uses: withastro/action@v6
+      # Installs, builds and uploads the Pages artifact itself. Pinned to the
+      # commit behind v6.1.4, not the movable v6 tag, so a compromised tag
+      # cannot change what builds the live site. Dependabot updates the pin
+      # and the comment together.
+      - uses: withastro/action@a8b97df764791eb61fbf3338ef713b0e61ae05c5 # v6.1.4
         with:
           path: site
           node-version: '22'
