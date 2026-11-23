@@ -54,46 +54,65 @@ const gateways = [
 	schema={[website]}
 	sheet="Home"
 >
-	<h1 class="hero-title">
-		Digital, data and AI for owners delivering more than one development at
-		once.
-	</h1>
-	<p class="standfirst">
-		I am Steven Yule, a chartered civil engineer based in Dubai. I lead
-		digital, data and AI work for infrastructure in the GCC and the UK.
-	</p>
-	<p class="standfirst">
-		Owners with several developments are measured on where the portfolio
-		lands. That is usually a range for the portfolio as a whole, such as a
-		return or a number of homes. It is seldom a fixed target for each
-		development.
-	</p>
-	<p class="standfirst pen-mark">
-		Plans change while the work is under way. When one development slips by
-		a year, the question is what can move elsewhere to keep the portfolio in
-		range.
-		Another phase might be brought forward. A shared road or utility
-		connection might be built in a different order. I set out those options
-		and what each one commits, while there is still time to use them.
-	</p>
-	<p class="meta hero-credentials">
-		CEng FICE FCIHT MIAM. ICE UAE Country Representative and ICE Policy
-		Fellow.
-	</p>
+	<div class="cover">
+		<div class="cover-main">
+			<div class="kicker">Review, advisory and board work</div>
+			<h1 class="hero-title">
+				Digital, data and AI for owners delivering more than one development at
+				once.
+			</h1>
+			<p class="meta hero-credentials">
+				CEng FICE FCIHT MIAM. ICE UAE Country Representative and ICE Policy
+				Fellow.
+			</p>
+			<p class="standfirst">
+				I am Steven Yule, a chartered civil engineer based in Dubai. I lead
+				digital, data and AI work for infrastructure in the GCC and the UK.
+			</p>
+			<p class="standfirst">
+				Owners with several developments are measured on where the portfolio
+				lands. That is usually a range for the portfolio as a whole, such as a
+				return or a number of homes. It is seldom a fixed target for each
+				development.
+			</p>
+			<figure class="drawing">
+				<img
+					src="/drawings/portfolio.svg"
+					width="1290"
+					height="939"
+					decoding="async"
+					alt="Line drawing of three developments on one street, built to different stages, sharing a single utility main marked in red."
+				/>
+			</figure>
+		</div>
 
-	<nav class="gateways" aria-label="Main sections">
-		{
-			gateways.map((gateway) => (
-				<a class="gateway" href={gateway.href}>
-					<span class="gateway-row">
-						<span class="gateway-label">{gateway.label}</span>
-						<span class="gateway-target">{gateway.target}</span>
-					</span>
-					<span class="gateway-teaser">{gateway.teaser}</span>
-				</a>
-			))
-		}
-	</nav>
+		<nav class="agenda" aria-label="Main sections">
+			<div class="agenda-title">Three ways in</div>
+			{
+				gateways.map((gateway, index) => (
+					<a class="agenda-row" href={gateway.href}>
+						<span class="agenda-num">{index + 1}</span>
+						<span>
+							<span class="agenda-label">{gateway.label}</span>
+							<span class="agenda-teaser">{gateway.teaser}</span>
+						</span>
+					</a>
+				))
+			}
+		</nav>
+	</div>
+
+	<div class="band">
+		<p>
+			<strong>Plans change while the work is under way.</strong> When one
+			development slips by a year, the question is what can move elsewhere to
+			keep the portfolio in range. Another phase might be brought forward. A
+			shared road or utility connection might be built in a different order. I
+			set out those options and what each one commits, while there is still
+			time to use them.
+		</p>
+	</div>
+
 
 	{
 		latest && (

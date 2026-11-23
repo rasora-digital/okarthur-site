@@ -3,20 +3,20 @@
  *
  *     node scripts/og-card.mjs
  *
- * The v2 card was a committed PNG with no script behind it. This reproduces
- * its layout from repository assets alone, so the card can be regenerated
- * rather than hand-edited. Geometry below was measured off og-default-v2.png
- * pixel by pixel; the type scale is v2's, only the wrap and the headline text
- * differ.
+ * From v6 the card follows the site's deck style. It is white, with a blue
+ * kicker, the practice line in bold, and the portfolio drawing that heads the
+ * home page, read from public/drawings/portfolio.svg so the two never drift.
  *
  * Two things about the fonts are not obvious.
  *
- * resvg cannot read woff2, so the site's woff2 faces are decompressed to
- * TrueType first. And resvg does not interpolate variable-font axes: it
- * renders the default instance. That mattered for v4 and earlier, which used
- * Public Sans Variable, whose default instance is Thin. From v5 the card uses
- * the site's own static faces, Charis SIL and IBM Plex Mono, so there is no
- * axis to pin, and loadFace only pins one when it is asked to.
+ * The site sets everything in Arial, through the OkArthur Sans family, but
+ * Arial cannot be committed to the repository. The card is set in Arimo,
+ * which the site already serves as Arial's stand-in and which shares Arial's
+ * metrics, so the card matches the page.
+ *
+ * resvg cannot read woff2, so the faces are decompressed to TrueType first,
+ * then subset to the card's text. Earlier cards (v2 to v5) stay in public/,
+ * because LinkedIn caches shares against the image URL.
  */
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -31,76 +31,76 @@ const site = join(here, '..');
 
 /* --- Content ---------------------------------------------------------- */
 
+const KICKER = 'Steven Yule, chartered civil engineer';
+
 /** The practice line. Wrapped by hand: the renderer does not break lines. */
 const HEADLINE = [
-	'Digital, data and AI for owners',
-	'delivering more than one',
+	'Digital, data and AI',
+	'for owners delivering',
+	'more than one',
 	'development at once.',
 ];
 
-const WORDMARK = 'OA';
 const FOOTER = 'okarthur.com';
 
-const OUT = join(site, 'public', 'og-default-v5.png');
+const OUT = join(site, 'public', 'og-default-v6.png');
 
-/* --- Geometry, measured from og-default-v2.png ------------------------- */
+/* --- Geometry ---------------------------------------------------------- */
 
 const CARD = { w: 1200, h: 630 };
+const MARGIN = 72;
 
-/** Left margin, and the right edge the rule stops at: 88px each side. */
-const MARGIN = 88;
-
+/** The site's tokens. */
 const COLOUR = {
-	field: '#1f4e6b', // --accent, carrying the card
-	ink: '#eeeeea', // --paper, reversed out of it
-	rule: '#517489', // the hairline: accent lifted toward paper
-	footer: '#a8b8bf', // muted, but muted against the accent field
+	paper: '#ffffff',
+	ink: '#1e2b33',
+	blue: '#2e5e7e',
+	muted: '#5b6770',
+	rule: '#d5dade',
 };
 
-const WORDMARK_TYPE = { size: 49, baseline: 112, tracking: -1 };
+const KICKER_TYPE = { size: 24, baseline: 112 };
+const HEADLINE_TYPE = { size: 50, leading: 60, firstBaseline: 196 };
+const FOOTER_TYPE = { size: 22, baseline: 566 };
 
-/** One hairline, from just right of the wordmark to the right margin. */
-const RULE = { y: 98, x1: 176, x2: CARD.w - MARGIN + 1 };
-
-/** v2's scale, set a little smaller because Charis SIL runs wider than
-    Source Serif did. Tracking follows --tracking-hero. */
-const HEADLINE_TYPE = {
-	size: 66,
-	leading: 82,
-	tracking: -0.012 * 66,
-	firstBaseline: 289,
-};
-
-const FOOTER_TYPE = { size: 20, baseline: 567, tracking: 2 };
+/** The drawing, right of the text, bottom-aligned with the footer. */
+const DRAWING = { x: 612, w: 548, bottom: 590 };
 
 /* --- Fonts ------------------------------------------------------------- */
 
-/** woff2 -> TrueType, subset to the text, with the weight axis pinned only
-    when a weight is given, for a variable face. */
-async function loadFace(file, text, weight) {
+async function loadFace(file, text) {
 	const woff2 = await readFile(join(site, 'public', 'fonts', file));
 	const ttf = Buffer.from(await decompress(woff2));
-	return subsetFont(ttf, text, {
-		targetFormat: 'truetype',
-		...(weight ? { variationAxes: { wght: weight } } : {}),
-	});
+	return subsetFont(ttf, text, { targetFormat: 'truetype' });
 }
 
 const escape = (s) =>
 	s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-function svg() {
+/** The drawing's own SVG, nested at the card's scale. */
+async function drawing() {
+	const src = await readFile(join(site, 'public', 'drawings', 'portfolio.svg'), 'utf8');
+	const viewBox = src.match(/viewBox="([^"]+)"/)[1];
+	const [, , vw, vh] = viewBox.split(/\s+/).map(Number);
+	const inner = src.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+	const h = Math.round((DRAWING.w * vh) / vw);
+	const y = DRAWING.bottom - h;
+	return `<svg x="${DRAWING.x}" y="${y}" width="${DRAWING.w}" height="${h}" viewBox="${viewBox}">${inner}</svg>`;
+}
+
+async function svg() {
 	const lines = HEADLINE.map((line, i) => {
 		const y = HEADLINE_TYPE.firstBaseline + i * HEADLINE_TYPE.leading;
-		return `		<text x="${MARGIN}" y="${y}" font-family="Charis SIL" font-size="${HEADLINE_TYPE.size}" letter-spacing="${HEADLINE_TYPE.tracking}" fill="${COLOUR.ink}">${escape(line)}</text>`;
+		return `	<text x="${MARGIN}" y="${y}" font-family="Arimo" font-weight="700" font-size="${HEADLINE_TYPE.size}" fill="${COLOUR.ink}">${escape(line)}</text>`;
 	}).join('\n');
 
 	return `<svg xmlns="http://www.w3.org/2000/svg" width="${CARD.w}" height="${CARD.h}" viewBox="0 0 ${CARD.w} ${CARD.h}">
-	<rect width="${CARD.w}" height="${CARD.h}" fill="${COLOUR.field}"/>
-	<text x="${MARGIN}" y="${WORDMARK_TYPE.baseline}" font-family="Charis SIL" font-size="${WORDMARK_TYPE.size}" letter-spacing="${WORDMARK_TYPE.tracking}" fill="${COLOUR.ink}">${WORDMARK}</text>
-	<rect x="${RULE.x1}" y="${RULE.y}" width="${RULE.x2 - RULE.x1}" height="1" fill="${COLOUR.rule}"/>
+	<rect width="${CARD.w}" height="${CARD.h}" fill="${COLOUR.paper}"/>
+	${await drawing()}
+	<text x="${MARGIN}" y="${KICKER_TYPE.baseline}" font-family="Arimo" font-weight="700" font-size="${KICKER_TYPE.size}" fill="${COLOUR.blue}">${escape(KICKER)}</text>
 ${lines}
-	<text x="${MARGIN}" y="${FOOTER_TYPE.baseline}" font-family="IBM Plex Mono" font-size="${FOOTER_TYPE.size}" letter-spacing="${FOOTER_TYPE.tracking}" fill="${COLOUR.footer}">${FOOTER}</text>
+	<rect x="${MARGIN}" y="${FOOTER_TYPE.baseline - 44}" width="${DRAWING.x - MARGIN - 40}" height="1" fill="${COLOUR.rule}"/>
+	<text x="${MARGIN}" y="${FOOTER_TYPE.baseline}" font-family="Arimo" font-weight="400" font-size="${FOOTER_TYPE.size}" fill="${COLOUR.muted}">${FOOTER}</text>
 </svg>`;
 }
 
@@ -108,21 +108,20 @@ ${lines}
 
 const scratch = await mkdtemp(join(tmpdir(), 'og-card-'));
 try {
-	const serifText = WORDMARK + HEADLINE.join('');
-	const serif = await loadFace('charis-sil-latin-400-normal.woff2', serifText);
-	const mono = await loadFace('ibm-plex-mono-400.woff2', FOOTER);
+	const bold = await loadFace('arimo-latin-700-normal.woff2', KICKER + HEADLINE.join(''));
+	const regular = await loadFace('arimo-latin-400-normal.woff2', FOOTER);
 
-	const serifPath = join(scratch, 'charis-sil.ttf');
-	const monoPath = join(scratch, 'ibm-plex-mono.ttf');
-	await writeFile(serifPath, serif);
-	await writeFile(monoPath, mono);
+	const boldPath = join(scratch, 'arimo-700.ttf');
+	const regularPath = join(scratch, 'arimo-400.ttf');
+	await writeFile(boldPath, bold);
+	await writeFile(regularPath, regular);
 
-	const resvg = new Resvg(svg(), {
+	const resvg = new Resvg(await svg(), {
 		fitTo: { mode: 'width', value: CARD.w },
 		font: {
-			fontFiles: [serifPath, monoPath],
+			fontFiles: [boldPath, regularPath],
 			loadSystemFonts: false,
-			defaultFontFamily: 'Charis SIL',
+			defaultFontFamily: 'Arimo',
 		},
 	});
 

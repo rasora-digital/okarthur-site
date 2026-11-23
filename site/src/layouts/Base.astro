@@ -75,38 +75,14 @@ const isCurrent = (href: string) =>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="color-scheme" content="light dark" />
-		<meta
-			name="theme-color"
-			media="(prefers-color-scheme: light)"
-			content="#eeeeea"
-		/>
-		<meta
-			name="theme-color"
-			media="(prefers-color-scheme: dark)"
-			content="#191b1d"
-		/>
+		<meta name="color-scheme" content="light" />
+		<meta name="theme-color" content="#ffffff" />
 
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" type="image/png" href="/favicon-16.png" sizes="16x16" />
 		<link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-		<!-- The two cuts of Charis SIL that render above the fold on every page. -->
-		<link
-			rel="preload"
-			as="font"
-			type="font/woff2"
-			href="/fonts/charis-sil-latin-400-normal.woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			as="font"
-			type="font/woff2"
-			href="/fonts/charis-sil-latin-700-normal.woff2"
-			crossorigin
-		/>
 
 		{noindex && <meta name="robots" content="noindex" />}
 
