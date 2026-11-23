@@ -1,86 +1,78 @@
 /* ==========================================================================
-   OkArthur — "Datum"
-   A setting-out drawing, rendered as a website.
+   OkArthur, in the Steven Yule deck style
+   A set of engineering drawing sheets, rendered as a website.
 
-   The page is organised around a single continuous vertical rule: the datum.
-   Content hangs off it. Dates and references hang in the margin to the left
-   of the line, annotated against it, as levels are annotated against a staff.
-   Sections on the longer pages are numbered as a document's are, and the
-   footer is a drawing sheet's title block.
-
-   Version 2, October 2026. One family, Charis SIL, sets everything a reader
-   reads, headlines and body alike, and IBM Plex Mono is kept for references,
-   dates and labels. One red-pen mark per page at most, the reviewer's ink,
-   for the one thing the page most wants read. Links stay drawing blue.
+   The page is white and there is one sans family. Blue carries structure and
+   what exists today. Red carries the page's own point and anything proposed,
+   one idea per area. Rules carry the structure and every corner is square.
+   Isometric line drawings, drawn to the same rules as the decks, show one
+   idea each in red. The datum, the margin annotations and the title-block
+   footer are kept from Datum, the design this replaced in November 2026.
 
    Contents
      1. Fonts
      2. Design tokens
-     3. Dark theme
-     4. Reset
-     5. Base typography
-     6. Links, selection, focus
-     7. Page structure — the datum
-     8. Masthead and footer
-     9. Components
-    10. Long-form reading
-    11. Motion
-    12. Print
+     3. Reset
+     4. Base typography
+     5. Links, selection, focus
+     6. Page structure, the datum
+     7. Masthead and footer
+     8. Components
+     9. Long-form reading
+    10. Motion
+    11. Print
+    12. Deck components
    ========================================================================== */
 
 /* 1. Fonts ================================================================
-   Self-hosted, Latin subset, served from this domain. No external requests.
-   Charis SIL is SIL International's text face, descended from Bitstream
-   Charter, which Matthew Carter drew for documents that had to stay legible
-   on poor printers. It ships in two weights, so headings use 400 at size or
-   700 at text size, and nothing in between. Licence in /fonts/charis-sil-OFL.txt.
+   One family, OkArthur Sans, sets everything, as Arial does in Steven's
+   decks and board papers. Each face asks for the installed Arial by its
+   exact name first, so Windows, macOS and iOS use their own Arial and
+   download nothing. Where Arial is missing, Arimo loads instead. It is
+   drawn to Arial's metrics, so nothing reflows. Naming Arial in the stack
+   alone would not do this. Android treats "Arial" as another name for
+   Roboto, so a fallback listed after it would never load there.
+   Arimo is self-hosted, Latin subset, 400 and 700 with italics, from
+   @fontsource/arimo 5.3.0. Licence in /fonts/arimo-OFL.txt.
    ------------------------------------------------------------------------ */
 
 @font-face {
-	font-family: 'Charis SIL';
-	src: url('/fonts/charis-sil-latin-400-normal.woff2') format('woff2');
+	font-family: 'OkArthur Sans';
+	src:
+		local('Arial'), local('ArialMT'),
+		url('/fonts/arimo-latin-400-normal.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Charis SIL';
-	src: url('/fonts/charis-sil-latin-400-italic.woff2') format('woff2');
+	font-family: 'OkArthur Sans';
+	src:
+		local('Arial Italic'), local('Arial-ItalicMT'),
+		url('/fonts/arimo-latin-400-italic.woff2') format('woff2');
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Charis SIL';
-	src: url('/fonts/charis-sil-latin-700-normal.woff2') format('woff2');
+	font-family: 'OkArthur Sans';
+	src:
+		local('Arial Bold'), local('Arial-BoldMT'),
+		url('/fonts/arimo-latin-700-normal.woff2') format('woff2');
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Charis SIL';
-	src: url('/fonts/charis-sil-latin-700-italic.woff2') format('woff2');
+	font-family: 'OkArthur Sans';
+	src:
+		local('Arial Bold Italic'), local('Arial-BoldItalicMT'),
+		url('/fonts/arimo-latin-700-italic.woff2') format('woff2');
 	font-weight: 700;
 	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'IBM Plex Mono';
-	src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'IBM Plex Mono';
-	src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2');
-	font-weight: 500;
-	font-style: normal;
 	font-display: swap;
 }
 
@@ -89,27 +81,30 @@
    ------------------------------------------------------------------------ */
 
 :root {
-	color-scheme: light;
+	color-scheme: light only;
 
 	/* Colour. Contrast against --paper is noted for each text tone. */
-	--paper: #eeeeea; /* cool drawing paper, never pure white         */
-	--paper-raised: #f5f5f2; /* a half-tone lighter, for quiet fills          */
-	--ink: #12161a; /* blue-black                            16.4:1 */
-	--ink-soft: #3a4148; /* standfirst and secondary prose         8.8:1 */
-	--muted: #5e646b; /* graphite: meta text, labels            5.1:1 */
-	--accent: #1f4e6b; /* drawing blue                           7.6:1 */
-	--accent-quiet: #cfdae2; /* accent at low saturation, for fills          */
-	--pen: #a8261b; /* reviewer's red ink, once a page at most  6.1:1 */
-	--rule: #d3d5cf; /* hairline. Never carries meaning alone.       */
-	--rule-strong: #b6b9b1;
+	--paper: #ffffff; /* always white                                  */
+	--paper-raised: #f4f6f7; /* a half-tone lighter, for quiet fills          */
+	--ink: #1e2b33; /* titles and body                        14.5:1 */
+	--ink-soft: #5b6770; /* standfirst and secondary prose         8.8:1 */
+	--muted: #5b6770; /* lead lines, captions, meta               5.8:1 */
+	--accent: #2e5e7e; /* blue, structure and what exists          7.0:1 */
+	--accent-quiet: #eef3f6; /* accent at low saturation, for fills          */
+	--pen: #c8372d; /* red, the page's own point                5.2:1 */
+	--pen-quiet: #fbefec; /* red tint, behind the page's own point          */
+	--soft: #b9c7d1; /* context lines, such as the timeline           */
+	--grey: #8a959c; /* furniture only, never content                 */
+	--rule: #d5dade; /* hairline. Never carries meaning alone.       */
+	--rule-strong: #1e2b33;
 
 	/* Type */
-	--font-display: 'Charis SIL', charter, 'Bitstream Charter', georgia, serif;
+	--font-display: 'OkArthur Sans', Arial, sans-serif;
 	--font-body: var(--font-display);
-	--font-mono: 'IBM Plex Mono', ui-monospace, sfmono-regular, menlo, monospace;
+	--font-mono: var(--font-display); /* labels are bold sans in this style */
 
 	/* A minor-third scale (1.25), base 17px, with two fluid display sizes. */
-	--text-2xs: 0.6875rem;
+	--text-2xs: 0.75rem; /* 12px, the smallest text on the site */
 	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
 	--text-base: 1.0625rem;
@@ -127,9 +122,9 @@
 	--leading-body: 1.6;
 	--leading-prose: 1.65;
 
-	--tracking-hero: -0.012em;
-	--tracking-title: -0.006em;
-	--tracking-label: 0.1em;
+	--tracking-hero: 0;
+	--tracking-title: 0;
+	--tracking-label: 0;
 
 	/* Space */
 	--s-1: 0.25rem;
@@ -152,7 +147,7 @@
 	--page-max: 82rem;
 	--measure: 66ch; /* reading measure, ~62–70 characters */
 
-	--selection-bg: #cfdce6;
+	--selection-bg: #eef3f6;
 	--selection-fg: var(--ink);
 
 	--transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -173,32 +168,7 @@
 	}
 }
 
-/* 3. Dark theme ===========================================================
-   A genuine re-theme through the same tokens. The paper becomes a graphite
-   charcoal, never pure black; the accent lifts to stay legible on it.
-   ------------------------------------------------------------------------ */
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		color-scheme: dark;
-
-		--paper: #191b1d; /* graphite charcoal                            */
-		--paper-raised: #202325;
-		--ink: #e4e2dc; /* warm off-white                        13.2:1 */
-		--ink-soft: #c3c2bd;
-		--muted: #9aa0a6; /*                                        6.5:1 */
-		--accent: #7fb5d6; /* the drawing blue, lifted               7.7:1 */
-		--accent-quiet: #24333c;
-		--pen: #ef8c7f; /* the red ink, lifted                    7.2:1 */
-		--rule: #313538;
-		--rule-strong: #454a4e;
-
-		--selection-bg: #2b4759;
-		--selection-fg: #f2f3f4;
-	}
-}
-
-/* 4. Reset ================================================================ */
+/* 3. Reset ================================================================ */
 
 *,
 *::before,
@@ -238,7 +208,7 @@ svg {
 	height: auto;
 }
 
-/* 5. Base typography ====================================================== */
+/* 4. Base typography ====================================================== */
 
 html {
 	-webkit-text-size-adjust: 100%;
@@ -276,13 +246,12 @@ h3 {
 .label {
 	font-family: var(--font-mono);
 	font-size: var(--text-2xs);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
 	color: var(--muted);
 }
 
-/* 6. Links, selection, focus ============================================== */
+/* 5. Links, selection, focus ============================================== */
 
 a {
 	color: inherit;
@@ -315,7 +284,7 @@ a {
 	border: 1px solid var(--accent);
 }
 
-/* 7. Page structure — the datum ===========================================
+/* 6. Page structure, the datum ===========================================
    The rule is painted as a one-pixel background on the page box, so it runs
    unbroken from the top of the masthead to the foot of the footer, behind
    everything, owned by nothing.
@@ -355,7 +324,7 @@ main {
 	}
 }
 
-/* 8. Masthead and footer ================================================== */
+/* 7. Masthead and footer ================================================== */
 
 .masthead {
 	display: flex;
@@ -398,7 +367,6 @@ main {
 	font-family: var(--font-mono);
 	font-size: var(--text-xs);
 	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
 	color: var(--muted);
 	text-decoration: none;
 	padding-bottom: 2px;
@@ -414,7 +382,7 @@ main {
 /* The current section is marked by weight and rule, not by colour alone. */
 .nav a[aria-current='page'] {
 	color: var(--ink);
-	font-weight: 500;
+	font-weight: 700;
 	border-bottom-color: var(--accent);
 }
 
@@ -430,9 +398,8 @@ main {
 .action {
 	font-family: var(--font-mono);
 	font-size: var(--text-xs);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
 	text-decoration: none;
 	color: var(--ink);
 	padding: 0.4rem 0.7rem;
@@ -456,12 +423,6 @@ main {
 	background-color: var(--accent);
 	border-color: var(--accent);
 	color: var(--paper);
-}
-
-@media (prefers-color-scheme: dark) {
-	.action-primary:hover {
-		color: var(--paper);
-	}
 }
 
 .footer {
@@ -497,9 +458,8 @@ main {
 .tb-cell dt {
 	font-family: var(--font-mono);
 	font-size: var(--text-2xs);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
 	color: var(--muted);
 }
 
@@ -558,7 +518,7 @@ main {
 	text-underline-offset: 0.2em;
 }
 
-/* 9. Components =========================================================== */
+/* 8. Components =========================================================== */
 
 /* --- Page head, shared by every interior page --- */
 
@@ -621,69 +581,6 @@ main {
 	margin-top: var(--s-6);
 	max-width: 54ch;
 	line-height: 1.6;
-}
-
-/* Editorial navigation: rows on a rule, not buttons on a grid. */
-.gateways {
-	margin-top: var(--s-8);
-	border-top: 1px solid var(--rule);
-}
-
-.gateway {
-	display: flex;
-	flex-direction: column;
-	gap: var(--s-3);
-	padding: var(--s-5) var(--s-3) var(--s-5) 0;
-	border-bottom: 1px solid var(--rule);
-	text-decoration: none;
-	transition: background-color var(--transition);
-}
-
-.gateway-row {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	gap: var(--s-4);
-}
-
-.gateway-label {
-	font-family: var(--font-display);
-	font-size: var(--text-xl);
-	font-weight: 400;
-	letter-spacing: var(--tracking-title);
-	transition: color var(--transition);
-}
-
-.gateway-target {
-	flex: none;
-	font-family: var(--font-mono);
-	font-size: var(--text-2xs);
-	font-weight: 500;
-	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
-	color: var(--muted);
-	transition: color var(--transition);
-}
-
-.gateway-teaser {
-	max-width: 58ch;
-	color: var(--ink-soft);
-	text-wrap: pretty;
-}
-
-.gateway:hover {
-	background-color: var(--accent-quiet);
-}
-
-.gateway:hover .gateway-label,
-.gateway:hover .gateway-target {
-	color: var(--accent);
-}
-
-@media (prefers-color-scheme: dark) {
-	.gateway:hover .gateway-label {
-		color: var(--ink);
-	}
 }
 
 /* --- About --- */
@@ -878,26 +775,6 @@ main {
 	color: var(--muted);
 }
 
-/* --- The red pen ---
-   A reviewer's mark in the rail between the datum and the text, beside the
-   one paragraph a page most wants read. Used once a page at most. It is
-   decoration, so it carries no meaning a screen reader would miss. */
-
-.pen-mark {
-	position: relative;
-}
-
-.pen-mark::before {
-	content: '';
-	position: absolute;
-	left: calc(-0.55 * var(--rail));
-	top: 0.35em;
-	bottom: 0.35em;
-	width: 2px;
-	background-color: var(--pen);
-	border-radius: 1px;
-}
-
 /* --- Numbered sections ---
    Review and Work read as documents, so their sections carry numbers in the
    label voice, 1.0, 2.0, as a report's do. The number is generated, and the
@@ -919,7 +796,7 @@ main {
 	margin-bottom: var(--s-2);
 	font-family: var(--font-mono);
 	font-size: var(--text-2xs);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: var(--tracking-label);
 	color: var(--muted);
 }
@@ -1051,13 +928,14 @@ hr::after {
 	background-color: var(--accent);
 }
 
-/* 10. Long-form reading ===================================================
-   The whole site is set in Charis SIL. A note is set a step larger, with a
-   drop cap, because it is read at length. Borrowed, deliberately, from the
-   furniture of a learned society's journal.
+/* 9. Long-form reading ===================================================
+   The whole site is set in OkArthur Sans. A note is set a step larger,
+   because it is read at length.
    ------------------------------------------------------------------------ */
 
-.prose {
+/* The reading measure, with no specificity of its own, so a component's own
+   width, such as the press photo's, still wins. Wide components opt out. */
+:where(.prose > :not(.wide)) {
 	max-width: var(--measure);
 }
 
@@ -1099,7 +977,7 @@ hr::after {
    On the page it is a portrait, and a portrait filling the measure would
    tower over the copy, so it is held to a portrait's worth of column. */
 .press-photo {
-	max-width: 20rem;
+	max-width: min(20rem, 100%);
 	border: 1px solid var(--rule);
 }
 
@@ -1151,17 +1029,6 @@ hr::after {
 
 /* Drop cap. Set with float so it works in every browser, not only those
    that support initial-letter. */
-.note-body > p:first-of-type::first-letter {
-	float: left;
-	font-family: var(--font-display);
-	font-size: 3.6em;
-	font-weight: 400;
-	line-height: 0.82;
-	padding-right: 0.06em;
-	margin-top: 0.02em;
-	color: var(--accent);
-}
-
 .note-body blockquote {
 	margin-left: 0;
 	padding-left: var(--s-5);
@@ -1204,9 +1071,8 @@ hr::after {
 .note-related-title {
 	font-family: var(--font-mono);
 	font-size: var(--text-2xs);
-	font-weight: 500;
+	font-weight: 700;
 	letter-spacing: var(--tracking-label);
-	text-transform: uppercase;
 	color: var(--muted);
 }
 
@@ -1263,7 +1129,7 @@ hr::after {
 	text-decoration-thickness: 2px;
 }
 
-/* 11. Motion ==============================================================
+/* 10. Motion ==============================================================
    None, apart from smooth scrolling to an anchor for visitors who have not
    asked for reduced motion. The fade-in on scroll was removed in October
    2026. It hid content from anything that renders a page without scrolling
@@ -1276,7 +1142,7 @@ hr::after {
 	}
 }
 
-/* 12. Print ===============================================================
+/* 11. Print ===============================================================
    For the About page and anything CV-adjacent. Ink on white, no furniture,
    and link destinations spelled out because a printed link is otherwise mute.
    ------------------------------------------------------------------------ */
@@ -1312,8 +1178,7 @@ hr::after {
 	.nav,
 	.actions,
 	.skip-link,
-	.footer-nav,
-	.gateway-target {
+	.footer-nav {
 		display: none;
 	}
 
@@ -1360,4 +1225,570 @@ hr::after {
 		orphans: 3;
 		widows: 3;
 	}
+}
+
+/* 12. Deck components =====================================================
+   The parts of the deck style that carry over to the page. Kicker, band,
+   cover agenda, career strip, case figure, column group, question track and
+   flow, each as the deck uses it, sized for reading on a screen.
+   ------------------------------------------------------------------------ */
+
+/* Titles and headings are bold in this style. */
+.hero-title,
+.page-title,
+.contents-title,
+.note-title,
+.origin-note-title {
+	font-weight: 700;
+}
+
+.hero-title {
+	font-size: clamp(2rem, 1.4rem + 2.4vw, 3.1rem);
+	line-height: 1.1;
+}
+
+/* --- Kicker. The small blue line above a title, as on every slide. --- */
+.kicker {
+	margin-bottom: var(--s-3);
+	font-size: var(--text-sm);
+	font-weight: 700;
+	color: var(--accent);
+}
+
+/* --- Band. One a page, behind the page's own point. --- */
+.band {
+	margin-block: var(--s-7);
+	padding: var(--s-5) var(--s-5);
+	background-color: var(--pen-quiet);
+}
+
+.band p {
+	max-width: 62ch;
+	font-size: var(--text-lg);
+	line-height: 1.45;
+	color: var(--ink);
+	text-wrap: pretty;
+}
+
+.band strong {
+	color: var(--pen);
+}
+
+.band-blue {
+	background-color: var(--accent-quiet);
+}
+
+.band-blue strong {
+	color: var(--accent);
+}
+
+@media (min-width: 40em) {
+	.band {
+		padding: var(--s-6) var(--s-6);
+	}
+}
+
+/* --- Drawings. Never cropped or recoloured. --- */
+.drawing {
+	margin: 0;
+}
+
+.drawing img {
+	width: 100%;
+	height: auto;
+}
+
+/* --- Home, laid out as the deck's cover. --- */
+.cover .hero-credentials {
+	margin-top: var(--s-4);
+}
+
+.cover {
+	display: grid;
+	gap: var(--s-7);
+}
+
+.cover .drawing {
+	margin-top: var(--s-6);
+	max-width: 36rem;
+}
+
+@media (min-width: 72em) {
+	.cover {
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+		column-gap: var(--s-8);
+		align-items: start;
+	}
+
+	.agenda {
+		margin-top: var(--s-3);
+	}
+}
+
+.agenda-title {
+	padding-bottom: var(--s-3);
+	border-bottom: 1px solid var(--ink);
+	font-size: var(--text-sm);
+	font-weight: 700;
+	color: var(--pen);
+}
+
+.agenda-row {
+	display: grid;
+	grid-template-columns: 2rem minmax(0, 1fr);
+	padding-block: var(--s-4);
+	border-bottom: 1px solid var(--rule);
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.agenda-num {
+	font-weight: 700;
+	color: var(--pen);
+}
+
+.agenda-label {
+	display: block;
+	font-weight: 700;
+	transition: color var(--transition);
+}
+
+.agenda-teaser {
+	display: block;
+	margin-top: var(--s-1);
+	font-size: var(--text-sm);
+	line-height: 1.5;
+	color: var(--muted);
+}
+
+.agenda-row:hover .agenda-label {
+	color: var(--accent);
+}
+
+/* --- Career strip, from an asset to a city, with its timeline. --- */
+.career {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: var(--gutter);
+	row-gap: var(--s-7);
+	margin-block: var(--s-6) var(--s-5);
+}
+
+@media (min-width: 72em) {
+	.career {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.career-step {
+	display: flex;
+	flex-direction: column;
+}
+
+.career-art {
+	display: flex;
+	align-items: flex-end;
+	height: 7rem;
+	padding-bottom: var(--s-3);
+	border-bottom: 1px solid var(--ink);
+}
+
+.career-art img {
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.career-year {
+	margin-top: var(--s-3);
+	font-size: var(--text-2xl);
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.career-place {
+	margin-top: var(--s-1);
+	font-weight: 700;
+}
+
+.career-text {
+	margin-top: var(--s-2);
+	font-size: var(--text-sm);
+	line-height: 1.5;
+	color: var(--muted);
+}
+
+.career-step.now .career-art {
+	border-bottom: 2px solid var(--pen);
+}
+
+.career-step.now .career-year {
+	color: var(--pen);
+}
+
+/* The market shock each chapter went through, on a line under all four. */
+.career-shock {
+	position: relative;
+	margin-top: auto;
+	padding-top: var(--s-5);
+}
+
+.career-shock span {
+	display: block;
+	padding-top: var(--s-3);
+	border-top: 1px solid var(--soft);
+	font-size: var(--text-xs);
+	color: var(--muted);
+}
+
+.career-shock::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: calc(var(--s-5) - 0.3rem);
+	width: 0.6rem;
+	height: 0.6rem;
+	border-radius: 50% !important;
+	background-color: var(--grey);
+}
+
+.career-step:not(:nth-child(2n)) .career-shock span {
+	margin-right: calc(-1 * var(--gutter));
+}
+
+@media (min-width: 72em) {
+	.career-step:nth-child(2n):not(:last-child) .career-shock span {
+		margin-right: calc(-1 * var(--gutter));
+	}
+}
+
+/* --- Case figure. One figure, then its story in labelled rows. --- */
+.case {
+	margin-block: var(--s-7);
+}
+
+.case-client {
+	font-size: var(--text-sm);
+	font-weight: 700;
+	color: var(--accent);
+}
+
+.case-figure {
+	margin-top: var(--s-2);
+	font-size: var(--text-3xl);
+	font-weight: 700;
+	line-height: 1.1;
+	color: var(--pen);
+}
+
+.case-context {
+	margin-top: var(--s-3);
+	color: var(--muted);
+}
+
+.case-rows {
+	margin-top: var(--s-5);
+	border-top: 1px solid var(--rule);
+}
+
+.case-row {
+	display: grid;
+	gap: var(--s-1);
+	padding-block: var(--s-3);
+	border-bottom: 1px solid var(--rule);
+}
+
+.case-row dt {
+	font-size: var(--text-xs);
+	font-weight: 700;
+	color: var(--muted);
+}
+
+.case-row dd {
+	margin: 0;
+}
+
+@media (min-width: 40em) {
+	.case-row {
+		grid-template-columns: 9rem minmax(0, 1fr);
+		gap: var(--s-4);
+	}
+
+	.case-row dt {
+		padding-top: 0.2em;
+	}
+}
+
+/* --- Column group. Three ways, each headed by a colour bar. --- */
+.columns {
+	display: grid;
+	gap: var(--s-6) var(--gutter);
+	margin-block: var(--s-6) var(--s-7);
+}
+
+@media (min-width: 48em) {
+	.columns {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.columns-2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.column {
+	padding-top: var(--s-4);
+	border-top: 5px solid var(--accent);
+}
+
+.column.proposed {
+	border-top-color: var(--pen);
+}
+
+.column-title {
+	font-size: var(--text-lg);
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--accent);
+}
+
+.column.proposed .column-title {
+	color: var(--pen);
+}
+
+.column-sub {
+	margin-top: var(--s-2);
+	color: var(--muted);
+}
+
+.column-link {
+	display: inline-block;
+	margin-top: var(--s-4);
+	font-size: var(--text-sm);
+	font-weight: 700;
+}
+
+/* A column with its drawing above the rule, as the deck's service columns. */
+.column-drawn {
+	padding-top: 0;
+	border-top: 0;
+}
+
+.column-drawn .drawing {
+	display: flex;
+	align-items: flex-end;
+	height: 12rem;
+	padding-bottom: var(--s-3);
+	border-bottom: 1px solid var(--ink);
+}
+
+.column-drawn .drawing img {
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.column-drawn h3 {
+	margin-top: var(--s-4);
+	font-size: var(--text-base);
+	color: var(--accent);
+}
+
+.column-drawn.proposed h3 {
+	color: var(--pen);
+}
+
+/* Square bullets, the only bullet in this style. */
+.squares {
+	margin-top: var(--s-3);
+	padding: 0;
+	list-style: none;
+}
+
+.squares li {
+	position: relative;
+	padding-left: 1.1rem;
+}
+
+.squares li + li {
+	margin-top: var(--s-2);
+}
+
+.squares li::before {
+	content: '';
+	position: absolute;
+	left: 0.1rem;
+	top: 0.55em;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-color: var(--accent);
+}
+
+.proposed .squares li::before {
+	background-color: var(--pen);
+}
+
+/* --- Question track. Five questions on a rule, the last one tinted. --- */
+.track {
+	display: grid;
+	gap: var(--s-5);
+	margin-block: var(--s-5) var(--s-6);
+	padding: 0;
+	list-style: none;
+	counter-reset: q;
+}
+
+.track li {
+	position: relative;
+	padding-left: 2.6rem;
+	counter-increment: q;
+}
+
+.track li::before {
+	content: counter(q);
+	position: absolute;
+	left: 0;
+	top: -0.1rem;
+	display: grid;
+	place-items: center;
+	width: 1.7rem;
+	height: 1.7rem;
+	border: 1.5px solid var(--pen);
+	border-radius: 50% !important;
+	background-color: var(--paper);
+	font-size: var(--text-xs);
+	font-weight: 700;
+	color: var(--pen);
+}
+
+.track li.judged {
+	padding-block: var(--s-3);
+	padding-right: var(--s-3);
+	background-color: var(--pen-quiet);
+}
+
+.track li.judged::before {
+	top: var(--s-3);
+	left: var(--s-2);
+	background-color: var(--pen);
+	color: var(--paper);
+}
+
+.track li.judged {
+	padding-left: 3.2rem;
+}
+
+@media (min-width: 62em) {
+	.track {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: var(--s-4);
+		background: linear-gradient(var(--ink), var(--ink)) no-repeat 0 0.85rem / 100% 1px;
+	}
+
+	.track li,
+	.track li.judged {
+		padding: 2.8rem var(--s-2) var(--s-3) 0;
+		font-weight: 700;
+	}
+
+	.track li::before,
+	.track li.judged::before {
+		top: 0;
+		left: 0;
+	}
+
+	.track li.judged {
+		padding-left: var(--s-3);
+		background: linear-gradient(var(--pen-quiet), var(--pen-quiet)) no-repeat 0 2.2rem / 100% calc(100% - 2.2rem);
+	}
+
+	.track li.judged::before {
+		left: var(--s-3);
+	}
+}
+
+/* --- Flow. Three tinted boxes joined by red arrows. --- */
+.flow {
+	display: grid;
+	gap: var(--s-2);
+	margin-block: var(--s-5) var(--s-6);
+	padding: 0;
+	list-style: none;
+}
+
+.flow-step {
+	padding: var(--s-4);
+	background-color: var(--paper-raised);
+}
+
+.flow-step strong {
+	display: block;
+	color: var(--accent);
+}
+
+.flow-arrow {
+	display: block;
+	justify-self: center;
+	width: 1rem;
+	height: 1.5rem;
+	color: var(--pen);
+}
+
+.flow-arrow svg {
+	width: 100%;
+	height: 100%;
+}
+
+@media (min-width: 48em) {
+	.flow {
+		grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1fr) 2rem minmax(0, 1fr);
+		align-items: stretch;
+	}
+
+	.flow-arrow {
+		align-self: center;
+		width: 2rem;
+		height: 1rem;
+		transform: rotate(-90deg);
+		width: 1rem;
+		height: 2rem;
+	}
+}
+
+/* --- Section title outside the prose, and the case beside its drawing. --- */
+.section-title {
+	margin-bottom: var(--s-2);
+	font-size: var(--text-xl);
+	font-weight: 700;
+}
+
+@media (min-width: 62em) {
+	.case {
+		display: grid;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		gap: var(--s-7);
+		align-items: start;
+		max-width: 62rem;
+	}
+}
+
+.case-drawing {
+	margin-bottom: var(--s-5);
+	max-width: 26rem;
+}
+
+/* Lists drawn as components keep their own spacing inside prose. */
+.prose .track,
+.prose .squares {
+	padding-left: 0;
+}
+
+.prose .track li + li,
+.prose .squares li + li,
+.prose .flow > * + * {
+	margin-top: 0;
+}
+
+.prose .squares li + li {
+	margin-top: var(--s-2);
 }

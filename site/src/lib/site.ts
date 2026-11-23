@@ -22,4 +22,4 @@ export const BOOKING_URL =
  * does not pass its own. Bump it when the site-wide design or copy changes.
  * Notes pass their own date, the updated date if there is one.
  */
-export const SITE_REVISED = new Date('2026-10-15');
+export const SITE_REVISED = new Date('2026-11-23');

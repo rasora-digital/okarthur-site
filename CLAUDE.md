@@ -39,7 +39,11 @@ will not fail loudly; it will just do the wrong thing.
 The Open Graph card is generated, not hand-edited, and is not part of
 `npm run build`. Regenerate it only when the card design changes:
 
-    node scripts/og-card.mjs    writes site/public/og-default-v5.png
+    node scripts/og-card.mjs    writes site/public/og-default-v6.png
+
+The site's own line drawings are generated too, by hand, from site/:
+
+    python3 scripts/drawings/scenes.py   writes three SVGs to public/drawings
 
 That script is the only reason `site/package.json` carries
 devDependencies. `@resvg/resvg-js`, `subset-font` and `wawoff2` are pinned
@@ -56,6 +60,8 @@ not "tidy them away" as unused.
                                site/src/content.config.ts
     site/src/lib/schema.ts     shared JSON-LD Person/WebSite definitions
     site/scripts/og-card.mjs   generates the Open Graph card, run by hand
+    site/scripts/drawings/     iso.py and scenes.py, which draw the site's
+                               own isometric drawings, run by hand
     site/scripts/check-meta.mjs  title and meta description check, run in CI
     site/scripts/check-llms.mjs  llms.txt link check, run in CI
     site/scripts/check-text.mjs  curly quote and em dash check, run in CI
@@ -68,8 +74,8 @@ not "tidy them away" as unused.
     site/src/lib/site.ts       contact email, LinkedIn URL, the Calendly
                                booking URL and the default revision date,
                                each set once and used by the layout
-    site/src/styles/global.css the whole design, "Datum", the site's only
-                               stylesheet
+    site/src/styles/global.css the whole design, in the Steven Yule deck
+                               style, the site's only stylesheet
     site/public/               copied verbatim into dist
 
 `notes` is two files: `notes/index.astro` for the list and
@@ -91,21 +97,39 @@ dot-directories, so `.well-known/` survives the build.
 
 ## Design
 
-`global.css` is Datum version 2, from October 2026. One family, Charis SIL,
-sets everything a reader reads, and IBM Plex Mono sets dates, references and
-labels. Both are self-hosted Latin subsets in `site/public/fonts`, and
-Charis SIL's licence sits beside it as `charis-sil-OFL.txt`. Charis ships in
-400 and 700 only, so a weight of 500 or 600 on serif text falls back to one
-of those, and nothing should ask for one. The red-pen colour, `--pen`, is
-used at most once a page, through the `pen-mark` class or in a figure. Links
-stay drawing blue. The masthead carries an email action and a "Book 30
-minutes" link to Calendly, and the footer is a drawing title block whose
-Revised date comes from `SITE_REVISED` in `site.ts` unless a page passes
-`revised`. There is no fade-in on scroll and no client script. The reveal
-was removed because it hid content from link previews and background tabs.
-The Datum design system in Claude Design was extracted from an earlier
-version of this stylesheet and is no longer kept in step. The stylesheet is
-the design.
+`global.css` follows the Steven Yule Deck Style, the style of Steven's decks
+and board papers, since November 2026. It replaced Datum version 2. The page
+is always white and there is no dark mode. Blue, `--accent`, carries
+structure, links and what exists. Red, `--pen`, carries the page's own point,
+numbered markers and anything proposed, one idea per area. Rules carry the
+structure and every corner is square. Nothing is set in capitals, labels are
+bold and blue in sentence case, and the smallest text is 12px.
+
+One family, OkArthur Sans, sets everything. Its four `@font-face` rules ask
+for the installed Arial by name through `local()` and fall back to Arimo,
+self-hosted from `@fontsource/arimo` 5.3.0 with its licence as
+`arimo-OFL.txt`. Do not replace this with Arial at the head of a plain font
+stack. Android aliases Arial to Roboto, so a fallback named after Arial
+never loads there. The Charis SIL and IBM Plex Mono files from Datum stay in
+`site/public/fonts` unreferenced, so their old URLs keep answering.
+
+The deck's components live in section 12 of the stylesheet. They are the
+kicker above each title, the band, the cover agenda on Home, the career strip
+and its timeline on About, the case figure, the column group, the drawn
+columns, the question track and the flow. Wide components inside `.prose`
+carry the `wide` class.
+
+Drawings sit in `site/public/drawings`. The cover and career drawings are the
+deck's PNGs converted to WebP at one and two times their displayed width. The
+portfolio drawing and the two Review drawings are SVGs made by
+`scripts/drawings/scenes.py`. Each drawing carries one idea in red and is
+never cropped or recoloured.
+
+The masthead carries an email action and a "Book 30 minutes" link to
+Calendly, and the footer is a drawing title block whose Revised date comes
+from `SITE_REVISED` in `site.ts` unless a page passes `revised`. Bump it when
+the site-wide design or copy changes. There is no fade-in on scroll and no
+client script. The stylesheet is the design.
 
 The portrait crops `steven-yule-portrait-360` and `-720`, in WebP and JPEG,
 were cut once from `steven-yule.jpg` with sharp and are committed. The press
@@ -251,13 +275,13 @@ wrong wherever it appears.
 
 `site/public/.well-known/security.txt` is the real one.
 
-`site/public/og-default-v2.png`, `og-default-v3.png` and `og-default-v4.png`
-must not be deleted, even though nothing in `site/src` references them any
-more. The live card is `og-default-v5.png`, so the older three look like dead
+`site/public/og-default-v2.png` to `og-default-v5.png` must not be deleted,
+even though nothing in `site/src` references them any more. The live card is
+`og-default-v6.png`, so the older four look like dead
 assets and read as safe to remove. They are not. LinkedIn caches share renders
 against the absolute image URL, and posts already in circulation still point
 at them. Deleting any of them breaks the card on every one of those posts. The
-same goes for any future v6: retire the reference, keep the file.
+same goes for any future v7: retire the reference, keep the file.
 
 See `CARRYOVER.md` for copy that was drafted rather than written, and for
 the open issues that go with it.

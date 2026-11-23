@@ -79,6 +79,7 @@ const faq = {
 	schema={[service, faq]}
 >
 	<div class="page-head">
+		<div class="kicker">What you can commission</div>
 		<h1 class="page-title">Independent review</h1>
 		<p class="lede">
 			A second opinion on a decision, before you commit.
@@ -104,36 +105,62 @@ const faq = {
 
 		<h2 id="when-it-applies">When it applies</h2>
 		<p>A review fits a decision point of one of two kinds.</p>
-		<h3>A digital or AI commitment</h3>
-		<ul>
-			<li>
-				A supplier's proposal for a digital or AI system, before you accept
-				it.
-			</li>
-			<li>
-				A digital twin or data platform, before you fund it or fund it again.
-			</li>
-			<li>A digital asset, before you accept handover into operation.</li>
-		</ul>
-		<h3>A decision that affects the portfolio</h3>
-		<ul>
-			<li>
-				A change of plan at group level, such as a pause or a re-phasing,
-				before anyone has worked out what it releases or delays elsewhere.
-			</li>
-			<li>
-				A portfolio forecast to miss its range, where the owner needs to know
-				which developments can still make up the difference.
-			</li>
-			<li>
-				A business case approved some time ago whose assumptions have since
-				moved, such as a utility connection or a handover date next door.
-			</li>
-			<li>
-				A committee choosing which phases to fund within a limit, where each
-				case was made on its own and none has been compared with the others.
-			</li>
-		</ul>
+		<div class="columns columns-2 wide">
+			<div class="column column-drawn">
+				<figure class="drawing">
+					<img
+						src="/drawings/review-digital.svg"
+						width="907"
+						height="609"
+						loading="lazy"
+						decoding="async"
+						alt="Line drawing of one building with its data connection marked in red, from a cabinet at the edge of the site to the plant room."
+					/>
+				</figure>
+				<h3>A digital or AI commitment</h3>
+				<ul class="squares">
+					<li>
+						A supplier's proposal for a digital or AI system, before you accept
+						it.
+					</li>
+							<li>
+						A digital twin or data platform, before you fund it or fund it again.
+					</li>
+							<li>A digital asset, before you accept handover into operation.</li>
+				</ul>
+			</div>
+			<div class="column column-drawn proposed">
+				<figure class="drawing">
+					<img
+						src="/drawings/review-portfolio.svg"
+						width="907"
+						height="711"
+						loading="lazy"
+						decoding="async"
+						alt="Line drawing of three developments on separate sites, joined by one connection marked in red."
+					/>
+				</figure>
+				<h3>A decision that affects the portfolio</h3>
+				<ul class="squares">
+					<li>
+						A change of plan at group level, such as a pause or a re-phasing,
+						before anyone has worked out what it releases or delays elsewhere.
+					</li>
+							<li>
+						A portfolio forecast to miss its range, where the owner needs to know
+						which developments can still make up the difference.
+					</li>
+							<li>
+						A business case approved some time ago whose assumptions have since
+						moved, such as a utility connection or a handover date next door.
+					</li>
+							<li>
+						A committee choosing which phases to fund within a limit, where each
+						case was made on its own and none has been compared with the others.
+					</li>
+				</ul>
+			</div>
+		</div>
 
 		<h2 id="what-is-reviewed">What is reviewed</h2>
 		<p>
@@ -151,15 +178,13 @@ const faq = {
 			review is there to find.
 		</p>
 		<p>The decision is then tested against five questions.</p>
-		<ul>
+		<ol class="track wide">
 			<li>What decision does this evidence actually support.</li>
 			<li>What would have to be true for the claim to hold.</li>
 			<li>What breaks it.</li>
 			<li>What does it cost to keep true after year one.</li>
-			<li>
-				What else it commits, and the date after which that cannot be changed.
-			</li>
-		</ul>
+			<li class="judged">What else it commits, and the date after which that cannot be changed.</li>
+		</ol>
 
 		<h2 id="what-you-receive">What you receive</h2>
 		<p>
@@ -199,14 +224,14 @@ const faq = {
 					only.
 				</desc>
 				<path class="fig-sheet" d="M24 352 V8 H456 V352" />
-				<text class="fig-label" x="48" y="40">INDEPENDENT REVIEW</text>
-				<text class="fig-label" x="432" y="40" text-anchor="end">PAGE 1</text>
+				<text class="fig-label" x="48" y="40">Independent review</text>
+				<text class="fig-label" x="432" y="40" text-anchor="end">Page 1</text>
 				<text class="fig-title" x="48" y="74">Opinion</text>
 				<rect class="fig-bar" x="48" y="88" width="230" height="6" />
 				<rect class="fig-bar" x="48" y="100" width="170" height="6" />
 
 				<rect class="fig-box" x="48" y="122" width="384" height="148" />
-				<text class="fig-label" x="64" y="146">RELIANCE STATEMENT</text>
+				<text class="fig-label" x="64" y="146">Reliance statement</text>
 
 				<text class="fig-text" x="64" y="178">Decision reviewed</text>
 				<rect class="fig-bar" x="214" y="170" width="190" height="6" />
@@ -251,6 +276,13 @@ const faq = {
 			takes 3 to 4 weeks from kickoff. The fee is fixed after a first call and
 			does not change. There is no time-and-materials billing.
 		</p>
+		<div class="flow wide">
+			<div class="flow-step"><strong>First call</strong> Scope, end date and a fixed fee are agreed.</div>
+			<span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 16 32"><path d="M8 0 V26" stroke="currentColor" stroke-width="1.5" fill="none" /><path d="M2 22 L8 31 L14 22 Z" fill="currentColor" /></svg></span>
+			<div class="flow-step"><strong>3 to 4 weeks</strong> The material is examined and the named interviews are held.</div>
+			<span class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 16 32"><path d="M8 0 V26" stroke="currentColor" stroke-width="1.5" fill="none" /><path d="M2 22 L8 31 L14 22 Z" fill="currentColor" /></svg></span>
+			<div class="flow-step"><strong>One written opinion</strong> Presented once to the sponsor or the board.</div>
+		</div>
 
 		<h2 id="independence">The independence rule</h2>
 		<p>
