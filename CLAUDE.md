@@ -115,7 +115,7 @@ never loads there. The Charis SIL and IBM Plex Mono files from Datum stay in
 
 The deck's components live in section 12 of the stylesheet. They are the
 kicker above each title, the band, the cover agenda on Home, the career strip
-and its timeline on About, the case figure, the column group, the drawn
+on About, the case figure, the column group, the drawn
 columns, the question track and the flow. Wide components inside `.prose`
 carry the `wide` class.
 
