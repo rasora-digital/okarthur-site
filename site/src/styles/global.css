@@ -1365,7 +1365,7 @@ hr::after {
 	color: var(--accent);
 }
 
-/* --- Career strip, from an asset to a city, with its timeline. --- */
+/* --- Career strip, from an asset to a city. --- */
 .career {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1424,42 +1424,6 @@ hr::after {
 
 .career-step.now .career-year {
 	color: var(--pen);
-}
-
-/* The market shock each chapter went through, on a line under all four. */
-.career-shock {
-	position: relative;
-	margin-top: auto;
-	padding-top: var(--s-5);
-}
-
-.career-shock span {
-	display: block;
-	padding-top: var(--s-3);
-	border-top: 1px solid var(--soft);
-	font-size: var(--text-xs);
-	color: var(--muted);
-}
-
-.career-shock::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: calc(var(--s-5) - 0.3rem);
-	width: 0.6rem;
-	height: 0.6rem;
-	border-radius: 50% !important;
-	background-color: var(--grey);
-}
-
-.career-step:not(:nth-child(2n)) .career-shock span {
-	margin-right: calc(-1 * var(--gutter));
-}
-
-@media (min-width: 72em) {
-	.career-step:nth-child(2n):not(:last-child) .career-shock span {
-		margin-right: calc(-1 * var(--gutter));
-	}
 }
 
 /* --- Case figure. One figure, then its story in labelled rows. --- */
